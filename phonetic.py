@@ -74,6 +74,8 @@ class Word:
 class Sentence:
     """
     Represents a group of Words
+    Attributes:
+        words       The words in the Sentence
     """
     def __init__(self):
         self.words = []
@@ -86,6 +88,10 @@ class PhoneticDictionary:
     """
     A phonetic dictionary stored in memory. Phonetic dictionaries provide syllabic stress 
     information for a given word
+    Attributes:
+        filename    The name of the file containing the CMU phonetic dictionary
+        pdict       A dictionary of words (as uppercase strings) to their corresponding Word
+                    objects
     """
     def __init__(self):
         self.filename = "None"

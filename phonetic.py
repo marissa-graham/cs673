@@ -14,7 +14,6 @@ class Word:
                     from its syllabic information). The rhythm for the word "table" is 
                     [10]
     """
-
     regex = re.compile("\d+") # a regular expression used to search for stress pattern info
 
     def __init__(self, word, syllables):
@@ -93,6 +92,7 @@ class PhoneticDictionary:
         pdict       A dictionary of words (as uppercase strings) to their corresponding Word
                     objects
     """
+    
     def __init__(self):
         self.filename = "None"
         self.pdict = {}

@@ -137,7 +137,8 @@ class PhoneticDictionary:
         Parses a CMU dictionary entry (in the form of <word> <syllable list>) 
         into a Word object
         :param line: a line in the CMU phonetic dictionary
-        :return: a Word object representing that entry
+        :return: a tuple containing a word (represented by a string) and
+                the Word object representing that entry
         """
         tokens = line.split()
         return tokens[0], Word(tokens[0], tokens[1:])

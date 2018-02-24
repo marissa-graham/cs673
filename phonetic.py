@@ -114,6 +114,18 @@ class PhoneticDictionary:
     def lookup(self, word: str):
         """
         Looks up a word in the dictionary and returns a corresponding Word object
+
+        NOTES:
+        If you run across a word you don't know:
+            - Add it to a global list of "words we don't know"
+            - Return a Word object thats "blank" 
+                - Phonetic info something that the rhyme checker recognizes as 
+                    "does not rhyme with anything"
+                - No stress on any of the syllables
+                - Set the number of syllables to be the number of groups of 
+                  consecutive vowels
+            - Basically, approximate it with a word with the right # of vowels
+            
         :param word: a word to look up in the dictionary
         :return: a Word object
         """

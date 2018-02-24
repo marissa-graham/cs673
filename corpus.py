@@ -23,7 +23,10 @@ class WordCorpus:
 		"""
 		Initialize an empty corpus.
 		"""
-		pass
+		self.name = "corpus name"
+
+	def printname(self):
+		print("YES")
 
 	def _readStringCorpus(self, text):
 		"""
@@ -107,6 +110,7 @@ class Syllable:
 		begin or end in 
 	"""
 	pass
+
 
 class StructureCorpus:
 	"""

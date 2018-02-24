@@ -1,5 +1,7 @@
 from nltk.corpus import cmudict
 
+# revision
+# test revision
 
 class RhymeEvaluator:
     def __init__(self):
@@ -49,7 +51,6 @@ class RhymeEvaluator:
                 if word1[-i] == word2[-i]:
                     count += 1
             return count * 2 / (l_word1 + l_word2)
-
     """
     def _rhyme(w, level):
         entries = cmudict.entries()

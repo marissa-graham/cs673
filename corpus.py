@@ -23,37 +23,14 @@ class WordCorpus:
 		"""
 		Initialize an empty corpus.
 		"""
-		self.name = "corpus name"
+		self.corp_string = None
+		self.size = None
+		self.wordSequence = None
+		self.wordList = []
+		self.wordDict = dict()
+		self.A = None
 
-	def printname(self):
-		print("YES")
-
-	def _readStringCorpus(self, text):
-		"""
-		Read in a corpus from a plaintext string.
-
-		Arguments:
-			text (str): A plaintext string.
-
-		Returns:
-			words: A list of strings with the corpus words.
-		"""
-		pass
-
-	def _readFileCorpus(self, filename):
-		"""
-		Read in a corpus from a given filename, either .csv or standard text
-		delimiters, depending on how easy it is to accomodate both.
-
-		Arguments:
-			filename (str): The name of the file containing the corpus.
-
-		Returns:
-			words: A list of strings with the corpus words.
-		"""
-		pass
-
-	def _initializeCorpus(self, words):
+	def _initializeCorpus(self):
 		"""
 		Initialize wordSequence, wordList, and wordDict for a corpus given a
 		list of word strings. Updates class attributes in place.
@@ -67,32 +44,54 @@ class WordCorpus:
 		"""
 		Initialize the transition matrix as a scipy.sparse.csr_matrix.
 
-		Arguments
+		Arguments:
+
 		"""
 		pass
 
 	def _extendCorpus(self, text):
-
 		pass
 
 	def _extendMatrix(self):
 		pass
 
-	def initialize(self, text):
+	def initialize(self, text, is_filename=True, keeplines=False):
 		"""
-		Read in the corpus and initialize the transition matrix.
-		"""
-		pass
+		Read in the corpus and calculate the transition matrix self.A
 
-	def extend(self, text):
+		Arguments:
+			- text: String containing either a filename or the actual text.
+			- is_filename: Bool telling us whether text is a filename.
+			- keeplines: Bool telling us whether to keep line structure at 
+				the cost of sometimes splitting words apart, or to keep words
+				together at the cost of losing line structure.
+		
 		"""
-		If the 
-		"""
+
+		# Assign the text to self.corp_string
+		if is_filename:
+			with open(text) as filename:
+				self.corp_string = filename.read()
+		else:
+			self.corp_string = text
+
+		# Remove newline characters
+		if keeplines == False:
+
+			# Hyphens followed by a newline should be ignored
+			self.corp_string.replace('-\n','')
+			self.corp_string.replace('\n',' ')
+
+		# Remove hyphens so hyphenated words can be treated as two words
+		self.corp_string.replace('-',' ')
+
+		self._initializeCorpus()
+		self._initializeMatrix()
+
+	def extend(self, text, is_filename=True):
 		pass
 
 	def add_constraints(self):
-		"""
-		"""
 		pass
 
 class Syllable:

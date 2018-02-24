@@ -114,6 +114,8 @@ class PhoneticDictionary:
     def lookup(self, word: str):
         """
         Looks up a word in the dictionary and returns a corresponding Word object
+
+            
         :param word: a word to look up in the dictionary
         :return: a Word object
         """

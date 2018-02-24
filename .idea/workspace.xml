@@ -2,753 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54e05010-3c4d-4b84-8066-95291f6cb4a8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/.idea/3dMaze.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/CMakeLists.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Invalid1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Invalid2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Invalid3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Invalid4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Invalid5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Solvable1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Solvable2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Solvable3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Unsolvable1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Unsolvable2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/Unsolvable3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Mazes/test.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Pathfinder.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/Pathfinder.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/PathfinderInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/3dMaze" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/3dMaze.cbp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeCache.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CMakeCCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CMakeCXXCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_C.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_CXX.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CMakeSystem.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/CMakeCCompilerId.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/Pathfinder.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/main.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/3dMaze.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/Makefile2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/cmake.check_cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/feature_tests.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/CMakeFiles/progress.marks" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/cmake_install.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/cmake-build-debug/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/3dMaze/test.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/.idea/AVL.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/AVL.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/AVL.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/AVLInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/CMakeLists.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/NodeInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/avl_test.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/AVL" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/AVL.cbp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeCache.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CMakeCCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CMakeCXXCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_C.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_CXX.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CMakeSystem.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/CMakeCCompilerId.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/main.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/AVL.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/Makefile2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/avl_test.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/cmake.check_cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/feature_tests.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/CMakeFiles/progress.marks" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/cmake_install.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/cmake-build-debug/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/AVL/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/.idea/BST.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/BST.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/BST.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/BST.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/BSTInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/CMakeLists.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/Node.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/Node.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/NodeInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/BST" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/BST.cbp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/BST_test" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeCache.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CMakeCCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CMakeCXXCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_C.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_CXX.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CMakeSystem.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/CMakeCCompilerId.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/BST.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/Node.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/main.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/BST.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/Node.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/BST_test.dir/test.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/Makefile2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/cmake.check_cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/feature_tests.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/friendTest.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/friendTest.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerReferenceExample.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/pointerTest.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/pointerTest.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/CMakeFiles/progress.marks" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/cmake_install.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/friendTest" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/cmake-build-debug/pointerTest" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/core" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/friendTest.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/pointerReferenceExample.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/pointerTest.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/BST/test.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/.idea/CS235_Fall_2017_Midterm.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/CMakeLists.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/ChutesAndLaddersGame.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/ChutesAndLaddersGame.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/DoubleLinkedList.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/Fall 2017 Midterm v7.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/GameBoardException.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/Gameboard.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/Gameboard.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/board1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/board2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/board3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/board4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeCache.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CMakeCCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CMakeCXXCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_C.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_CXX.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CMakeSystem.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/CMakeCCompilerId.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/ChutesAndLaddersGame.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/Gameboard.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/main.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/CS235_Fall_2017_Midterm.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/Makefile2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/cmake.check_cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/dll_test.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/feature_tests.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/Gameboard.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/gameboard_test.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/gameboard_test.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CMakeFiles/progress.marks" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CS235_Fall_2017_Midterm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/CS235_Fall_2017_Midterm.cbp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/cmake_install.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/cmake-build-debug/gameboard_test" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/dll_test.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/gameboard_test.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/CS235_Fall_2017_Midterm/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/ExpressionManager.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/ExpressionManager.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/ExpressionManager.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/ExpressionManagerInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/WindowsEndlines/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/WindowsEndlines/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/WindowsEndlines/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/WindowsEndlines/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/WindowsEndlines/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/express" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/express.dSYM/Contents/Info.plist" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/express.dSYM/Contents/Resources/DWARF/express" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/main.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/test" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/ExpressionManager/tmp.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/LinkedList.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/LinkedListInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/WindowsEndlines/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/WindowsEndlines/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/WindowsEndlines/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/WindowsEndlines/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/WindowsEndlines/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/demo/lldemo" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/demo/lldemo.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/LinkedList/lab2_main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MapsCrandall/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MapsCrandall/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MapsCrandall/out.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MapsCrandall/test1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MapsCrandall/test1out.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/CS 235 Fall 2017 Midterm Grading Procedure.docx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/CS 235 Fall 2017 Midterm Grading Procedure.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/Untitled 1.ods" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/chain" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/full" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/inv1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/inv2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/inv3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/smart" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/boards/stop" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/MidtermGradingProcedure/grade.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/.directory" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/.directory" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/.tst.swp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/ArenaInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/FighterInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/keys/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/lab1_main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._.DS_Store" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Archer.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Archer.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Arena.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Arena.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._ArenaInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Cleric.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Cleric.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Fighter.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Fighter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._FighterInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Files with Windows Line Endings" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Robot.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._Robot.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/._main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/src/.suo" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab1Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/.directory" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/LinkedListInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/keys/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/lab2_main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab2Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/ExpressionManagerInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/keys/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab3Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/Docs/Lab4TheRailroadStation.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/Docs/welcome_train.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/Grade.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/StationInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/StationInterfaceExtra.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/clear.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/src/StationInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab4Passoff/src/StationInterfaceExtra.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/PathfinderInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Invalid1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Invalid2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Invalid3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Invalid4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Invalid5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Solvable1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Solvable2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Solvable3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Unsolvable1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Unsolvable2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/Unsolvable3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/src/Mazes/test.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Invalid1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Invalid2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Invalid3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Invalid4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Invalid5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Solvable1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Solvable2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Solvable3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Unsolvable1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Unsolvable2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/Mazes/Unsolvable3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab5Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/BSTInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/NodeInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/keys/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/src/._.DS_Store" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/src/._BST.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/src/._BST.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/src/._Binary_Search_Tree-clknicjmbcusocdbzpxqmjlrtgxt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/src/._Node.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab6Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/AVLInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/NodeInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/keys/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab7Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/HuffmanInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/NodeInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/TreeInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/inputFiles/inputFile1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/inputFiles/inputFile2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab8PQPassoff/tests/inputFiles/inputFile3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/QSInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/clean.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/keys/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/keys/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/keys/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/keys/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/keys/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/run.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/src/._QS.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/src/._QS.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/tests/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/tests/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/tests/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/tests/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Lab9Passoff/tests/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/Passoff Scripts/Passoff Scripts.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/.idea/QuickSort.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/CMakeLists.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/QS.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/QS.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/QS.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/QSInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeCache.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CMakeCCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CMakeCXXCompiler.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_C.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_CXX.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CMakeSystem.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/CMakeCCompilerId.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdC/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/3.7.1/CompilerIdCXX/a.out" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/Makefile2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/CXX.includecache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/DependInfo.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/QS.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/build.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/cmake_clean.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/depend.internal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/depend.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/flags.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/link.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/main.cpp.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/QuickSort.dir/progress.make" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/clion-environment.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/cmake.check_cache" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/feature_tests.bin" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/feature_tests.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/feature_tests.cxx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/CMakeFiles/progress.marks" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/QuickSort" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/QuickSort.cbp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/cmake_install.cmake" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/cmake-build-debug/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/QuickSort/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Archer.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Archer.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Archer.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Arena.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Arena.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Arena.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/ArenaInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Cleric.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Cleric.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Cleric.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Fighter.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Fighter.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Fighter.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/FighterInterface.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Files with Windows Line Endings/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Robot.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Robot.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/Robot.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/fight" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/help_session/poly" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/help_session/poly.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/key_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/key_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/key_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/key_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/key_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/main.o" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/out_file1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/out_file2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/out_file3.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/out_file4.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/out_file5.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/RPG/test" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/StudentPassoffs.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/To Students 2017.zip" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/.vs/grades/v14/.suo" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/Debug/grades.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/Debug/grades.ilk" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/Debug/grades.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades.VC.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades.sln" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/CL.command.1.tlog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/CL.read.1.tlog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/CL.write.1.tlog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/grades.lastbuildstate" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/link.command.1.tlog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/link.read.1.tlog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/grades.tlog/link.write.1.tlog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/main.obj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/vc140.idb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/Debug/vc140.pdb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/grades.vcxproj" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/grades.vcxproj.filters" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/grades.vcxproj.user" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/lab01_in_01.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/lab01_out_01.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/grades/grades/main.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/lab01_in_01.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../../cs235-ta/winter_2018/lab1/lab01_out_01.txt" afterPath="" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rhymetools.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/verse.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/proj.iml" afterPath="$PROJECT_DIR$/.idea/proj.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -760,26 +21,23 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/proj$main.coverage" NAME="main Coverage Results" MODIFIED="1518486654909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="58" column="28" lean-forward="true" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="45">
+              <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="trump.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/text/trump.txt">
+      <file leaf-file-name="rhymetools.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rhymetools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6256">
-              <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+            <state relative-caret-position="930">
+              <caret line="62" column="7" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -788,38 +46,8 @@
       <file leaf-file-name="phonetic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/phonetic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="846">
+            <state relative-caret-position="516">
               <caret line="138" column="56" lean-forward="false" selection-start-line="138" selection-start-column="56" selection-end-line="138" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apport_python_hook.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmudict-0.7b.symbols" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/cmudict/cmudict-0.7b.symbols">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmudict-0.7b" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/cmudict/cmudict-0.7b">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -834,8 +62,14 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>don</find>
+      <find>don't</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -844,7 +78,9 @@
         <option value="$PROJECT_DIR$/word.py" />
         <option value="$PROJECT_DIR$/phonetic.py" />
         <option value="$PROJECT_DIR$/data/text/trump.txt" />
+        <option value="$PROJECT_DIR$/Verse.py" />
         <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/rhymetools.py" />
       </list>
     </option>
   </component>
@@ -854,11 +90,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1273" />
     <option name="height" value="1024" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -874,79 +112,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="proj">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="proj">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="data">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="text" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="cs673" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs673" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs673" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs673" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
     </panes>
@@ -955,7 +136,7 @@
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -969,7 +150,57 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="proj" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="proj" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <module name="proj" />
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -1034,38 +265,6 @@
       <option name="ADDITIONAL_ARGS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="proj" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <module name="proj" />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -1080,6 +279,22 @@
       <scripts />
       <node-interpreter value="project" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="proj" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -1100,49 +315,13 @@
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
-      <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="proj" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;.&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method />
-    </configuration>
-    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/usr/bin/python3.5" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="proj" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Python.main" />
-    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -1155,29 +334,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1273" height="1024" extended-state="4" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1273" height="773" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24110672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24037707" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4807418" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34170306" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43794578" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30567685" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1186,34 +364,50 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../.." />
+    </ignored-roots>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/test.py</url>
-          <line>57</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/rhymetools.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/rhymetools.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py">
+    <entry file="file://$PROJECT_DIR$/data/text/trump.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="5520">
+          <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phonetic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2070">
+          <caret line="138" column="56" lean-forward="false" selection-start-line="138" selection-start-column="56" selection-end-line="138" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -1226,11 +420,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/cmudict/cmudict-0.7b">
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py" />
+    <entry file="file://$PROJECT_DIR$/data/cmudict/cmudict-0.7b.symbols">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cmudict/cmudict-0.7b">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1246,6 +456,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/text/trump.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5520">
+          <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py" />
+    <entry file="file://$PROJECT_DIR$/test_py3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/nltk/corpus/reader/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="262" column="0" lean-forward="false" selection-start-line="262" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/nltk/corpus/reader/cmudict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1027">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/verse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" lean-forward="false" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_import.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1258,37 +516,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/text/trump.txt">
+    <entry file="file://$PROJECT_DIR$/data/cmudict/cmudict.0.6d">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6256">
-          <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+        <state relative-caret-position="93">
+          <caret line="32340" column="5" lean-forward="false" selection-start-line="32340" selection-start-column="0" selection-end-line="32340" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/phonetic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="846">
+        <state relative-caret-position="516">
           <caret line="138" column="56" lean-forward="false" selection-start-line="138" selection-start-column="56" selection-end-line="138" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="58" column="28" lean-forward="true" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="45">
+          <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rhymetools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="62" column="7" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>

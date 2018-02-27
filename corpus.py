@@ -94,8 +94,8 @@ class WordCorpus:
         #rowsums = A_raw.sum(axis=1)
         #self.A.data /= rowsums.repeat(np.diff(self.A.indptr))
         self.A = A_raw / np.maximum(A_raw.sum(axis=1),np.ones(self.size))
-        plt.imshow(self.A, cmap="Greys")
-        plt.show()
+        #plt.imshow(self.A, cmap="Greys")
+        #plt.show()
 
     def _extendCorpus(self, text):
         pass
@@ -152,7 +152,7 @@ class WordCorpus:
         self.A = np.asarray(self.A)
 
         samples = np.random.choice(self.size, size=n, p=self.A[current,:])
-        return [self.wordList[index] for index in samples]
+        return np.unique(samples)
 
     def generate_babble(self, n):
         """

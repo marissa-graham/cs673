@@ -27,7 +27,7 @@ class WordCorpus:
         Initialize an empty corpus. Dictionary is a PhoneticDictionary object.
         """
         self.dictionary = dictionary
-        self.corp_string = None
+        self.corpString = None
         self.size = 0
         self.wordSeq = None
         self.wordList = []
@@ -41,7 +41,7 @@ class WordCorpus:
         """
 
         # Split the corpus string into words
-        wordstrings = self.corp_string.split()
+        wordstrings = self.corpString.split()
 
         # Initialize variables before iterating through the words
         self.wordSeq = np.zeros(len(wordstrings))
@@ -70,7 +70,10 @@ class WordCorpus:
                 self.wordSeq[i] = self.size
                 self.size += 1
 
-        print("\nInput text:", len(wordstrings), "words,", self.size, "unique")
+        print("Input text:", len(wordstrings), "words,", self.size, "unique")
+        #print("\nWord indices:\n", self.wordDict)
+        #print("\nTransition sequence:\n", self.wordSeq)
+        #print("\nTransition matrix:\n")
 
     def _initializeMatrix(self):
         """
@@ -91,6 +94,8 @@ class WordCorpus:
         #rowsums = A_raw.sum(axis=1)
         #self.A.data /= rowsums.repeat(np.diff(self.A.indptr))
         self.A = A_raw / np.maximum(A_raw.sum(axis=1),np.ones(self.size))
+        plt.imshow(self.A, cmap="Greys")
+        plt.show()
 
     def _extendCorpus(self, text):
         pass
@@ -110,26 +115,26 @@ class WordCorpus:
                 together at the cost of losing line structure.
         """
 
-        # Assign the text to self.corp_string
+        # Assign the text to self.corpString
         if is_filename:
             with open(text) as filename:
-                self.corp_string = filename.read()
+                self.corpString = filename.read()
         else:
-            self.corp_string = text
+            self.corpString = text
 
-        #print("Raw corp_string:", self.corp_string)
+        #print("Raw corpString:", self.corpString)
 
         # Remove newline characters
         if keeplines == False:
 
             # Hyphens followed by a newline should be ignored
-            self.corp_string = self.corp_string.replace('-\n','')
-            self.corp_string = self.corp_string.replace('\n',' ')
+            self.corpString = self.corpString.replace('-\n','')
+            self.corpString = self.corpString.replace('\n',' ')
 
         # Remove hyphens so hyphenated words can be treated as two words
-        self.corp_string = self.corp_string.replace('-',' ')
+        self.corpString = self.corpString.replace('-',' ')
 
-        #print("\nTidied corp_string:", self.corp_string)
+        #print("\nTidied corpString:", self.corpString)
 
         self._initializeCorpus()
         self._initializeMatrix()
@@ -140,38 +145,29 @@ class WordCorpus:
     def add_constraints(self):
         pass
 
+    def sample_distribution(self, current, n):
+        """
+        Sample the probability distribution for word 'current' n times.
+        """
+        self.A = np.asarray(self.A)
+
+        samples = np.random.choice(self.size, size=n, p=self.A[current,:])
+        return [self.wordList[index] for index in samples]
+
     def generate_babble(self, n):
         """
-        Generate n words of babble.
+        Generate n word/s of babble.
         """
-        #current = np.random.randint(self.size)
-        current = 0
+        current = np.random.randint(self.size)
+        #current = 0
         babble_words = [self.wordList[current].word.lower()]
         self.A = np.asarray(self.A)
 
         for i in range(1,n):
-            row = self.A[current,:]
             current = np.random.choice(self.size, p=self.A[current,:])
             babble_words.append(self.wordList[current].word.lower())
 
         print("\n", " ".join(babble_words))
-
-class Syllable:
-    """
-    Does this need to go here or in phonetic? Yes
-    
-    Four pieces (all ARPABET symbols)
-    - Beginning consonant list
-    - Vowel sound
-    - Ending consonant list
-    - Stress
-
-    rhyme ending
-        a syllable has to have a vowel sound in the middle, and can optionally
-        begin or end in 
-    """
-    pass
-
 
 class StructureCorpus:
     """
@@ -185,3 +181,4 @@ class StructureCorpus:
     3) Simplify to a small number of patterns
     4) Generate new patterns accordingly
     """
+    pass

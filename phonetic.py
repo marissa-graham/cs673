@@ -24,7 +24,7 @@ class Word:
         """
         self.word = word
         self.syllables = syllables
-        self.rhythm = ""
+        self.rhythm = []
         self.parse_rhythm()
 
     def word(self):
@@ -47,7 +47,7 @@ class Word:
         for syllable in self.syllables:
             m = Word.regex.search(syllable)
             if m is not None:
-                self.rhythm += m.group(0)
+                self.rhythm.append(int(m.group(0)))
         return
 
     def rhymes_with(self, other):
@@ -64,11 +64,12 @@ class Word:
         """
         :return: a string representation of the Word object 
         """
-        str = "Word: " + self.word + " "
-        str += "Syllables: ["
-        str += ", ".join(self.syllables) + "] "
-        str += "Rhythm: [" + self.rhythm + "]"
-        return str
+        out = "Word: " + self.word + " "
+        out += "Syllables: ["
+        out += ", ".join(self.syllables) + "] "
+        out += "Rhythm: "
+        out += str(self.rhythm)
+        return out
 
 class Sentence:
     """
@@ -93,9 +94,11 @@ class PhoneticDictionary:
                     objects
     """
     
-    def __init__(self):
-        self.filename = "None"
+    def __init__(self, file=None):
+        self.filename = file
         self.pdict = {}
+        if file is not None:
+            self.import_file(file)
 
     def import_file(self, filename):
         """
@@ -112,6 +115,7 @@ class PhoneticDictionary:
         return
 
     def lookup(self, word: str):
+        self.checkDictLoaded()
         """
         Looks up a word in the dictionary and returns a corresponding Word object
 
@@ -133,6 +137,7 @@ class PhoneticDictionary:
         return self.pdict[word.upper()]
 
     def evaluate(self, s):
+        self.checkDictLoaded()
         """
         Transforms a string into a Sentence of Words
         :param s: a string to parse
@@ -154,3 +159,7 @@ class PhoneticDictionary:
         """
         tokens = line.split()
         return tokens[0], Word(tokens[0], tokens[1:])
+
+    def checkDictLoaded(self):
+        if self.filename is None:
+            raise Exception("no dictionary has been loaded")

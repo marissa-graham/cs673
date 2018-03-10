@@ -42,6 +42,8 @@ class Word:
     def parse_rhythm(self):
         """
         Extracts rhythm string from syllabic data 
+
+        TODO: store the indices where the vowels
         :return: None
         """
         for syllable in self.syllables:
@@ -117,18 +119,10 @@ class PhoneticDictionary:
     def lookup(self, word: str):
         self.checkDictLoaded()
         """
-        Looks up a word in the dictionary and returns a corresponding Word object
+        Look up a word in the dictionary and return a corresponding Word object
 
-        NOTES:
-        If you run across a word you don't know:
-            - Add it to a global list of "words we don't know"
-            - Return a Word object thats "blank" 
-                - Phonetic info something that the rhyme checker recognizes as 
-                    "does not rhyme with anything"
-                - No stress on any of the syllables
-                - Set the number of syllables to be the number of groups of 
-                  consecutive vowels
-            - Basically, approximate it with a word with the right # of vowels
+        TODO:
+        If you run across a word you don't know, look it up using the LOGIOS tool
             
         :param word: a word to look up in the dictionary
         :return: a Word object
@@ -153,6 +147,7 @@ class PhoneticDictionary:
         """
         Parses a CMU dictionary entry (in the form of <word> <syllable list>) 
         into a Word object
+
         :param line: a line in the CMU phonetic dictionary
         :return: a tuple containing a word (represented by a string) and
                 the Word object representing that entry

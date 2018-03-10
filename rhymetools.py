@@ -49,8 +49,7 @@ class RhymeEvaluator:
         correlation matrices for phoneme properties (colorful ones from the paper)
         """
         for i in range(self.num_vowels):
-            for j in range(self.num_vowels
-   ):
+            for j in range(self.num_vowels):
                 self.Av[i,j] = vowel_pair_score(i,j)
 
         for i in range(self.num_consonants):

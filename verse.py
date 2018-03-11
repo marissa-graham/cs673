@@ -5,6 +5,7 @@ class Verse:
     for each of the component syllables and information about its semantic
     content in the form of a list of sentences with the actual words
     """
+
     def __init__(self):
         self.template = []
         self.lines = []

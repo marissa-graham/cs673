@@ -1,6 +1,7 @@
 import re
 import numpy as np
 
+
 class Word:
     """
     Represents a word like "table" or "dog" but with metric/syllabic information from the
@@ -14,7 +15,7 @@ class Word:
                     from its syllabic information). The rhythm for the word "table" is 
                     [10]
     """
-    regex = re.compile("\d+") # a regular expression used to search for stress pattern info
+    regex = re.compile("\d+")  # a regular expression used to search for stress pattern info
 
     def __init__(self, word, syllables):
         """
@@ -73,12 +74,14 @@ class Word:
         out += str(self.rhythm)
         return out
 
+
 class Sentence:
     """
     Represents a group of Words
     Attributes:
         words       The words in the Sentence
     """
+
     def __init__(self):
         self.words = []
 
@@ -95,7 +98,7 @@ class PhoneticDictionary:
         pdict       A dictionary of words (as uppercase strings) to their corresponding Word
                     objects
     """
-    
+
     def __init__(self, file=None):
         self.filename = file
         self.pdict = {}

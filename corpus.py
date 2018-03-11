@@ -5,6 +5,7 @@ import string
 from scipy import sparse
 from matplotlib import pyplot as plt
 
+
 class WordCorpus:
     """
     Calculate the transition probabilities for a given corpus of text and 
@@ -45,8 +46,8 @@ class WordCorpus:
 
         # Initialize variables before iterating through the words
         self.wordSeq = np.zeros(len(wordstrings))
-        nonos = string.punctuation+'0123456789'
-        
+        nonos = string.punctuation + '0123456789'
+
         for i in range(len(wordstrings)):
 
             # Get punctuation free word text
@@ -71,9 +72,9 @@ class WordCorpus:
                 self.size += 1
 
         print("Input text:", len(wordstrings), "words,", self.size, "unique")
-        #print("\nWord indices:\n", self.wordDict)
-        #print("\nTransition sequence:\n", self.wordSeq)
-        #print("\nTransition matrix:\n")
+        # print("\nWord indices:\n", self.wordDict)
+        # print("\nTransition sequence:\n", self.wordSeq)
+        # print("\nTransition matrix:\n")
 
     def _initializeMatrix(self):
         """
@@ -84,18 +85,18 @@ class WordCorpus:
         """
         n = len(self.wordSeq)
         A_raw = sparse.coo_matrix(
-            (np.ones(n-1),(self.wordSeq[:-1], self.wordSeq[1:])),
+            (np.ones(n - 1), (self.wordSeq[:-1], self.wordSeq[1:])),
             shape=(self.size, self.size)
-            ).tocsr()
+        ).tocsr()
 
         # TODO: NORMALIZE WITHOUT DENSIFYING THE DAMN THING
         # Normalize rows to get probabilities
-        #self.A = A_raw.copy()
-        #rowsums = A_raw.sum(axis=1)
-        #self.A.data /= rowsums.repeat(np.diff(self.A.indptr))
-        self.A = A_raw / np.maximum(A_raw.sum(axis=1),np.ones(self.size))
-        #plt.imshow(self.A, cmap="Greys")
-        #plt.show()
+        # self.A = A_raw.copy()
+        # rowsums = A_raw.sum(axis=1)
+        # self.A.data /= rowsums.repeat(np.diff(self.A.indptr))
+        self.A = A_raw / np.maximum(A_raw.sum(axis=1), np.ones(self.size))
+        # plt.imshow(self.A, cmap="Greys")
+        # plt.show()
 
     def _extendCorpus(self, text):
         pass
@@ -122,19 +123,18 @@ class WordCorpus:
         else:
             self.corpString = text
 
-        #print("Raw corpString:", self.corpString)
+        # print("Raw corpString:", self.corpString)
 
         # Remove newline characters
         if keeplines == False:
-
             # Hyphens followed by a newline should be ignored
-            self.corpString = self.corpString.replace('-\n','')
-            self.corpString = self.corpString.replace('\n',' ')
+            self.corpString = self.corpString.replace('-\n', '')
+            self.corpString = self.corpString.replace('\n', ' ')
 
         # Remove hyphens so hyphenated words can be treated as two words
-        self.corpString = self.corpString.replace('-',' ')
+        self.corpString = self.corpString.replace('-', ' ')
 
-        #print("\nTidied corpString:", self.corpString)
+        # print("\nTidied corpString:", self.corpString)
 
         self._initializeCorpus()
         self._initializeMatrix()
@@ -151,7 +151,7 @@ class WordCorpus:
         """
         self.A = np.asarray(self.A)
 
-        samples = np.random.choice(self.size, size=n, p=self.A[current,:])
+        samples = np.random.choice(self.size, size=n, p=self.A[current, :])
         return np.unique(samples)
 
     def generate_babble(self, n):
@@ -159,15 +159,16 @@ class WordCorpus:
         Generate n word/s of babble.
         """
         current = np.random.randint(self.size)
-        #current = 0
+        # current = 0
         babble_words = [self.wordList[current].word.lower()]
         self.A = np.asarray(self.A)
 
-        for i in range(1,n):
-            current = np.random.choice(self.size, p=self.A[current,:])
+        for i in range(1, n):
+            current = np.random.choice(self.size, p=self.A[current, :])
             babble_words.append(self.wordList[current].word.lower())
 
         print("\n", " ".join(babble_words))
+
 
 class StructureCorpus:
     """

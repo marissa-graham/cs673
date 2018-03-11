@@ -25,7 +25,7 @@ def docstring_example(arg1, arg2, kwarg1=0):
     ------
     mystring : String that is the output that we return.
     """
-    
+
     # We should include a line between the docstring and the start of the code. 
     # The comment above results in a line of exactly 79 characters, which is
     # the pep8 maximum for lines of actual code vs. docstrings/comments.

@@ -18,6 +18,8 @@ class RhymeEvaluator:
         self.consonant_symbols = ["B", "CH", "D", "DH", "F", "G", "HH", "JH", "K", "L", "M",
                                   "N", "NG", "P", "R", "S", "SH", "T", "TH", "V", "W", "Y",
                                   "Z", "ZH"]
+        self.vowel_data = self.import_arpabet("data/arpabet_vowels_to_ipa.txt")
+        self.consonant_data = self.import_arpabet("data/arpabet_consonants_to_ipa.txt")
 
         self.num_vowels = len(self.vowel_symbols)
         self.num_consonants = len(self.consonant_symbols)
@@ -47,6 +49,31 @@ class RhymeEvaluator:
         self.Av = np.zeros((self.num_vowels, self.num_vowels))
         self.Ac = np.zeros((self.num_consonants, self.num_consonants))
         self.initialize_tables()
+        self.initialize_arpabet_data()
+
+    def import_arpabet(self, filename):
+        import re
+        attribute_data = []
+        phoneme_data = {}
+        capture_data = False
+        with open(filename, "r") as file:
+            for line in file:
+                if re.match("^@attribute", line):
+                    line = re.sub("['\s\n]", "", line[10:])
+                    match = re.match("(.*){(.*)}")
+                    attr_name = match.group(1)
+                    attr_values = match.group(2).split(",")
+                    data.append((attr_name, attr_values))
+                elif re.match("^@data", line):
+                    capture_data = True
+                if capture_data:
+                    line = re.sub("['\s\n]", "", line)
+                    match = re.match("(.*){(.*)}")
+                    phoneme = match.group(1)
+                    values = match.group(2).split(",")
+                    phoneme_data[phoneme] = values
+        return phoneme_data
+
 
     def initialize_tables(self):
         """

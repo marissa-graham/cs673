@@ -1,3 +1,20 @@
+% Map of Arpabet phonemes to IPA categories
+% For vowels, Aprabet phonemes correspond to 5 categories:
+%	-height {high, mid, low}
+% 	-frontness {front, central, back}
+%	-rounding {true, false}
+%	-tensing {true, false}
+%	-stress {primary, secondary, none}
+% Note: stress is indicated by the numerical suffix attached to the phoneme 
+
+AA {low, back, false, false}
+AA0 {low, back, false, false}
+AA1 {low, back, false, false}
+AA2 {low, back, false, false}
+AE {low, front, false, false}
+AE0 {low, front, false, false}
+AE1 {low, front, false, false}
+AE2 {low, front, false, false}
 AA
 AA0
 AA1

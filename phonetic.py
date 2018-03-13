@@ -120,7 +120,6 @@ class PhoneticDictionary:
         return
 
     def lookup(self, word: str):
-        self.checkDictLoaded()
         """
         Look up a word in the dictionary and return a corresponding Word object
 
@@ -130,8 +129,13 @@ class PhoneticDictionary:
         :param word: a word to look up in the dictionary
         :return: a Word object
         """
-        # assert(word.upper() in self.pdict)
-        return self.pdict[word.upper()]
+        self.checkDictLoaded()
+        
+        if word.upper() in self.pdict:
+            return self.pdict[word.upper()]
+        else:
+            #print(word, " not in dictionary")
+            return Word('',[])
 
     def evaluate(self, s):
         self.checkDictLoaded()

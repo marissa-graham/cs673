@@ -24,11 +24,12 @@
 @attribute place_of_articulation {bilabial,labial,interdental,alveolar,palatal,velar,glottal}
 @attribute voicing {true,false}
 
+@data
 B {stop,bilabial,true}
 CH {affricate,palatal,false}
 D {stop,alveolar,true}
 DH {fricative,interdental,true}
-F {fricative,labiodental,false}
+F {fricative,labial,false}
 G {stop,velar,true}
 HH {aspirate,glottal,false}
 JH {affricate,palatal,true}
@@ -43,7 +44,7 @@ S {fricative,alveolar,false}
 SH {fricative,palatal,false}
 T {stop,alveolar,false}
 TH {fricative,interdental,false}
-V {fricative,labiodental,true}
+V {fricative,labial,true}
 W {semivowel,bilabial,false}
 Y {semivowel,palatal,false}
 Z {fricative,alveolar,true}

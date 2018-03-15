@@ -1,5 +1,6 @@
 from nltk.corpus import cmudict
 import numpy as np
+import re
 
 
 # revision
@@ -18,23 +19,21 @@ class RhymeEvaluator:
         self.consonant_symbols = ["B", "CH", "D", "DH", "F", "G", "HH", "JH", "K", "L", "M",
                                   "N", "NG", "P", "R", "S", "SH", "T", "TH", "V", "W", "Y",
                                   "Z", "ZH"]
-        self.vowel_data = self.import_arpabet("data/arpabet_vowels_to_ipa.txt")
-        self.consonant_data = self.import_arpabet("data/arpabet_consonants_to_ipa.txt")
 
         self.num_vowels = len(self.vowel_symbols)
         self.num_consonants = len(self.consonant_symbols)
         self.vowel_dict = {self.vowel_symbols[i]: i for i in range(self.num_vowels)}
         self.consonant_dict = {self.consonant_symbols[i]: i for i in range(self.num_consonants)}
 
-        self.vowel_weights = np.array([0.355, 0.921, 0.979, 0.053, 0.398])
-        self.consonant_weights = np.array([0.933, 0.0, 1.0])
+        self.vowel_weights = np.loadtxt("data/vowel_weights.csv", delimiter=",")
+        self.consonant_weights = np.loadtxt("data/consonant_weights.csv", delimiter=",")
 
-        self.vowel_features = np.zeros((5, self.num_vowels))
-        self.consonant_features = np.zeros((3, self.num_consonants))
+        self.vowel_features = self.get_features_from_file("data/arpabet_vowels_to_ipa.txt")
+        self.consonant_features = self.get_features_from_file("data/arpabet_consonants_to_ipa.txt")
 
         self.Mh = np.loadtxt("data/v_height.csv", delimiter=",")
         self.Mf = np.loadtxt("data/v_frontness.csv", delimiter=",")
-        self.Mr = np.loadtxt("data/v_roundness.csv", delimiter=",")
+        self.Mr = np.loadtxt("data/v_rounding.csv", delimiter=",")
         self.Mt = np.loadtxt("data/v_tensing.csv", delimiter=",")
         self.Ms = np.loadtxt("data/v_stress.csv", delimiter=",")
 
@@ -46,34 +45,72 @@ class RhymeEvaluator:
 
         self.consonant_feature_matrices = [self.Mm, self.Mp, self.Mv]
 
-        self.Av = np.zeros((self.num_vowels, self.num_vowels))
-        self.Ac = np.zeros((self.num_consonants, self.num_consonants))
+        self.Av = self.compute_Av_values()
+        self.Ac = self.compute_Ac_values()
         self.initialize_tables()
-        self.initialize_arpabet_data()
 
-    def import_arpabet(self, filename):
-        import re
+    def compute_Av_values(self):
+        Av = np.zeros((self.num_vowels, self.num_vowels))
+
+        for vowel1 in self.vowel_symbols:
+            v1_idx = self.vowel_dict[vowel1]
+            for vowel2 in self.vowel_symbols:
+                v2_idx = self.vowel_dict[vowel2]
+                height_score = self.Mh[self.vowel_features[v1_idx][0], self.vowel_features[v2_idx][0]]
+                frontness_score = self.Mf[self.vowel_features[v1_idx][1], self.vowel_features[v2_idx][1]]
+                rounding_score = self.Mr[self.vowel_features[v1_idx][2], self.vowel_features[v2_idx][2]]
+                tensing_score = self.Mt[self.vowel_features[v1_idx][3], self.vowel_features[v2_idx][3]]
+                # stress_score = self.Ms[self.vowel_features[v1_idx], self.vowel_features[v2_idx]]
+                Av[v1_idx, v2_idx] = sum((height_score, frontness_score, rounding_score, tensing_score))
+        return Av
+
+    def compute_Ac_values(self):
+        Ac = np.zeros((self.num_consonants, self.num_consonants))
+
+        for c1 in self.consonant_symbols:
+            c1_idx = self.consonant_dict[c1]
+            for c2 in self.consonant_symbols:
+                c2_idx = self.consonant_dict[c2]
+                manner_score = self.Mm[self.consonant_features[c1_idx][0], self.consonant_features[c2_idx][0]]
+                place_score = self.Mp[self.consonant_features[c1_idx][1], self.consonant_features[c2_idx][1]]
+                voicing_score = self.Mm[self.consonant_features[c1_idx][2], self.consonant_features[c2_idx][2]]
+
+                Ac[c1_idx, c2_idx] = sum((manner_score, place_score, voicing_score))
+        return Ac
+
+    def get_features_from_file(self, filename):
         attribute_data = []
-        phoneme_data = {}
+        phoneme_data = []
         capture_data = False
+        enumerated_features = []
         with open(filename, "r") as file:
             for line in file:
                 if re.match("^@attribute", line):
                     line = re.sub("['\s\n]", "", line[10:])
-                    match = re.match("(.*){(.*)}")
+                    match = re.match("(.*){(.*)}", line)
                     attr_name = match.group(1)
                     attr_values = match.group(2).split(",")
-                    data.append((attr_name, attr_values))
+                    attribute_data.append((attr_name, attr_values))
                 elif re.match("^@data", line):
+                    enumerated_features = [{k: v for v, k in enumerate(attr[1])} for attr in attribute_data]
                     capture_data = True
+                    continue
                 if capture_data:
                     line = re.sub("['\s\n]", "", line)
-                    match = re.match("(.*){(.*)}")
+                    match = re.match("(.*){(.*)}", line)
                     phoneme = match.group(1)
                     values = match.group(2).split(",")
-                    phoneme_data[phoneme] = values
-        return phoneme_data
 
+                    for i in range(len(values)):
+                        try:
+                            assert values[i] in attribute_data[i][1]
+                        except AssertionError:
+                            print("Error parsing '{}'".format(values[i]))
+                            print("\tPossible options: {}".format(attribute_data[i][1]))
+
+                    enumerated_values = [enumerated_features[i][values[i]] for i in range(len(values))]
+                    phoneme_data.append(enumerated_values)
+        return np.array(phoneme_data)
 
     def initialize_tables(self):
         """
@@ -101,15 +138,11 @@ class RhymeEvaluator:
         rows = len(w1) + 1
         cols = len(w2) + 1
         alignment = [[0] * cols for i in range(rows)]
-        prev = [[0] * cols for i in range(rows)]
         alignment[0][0] = 0
-        prev[0][0] = -1
         for i in range(1, rows):
             alignment[i][0] = alignment[i - 1][0] + IN_DEL_COST
-            prev[i][0] = 1
         for i in range(1, cols):
             alignment[0][i] = alignment[0][i - 1] + IN_DEL_COST
-            prev[0][i] = 2
         for i in range(1, rows):
             for j in range(1, cols):
                 top = alignment[i - 1][j] + IN_DEL_COST
@@ -117,37 +150,81 @@ class RhymeEvaluator:
                 diag = alignment[i - 1][j - 1] + self.diff(w1[i - 1], w2[j - 1])
                 choice = min(top, left, diag)
                 alignment[i][j] = choice
-                if choice == top:
-                    prev[i][j] = 1
-                elif choice == left:
-                    prev[i][j] = 2
-                else:
-                    prev[i][j] = 3
         score = alignment[rows - 1][cols - 1]
-        return alignment, prev, score
+        return score
 
     def vowel_pair_score(self, i, j):
         score = 0
-        for k in range(5):
+        for k in range(len(self.vowel_weights)):
             M = self.vowel_feature_matrices[k]
-            score += self.vowel_weights[k] * M[self.vowel_features[k, i], self.vowel_features[k, j]]
+            # score += self.vowel_weights[k] * M[self.vowel_features[k, i], self.vowel_features[k,j]]
         return score
 
     def consonant_pair_score(self, i, j):
         score = 0
         for k in range(3):
             M = self.consonant_feature_matrices[k]
-            index1 = self.consonant_features[k, i]
-            index2 = self.consonant_features[k, j]
-            score += self.consonant_weights[k] * M[index1, index2]
+            index1 = self.consonant_features[i, k]
+            index2 = self.consonant_features[j, k]
+            score += self.consonant_weights[k] * M[index1][index2]
         return score
 
-    def consonant_sequence_score(self, onset):
+    def consonant_sequence_score(self, onset1, onset2):
         """
         Alignment function for consonant sequences with like edit distances and stuff
         """
-        optimal_alignment_score = 0.5
-        return optimal_alignment_score
+        # optimal_alignment_score = 0.5
+        return self.align(onset1, onset2)
+
+    def is_vowel(self, syllable):
+        # returns true if sllable is a vowel
+        # return true if number (stress) found in syllable
+        return re.match(".*\d.*", syllable) is not None
+
+    def is_consonant(self, syllable):
+        return not self.is_vowel(syllable)
+
+    def get_nucleus(self, word, vowel_num):
+        # input: word object, number of the vowel to return (eg 0 == first vowel)
+        vowel_count = 0
+        cur_vowel = None
+        syllables = word.syllables
+        for i in range(len(syllables)):
+            if self.is_vowel(syllables[i]):
+                if vowel_count == vowel_num:
+                    return syllables[i], i
+                else:
+                    vowel_count += 1
+        return None, None
+
+    def get_onset(self, word, nucleus_idx):
+        # get the onset (if any) of a syllable
+        # iteratre backwards until start of string or another vowel is found
+        # any characters found between them are the offset (again, potentially none)
+        if nucleus_idx == 0:
+            return None
+        onset = []
+        syllables = word.syllables
+        for i in range(nucleus_idx-1, -1, -1):
+            if self.is_consonant(syllables[i]):
+                onset.insert(0, syllables[i])
+            else:
+                break
+        return onset
+
+    def get_coda(self, word, nucleus_idx):
+        # get the code (if exists)
+        coda = []
+        syllables = word.syllables
+        if nucleus_idx == len(syllables) - 1:
+            return None
+        for i in range(nucleus_idx + 1, len(syllables)):
+            if self.is_consonant(syllables[i]):
+                coda.append(syllables[i])
+            else:
+                break
+        return coda
+
 
     def rhyme_score(self, word1, word2, i, j, priority=np.array([0.013, 0.355, 0.014])):
         """
@@ -163,14 +240,58 @@ class RhymeEvaluator:
             rhyme_score: A value in [0,1] indicating how well the syllables rhyme.
         """
 
-        # TODO: Get the arpabet symbols for the vowels
-        index1, index2 = "IH", "IH"
+        # get the ith and jth nuclei from both words
+        # aka if i is 0, that means get the first vowel
+        nucleus1, nucleus2 = word1.stress_indices[i], word2.stress_indices[j]
 
-        # TODO: Get the list of arpabet symbols for onset and coda
-        onset1, onset2 = [], []
-        coda1, coda2 = [], []
+        # if i == 0:
+        #     onset1 = word1.stress_indices[0:nucleus1]
+        # else:
+        #     onset1 = word1.syllables[word1.stress_indices[i-1]+1:nucleus1]
 
-        vowel_score = self.Av[self.vowel_dict[vowel1], self.vowel_dict[vowel2]]
+        # word 1
+        if i == 0:
+            onset1 = word1.syllables[0:nucleus1]
+        else:
+            onset1 = word1.syllables[word1.stress_indices[i-1]+1:nucleus1]
+
+        if i == word1.stress_indices.size - 1:
+            if len(word1.syllables) > nucleus1 + 1:
+                coda1 = word1.syllables[nucleus1+1:]
+            else:
+                coda1 = []
+        else:
+            coda1 = word1.syllables[nucleus1+1:word1.stress_indices[i+1]]
+
+        # word 2
+        if j == 0:
+            onset2 = word2.syllables[0:nucleus2]
+        else:
+            onset2 = word2.syllables[word2.stress_indices[j - 1] + 1:nucleus2]
+
+        if j == word2.stress_indices.size - 1:
+            if len(word2.syllables) > nucleus2 + 1:
+                coda2 = word2.syllables[nucleus2 + 1:]
+            else:
+                coda2 = []
+        else:
+            coda2 = word2.syllables[nucleus2 + 1:word2.stress_indices[j + 1]]
+
+        print("Word 1: ", word1, onset1, word1.syllables[nucleus1], coda1)
+        print("Word 2: ", word2, onset2, word2.syllables[nucleus2], coda2)
+
+        # word1_nucleus, nuc_index1 = self.get_nucleus(word1, i)
+        # word2_nucleus, nuc_index2 = self.get_nucleus(word2, j)
+
+        # onset1, onset2 = self.get_onset(word1, nuc_index1), self.get_onset(word2, nuc_index2)
+        # coda1, coda2 = self.get_coda(word1, nuc_index1), self.get_coda(word2, nuc_index2)
+
+        # TODO: get actual scores
+
+        syl1 = word1.syllables[nucleus1][:-1] # strip stress marker
+        syl2 = word2.syllables[nucleus2][:-1]
+
+        vowel_score = self.Av[self.vowel_dict[syl1], self.vowel_dict[syl2]]
         onset_score = self.consonant_sequence_score(onset1, onset2)
         coda_score = self.consonant_sequence_score(coda1, coda2)
 

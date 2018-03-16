@@ -1,0 +1,31 @@
+% Map of Arpabet phonemes to IPA categories
+% For vowels, Aprabet phonemes correspond to 5 categories:
+%	-height {high, mid, low}
+% 	-frontness {front, central, back}
+%	-rounding {true, false}
+%	-tensing {true, false}
+%	-stress {primary, secondary, none}
+% Note: stress is indicated by the numerical suffix attached to the phoneme 
+
+@attribute height {high,mid,low}
+@attribute frontness {front,central,back}
+@attribute rounding {true,false}
+@attribute tensing {true,false}
+% @attribute stress {0,1,2}
+
+@data
+AA {low,back,false,false}
+AE {low,front,false,false}
+AH {mid,central,false,false}
+AO {mid,back,true,false}
+AW {low,central,true,true}
+AY {low,central,false,true}
+EH {mid,front,false,false}
+ER {mid,central,false,false}
+EY {mid,front,false,true}
+IH {high,front,false,false}
+IY {high,front,false,true}
+OW {mid,back,true,true}
+OY {high,front,true,false}
+UH {high,back,false,true}
+UW {high,back,true,true}

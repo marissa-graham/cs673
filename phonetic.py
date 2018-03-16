@@ -15,7 +15,7 @@ class Word:
                     from its syllabic information). The rhythm for the word "table" is 
                     [10]
     """
-    regex = re.compile("\d+")  # a regular expression used to search for stress pattern info
+    #regex = re.compile("\d+")  # a regular expression used to search for stress pattern info
 
     def __init__(self, word, syllables):
         """
@@ -26,6 +26,7 @@ class Word:
         self.word = word
         self.syllables = syllables
         self.rhythm = []
+        self.stress_indices = []
         self.parse_rhythm()
 
     def word(self):
@@ -47,11 +48,19 @@ class Word:
         TODO: store the indices where the vowels
         :return: None
         """
+        for i in range(len(self.syllables)):
+            if self.syllables[i].endswith(('0','1','2','3')):
+                self.rhythm.append(int(self.syllables[i][-1]))
+                self.stress_indices.append(i)
+        self.rhythm = np.array(self.rhythm)
+        self.stress_indices = np.array(self.stress_indices)
+        """
         for syllable in self.syllables:
             m = Word.regex.search(syllable)
             if m is not None:
                 self.rhythm.append(int(m.group(0)))
         return
+        """
 
     def rhymes_with(self, other):
         """
@@ -101,9 +110,11 @@ class PhoneticDictionary:
 
     def __init__(self, file=None):
         self.filename = file
-        self.pdict = {}
+        self.pdict = None
         if file is not None:
             self.import_file(file)
+        else:
+            self.loadCMUdict()
 
     def import_file(self, filename):
         """
@@ -130,12 +141,15 @@ class PhoneticDictionary:
         :return: a Word object
         """
         self.checkDictLoaded()
-        
-        if word.upper() in self.pdict:
-            return self.pdict[word.upper()]
+        word = word.lower()
+        # TODO: check whether dictionary was loaded from cmudict
+        # TODO: logios tool to return non-null value, more rigorous test cases
+        if word in self.pdict:
+            syllables = self.pdict[word][0] #cmudict provides a list of lists for some reason
+            return Word(word, syllables)
         else:
-            #print(word, " not in dictionary")
-            return Word('',[])
+            print("\"{}\" not in dictionary".format(word))
+            return None
 
     def evaluate(self, s):
         self.checkDictLoaded()
@@ -162,6 +176,19 @@ class PhoneticDictionary:
         tokens = line.split()
         return tokens[0], Word(tokens[0], tokens[1:])
 
+    def loadCMUdict(self):
+        from nltk.corpus import cmudict
+        self.pdict = cmudict.dict()
+        # print(self.pdict)
+
+        pass
+
     def checkDictLoaded(self):
         if self.filename is None:
-            raise Exception("no dictionary has been loaded")
+            if self.pdict is None:
+                # raise Exception("no dictionary has been loaded")
+                print("Loading CMUdict...",)
+                self.loadCMUdict()
+                print("done")
+                return
+            return

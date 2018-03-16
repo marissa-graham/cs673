@@ -1,0 +1,76 @@
+% Map of Arpabet phonemes to IPA categories
+% For vowels, Aprabet phonemes correspond to 5 categories:
+%	-height {high, mid, low}
+% 	-frontness {front, central, back}
+%	-rounding {true, false}
+%	-tensing {true, false}
+%	-stress {primary, secondary, none}
+% Note: stress is indicated by the numerical suffix attached to the phoneme
+
+@attribute height {high,mid,low}
+@attribute frontness {front,central,back}
+@attribute rounding {true,false}
+@attribute tensing {true,false}
+% @attribute stress {0,1,2}
+
+@data
+AA {low,back,false,false}
+AA0 {low,back,false,false}
+AA1 {low,back,false,false}
+AA2 {low,back,false,false}
+AE {low,front,false,false}
+AE0 {low,front,false,false}
+AE1 {low,front,false,false}
+AE2 {low,front,false,false}
+AH {mid,central,false,false}
+AH0 {mid,central,false,false}
+AH1 {mid,central,false,false}
+AH2 {mid,central,false,false}
+AO {mid,back,true,false}
+AO0 {mid,back,true,false}
+AO1 {mid,back,true,false}
+AO2 {mid,back,true,false}
+AW {low,central,true,true}
+AW0 {low,central,true,true}
+AW1 {low,central,true,true}
+AW2 {low,central,true,true}
+AY {low,central,false,true}
+AY0 {low,central,false,true}
+AY1 {low,central,false,true}
+AY2 {low,central,false,true}
+EH {mid,front,false,false}
+EH0 {mid,front,false,false}
+EH1 {mid,front,false,false}
+EH2 {mid,front,false,false}
+ER {mid,central,false,false}
+ER0 {mid,central,false,false}
+ER1 {mid,central,false,false}
+ER2 {mid,central,false,false}
+EY {mid,front,false,true}
+EY0 {mid,front,false,true}
+EY1 {mid,front,false,true}
+EY2 {mid,front,false,true}
+IH {high,front,false,false}
+IH0 {high,front,false,false}
+IH1 {high,front,false,false}
+IH2 {high,front,false,false}
+IY {high,front,false,true}
+IY0 {high,front,false,true}
+IY1 {high,front,false,true}
+IY2 {high,front,false,true}
+OW {mid,back,true,true}
+OW0 {mid,back,true,true}
+OW1 {mid,back,true,true}
+OW2 {mid,back,true,true}
+OY {high,front,true,false}
+OY0 {high,front,true,false}
+OY1 {high,front,true,false}
+OY2 {high,front,true,false}
+UH {high,back,false,true}
+UH0 {high,back,false,true}
+UH1 {high,back,false,true}
+UH2 {high,back,false,true}
+UW {high,back,true,true}
+UW0 {high,back,true,true}
+UW1 {high,back,true,true}
+UW2 {high,back,true,true}

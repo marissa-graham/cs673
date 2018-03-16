@@ -1,0 +1,51 @@
+% Map of Arpabet consonants to IPA categories
+% For consonants correspond to 3 categories:
+%	-manner of articulation 
+%		{affricate,
+%			aspirate,
+%			fricative,
+%			liquid,
+%			nasal,
+%			semivowel,
+%			stop}
+%	-place of articulation
+%		{bilabial,
+%			labial,
+%			interdental,
+%			alveolar,
+%			palatal,
+%			velar,
+%			glottal}
+%	-voicing
+%		{true,
+%			false}
+
+@attribute manner_of_articulation {affricate,aspirate,fricative,liquid,nasal,semivowel,stop}
+@attribute place_of_articulation {bilabial,labial,interdental,alveolar,palatal,velar,glottal}
+@attribute voicing {true,false}
+
+@data
+B {stop,bilabial,true}
+CH {affricate,palatal,false}
+D {stop,alveolar,true}
+DH {fricative,interdental,true}
+F {fricative,labial,false}
+G {stop,velar,true}
+HH {aspirate,glottal,false}
+JH {affricate,palatal,true}
+K {stop,velar,false}
+L {liquid,alveolar,true}
+M {nasal,bilabial,true}
+N {nasal,alveolar,true}
+NG {nasal,velar,true}
+P {stop,bilabial,false}
+R {liquid,alveolar,true}
+S {fricative,alveolar,false}
+SH {fricative,palatal,false}
+T {stop,alveolar,false}
+TH {fricative,interdental,false}
+V {fricative,labial,true}
+W {semivowel,bilabial,false}
+Y {semivowel,palatal,false}
+Z {fricative,alveolar,true}
+ZH {fricative,palatal,true}

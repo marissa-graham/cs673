@@ -4,152 +4,105 @@ import phonetic
 import numpy as np
 #import rhymetools
 
-def get_rhythm_string(template, dictionary):
-    """
-    Simple function to extract the meter pattern and word breaks from a given
-    string.
-    """
-    wordstrings = template.split()
-    wordlengths = np.zeros(len(wordstrings),dtype=np.int)
-    nonos = string.punctuation + '0123456789'
-    meter = []
-
-    for i in range(len(wordstrings)):
-        wordstring = wordstrings[i].strip(nonos).lower()
-        word = dictionary.lookup(wordstring)
-        wordlengths[i] = len(word.rhythm)
-        meter.extend(word.rhythm)
-    
-    return wordlengths, np.array(meter)
-
-def similarity_metric(A, B):
-    """
-    Return a float between 0 and 1 representing the similarity score between
-    texts A and B, where 0 is complete dissimilarity and 1 is plagiarism.
-
-    Arguments:
-        A, B: Are they WordCorpus? Are they Sentence? Who knows?
-
-    Returns:
-        s (float) : Similarity score.
-    """
-    pass
+def dada_filler():
+	"""
+	Generate a daDada filler word with the desired scansion.
+	"""
+	pass
 
 
-def get_synonyms():
-    """
-    Placeholder to eventually get WordNet synonyms.
-    """
-    pass
+def join_stubs(location, params, corpus, versetemplate):
+	"""
+	Join the words going forwards and backwards by maximizing
+	the probability of a word or phrase following the left side 
+	and being followed by the right side, while matching the 
+	meter as best as possible.
+	"""
+
+	# Get ALL words from the corpus that follow Left and are followed
+		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
+
+	# Get some synonyms maybe
+
+	# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
+		# fitness score
+
+	pass
+
+def fill_rhyme(location, corpus, versetemplate):
+	"""
+	Get words which:
+		1) match the meter and rhyme pattern at the given indices, and 
+		2) are either in or synonymous to something in the corpus.
+	"""
+	pass 
+
+def generate_word(location, corpus, versetemplate, forward=True):
+	"""
+	Generate a word based on the given corpus to fill the 
+	given template.
+
+	Arguments:
+		- location: Tuple with the information about the current
+					word and indices in the template.
+		- corpus: WordCorpus to use.
+		- versetemplate: VerseTemplate to use.
+		- forward: if True, fill forward; if False, fill backward.
+
+	Returns:
+		- location: Updated information about current word
+					and indices.
+	"""
+
+	# Get a pool of choices
+
+		# Sample the distribution
+
+		# Get synonyms as desired (w/ original index in transition matrix)
 
 
-def check_rhyme():
-    """
-    Check for a meter match to the template, accounting for the fact that 
-    we can have binary or ternary stress pattern symbols.
-    """
-    pass
+	# Get the fitness scores for each choice
+
+		# How well do they fit the meter?
+
+		# Do they cross a breakpoint?
+
+		# How "followable" are they?
+
+		# Do they result in plagiarism?
 
 
-def check_rhythm(w, wordlengths, rhythmtemplate, wordindex, rhythmindex):
-    """
-    Wrap around the rhymetools module to allow for multi-syllable rhymings.
-    """
-    
-    # Check if the word length is right
-    if len(w.rhythm) != wordlengths[wordindex]:
-        #print("\tWord doesn't have the right number of syllables")
-        return 0
+	# Choose between them based on these scores, including minimum 
+		# acceptability thresholds and compromise
 
-    # Single-syllable words match meter with everything
-    if len(w.rhythm) == 1:
-        #print("\tSingle-syllable words always match stress")
-        return 1
+	# Update the template and location accordingly
 
-    else:
-        rhythm_score = 0
+		# Should we have a "ChoiceOption" class and such to keep track
+			# of all this nonsense? What needs to be stored?
 
-        # TODO: convert to rhythm being a numpy array
-        for i in range(len(w.rhythm)):
-            if w.rhythm[i] == rhythmtemplate[rhythmindex + i]:
-                rhythm_score += 1
+		# KEEP the fitness scores of the choice for potential
+			# backtracking later
 
-        #print("rhythm score: ", rhythm_score)
-        if rhythm_score == len(w.rhythm):
-            #print("\tMATCHES PERFECTLY")
-            return rhythm_score
-        else:
-            #print("\tRIGHT NUMBER OF SYLLABLES BUT WRONG RHYTHM")
-            return 0.5
+	pass
 
+def fill_template(corpus, versetemplate):
+	"""
+	Generate babble words to fill the given Verse template.
+	"""
 
-def check_grammar():
-    """
-    Get a grammar score for the desired word.
-    """
-    pass
+	# Pure initialization steps
 
+	# Go through the rhymes in the template and get bone words that 
+		# match the desired scansion
 
-def check_quality():
-    """
-    Check the quality of the writing.
-    """
-    pass
+	# Now go through all the "holes" between bone words
+		
+		# If you are at the first rhyme word, go backwards to start
 
+		# If you are at the last rhyme word, go forward to the end
 
-def choose_next(corpus, index, template):
-    """
-    Choose next word to use.
-    """
-    pass
+		# If you are between two pairs of rhyme words, work forwards
+			# and backwards simultaneously until the desired choices
+			# overlap each other, backtrack one step, then call join_stubs
 
-
-def generate_verse(corp, wordlengths, rhythmtemplate):
-    """
-    Generate babble words to fill the given Verse template.
-    """
-    current_word = np.random.randint(corp.size)
-    rhythmindex = 0
-    wordindex = 0
-    words = []
-
-    while rhythmindex < rhythmtemplate.size:
-
-        choices = corp.sample_distribution(current_word, 25)
-        rhythm_scores = np.zeros_like(choices)
-
-        for i in range(len(choices)):
-            w = corp.wordList[choices[i]]
-            rhythm_scores[i] = check_rhythm(w, wordlengths, rhythmtemplate, \
-                wordindex, rhythmindex)
-        
-        current_word = choices[np.argmax(rhythm_scores)]
-        w = corp.wordList[current_word]
-
-        if np.max(rhythm_scores) < wordlengths[wordindex]:
-            filler_word = ""
-            for i in range(wordlengths[wordindex]):
-                if rhythmtemplate[rhythmindex+i] == 0:
-                    filler_word += "da"
-                else:
-                    filler_word += "DA"
-            words.append(filler_word)
-            rhythmindex += wordlengths[wordindex]
-            wordindex += 1
-
-        elif np.max(rhythm_scores) == 0.5:
-
-            print("Match word length only")
-            print(rhythmtemplate[rhythmindex:rhythmindex+wordlengths[wordindex]])
-            print(current_word.rhythm)
-            words.append(corp.wordList[current_word].word.lower())
-            rhythmindex += wordlengths[wordindex]
-            wordindex += 1
-
-        else:
-            words.append(corp.wordList[current_word].word.lower())
-            rhythmindex += wordlengths[wordindex]
-            wordindex += 1
-
-    # print("\nResults:\n", " ".join(words))
-    return " ".join(words)
+	pass

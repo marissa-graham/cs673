@@ -5,7 +5,6 @@ import string
 from scipy import sparse
 from matplotlib import pyplot as plt
 
-
 class WordCorpus:
     """
     Calculate the transition probabilities for a given corpus of text and 

@@ -4,9 +4,6 @@ import re
 import itertools
 
 
-# revision
-# test revision
-
 class RhymeEvaluator:
     def __init__(self):
         """
@@ -51,7 +48,6 @@ class RhymeEvaluator:
 
         self.compute_Av_values()
         self.compute_Ac_values()
-        #self.initialize_tables()
 
     def compute_Av_values(self):
         self.Av = np.zeros((self.num_vowels, self.num_vowels))
@@ -132,64 +128,6 @@ class RhymeEvaluator:
                     phoneme_data.append(enumerated_values)
         return np.array(phoneme_data)
 
-    def initialize_tables(self):
-        """
-        Create Av and Ac using the hardcoded property tables (made manually) and the
-        correlation matrices for phoneme properties (colorful ones from the paper)
-        """
-        self.vowel_pairs = np.zeros((self.num_vowels, self.num_vowels))
-        for i in range(self.num_vowels):
-            for j in range(self.num_vowels):
-                self.vowel_pairs[i, j] = self.vowel_pair_score(i, j)
-        self.consonant_pairs = np.zeros((self.num_consonants, self.num_consonants))
-        for i in range(self.num_consonants):
-            for j in range(self.num_consonants):
-                self.consonant_pairs[i, j] = self.consonant_pair_score(i, j)
-
-    def diff(self, a, b):
-        SUB_COST = 1
-        MATCH_COST = -3
-        if a == b:
-            return MATCH_COST
-        else:
-            return SUB_COST
-
-    def align(self, w1, w2):
-        IN_DEL_COST = 5
-        rows = len(w1) + 1
-        cols = len(w2) + 1
-        alignment = [[0] * cols for i in range(rows)]
-        alignment[0][0] = 0
-        for i in range(1, rows):
-            alignment[i][0] = alignment[i - 1][0] + IN_DEL_COST
-        for i in range(1, cols):
-            alignment[0][i] = alignment[0][i - 1] + IN_DEL_COST
-        for i in range(1, rows):
-            for j in range(1, cols):
-                top = alignment[i - 1][j] + IN_DEL_COST
-                left = alignment[i][j - 1] + IN_DEL_COST
-                diag = alignment[i - 1][j - 1] + self.diff(w1[i - 1], w2[j - 1])
-                choice = min(top, left, diag)
-                alignment[i][j] = choice
-        score = alignment[rows - 1][cols - 1]
-        return score
-
-    def vowel_pair_score(self, i, j):
-        score = 0
-        for k in range(len(self.vowel_weights)):
-            M = self.vowel_feature_matrices[k]
-            score += self.vowel_weights[k] * M[self.vowel_features[i, k], self.vowel_features[j, k]]
-        return score
-
-    def consonant_pair_score(self, i, j):
-        score = 0
-        for k in range(3):
-            M = self.consonant_feature_matrices[k]
-            index1 = self.consonant_features[i, k]
-            index2 = self.consonant_features[j, k]
-            score += self.consonant_weights[k] * M[index1][index2]
-        return score
-
     def similarity_score(self, phoneme_1, phoneme_2):
         phoneme_1_idx = self.consonant_dict[phoneme_1]
         phoneme_2_idx = self.consonant_dict[phoneme_2]
@@ -241,55 +179,6 @@ class RhymeEvaluator:
             score = self.seq_align(alignment)
         return score
 
-    def is_vowel(self, syllable):
-        # returns true if sllable is a vowel
-        # return true if number (stress) found in syllable
-        return re.match(".*\d.*", syllable) is not None
-
-    def is_consonant(self, syllable):
-        return not self.is_vowel(syllable)
-
-    def get_nucleus(self, word, vowel_num):
-        # input: word object, number of the vowel to return (eg 0 == first vowel)
-        vowel_count = 0
-        cur_vowel = None
-        syllables = word.syllables
-        for i in range(len(syllables)):
-            if self.is_vowel(syllables[i]):
-                if vowel_count == vowel_num:
-                    return syllables[i], i
-                else:
-                    vowel_count += 1
-        return None, None
-
-    def get_onset(self, word, nucleus_idx):
-        # get the onset (if any) of a syllable
-        # iteratre backwards until start of string or another vowel is found
-        # any characters found between them are the offset (again, potentially none)
-        if nucleus_idx == 0:
-            return None
-        onset = []
-        syllables = word.syllables
-        for i in range(nucleus_idx-1, -1, -1):
-            if self.is_consonant(syllables[i]):
-                onset.insert(0, syllables[i])
-            else:
-                break
-        return onset
-
-    def get_coda(self, word, nucleus_idx):
-        # get the code (if exists)
-        coda = []
-        syllables = word.syllables
-        if nucleus_idx == len(syllables) - 1:
-            return None
-        for i in range(nucleus_idx + 1, len(syllables)):
-            if self.is_consonant(syllables[i]):
-                coda.append(syllables[i])
-            else:
-                break
-        return coda
-
     def rhyme_score(self, word1, word2, i, j):
         """
         Calculate the rhyme score for syllables i and j of words 1 and 2, respectively.
@@ -308,12 +197,6 @@ class RhymeEvaluator:
         # aka if i is 0, that means get the first vowel
         nucleus1, nucleus2 = word1.stress_indices[i], word2.stress_indices[j]
 
-        # if i == 0:
-        #     onset1 = word1.stress_indices[0:nucleus1]
-        # else:
-        #     onset1 = word1.syllables[word1.stress_indices[i-1]+1:nucleus1]
-
-        # word 1
         if i == 0:
             onset1 = word1.syllables[0:nucleus1]
         else:
@@ -340,17 +223,6 @@ class RhymeEvaluator:
                 coda2 = []
         else:
             coda2 = word2.syllables[nucleus2 + 1:word2.stress_indices[j + 1]]
-
-        print("Word 1: ", word1, onset1, word1.syllables[nucleus1], coda1)
-        print("Word 2: ", word2, onset2, word2.syllables[nucleus2], coda2)
-
-        # word1_nucleus, nuc_index1 = self.get_nucleus(word1, i)
-        # word2_nucleus, nuc_index2 = self.get_nucleus(word2, j)
-
-        # onset1, onset2 = self.get_onset(word1, nuc_index1), self.get_onset(word2, nuc_index2)
-        # coda1, coda2 = self.get_coda(word1, nuc_index1), self.get_coda(word2, nuc_index2)
-
-        # TODO: get actual scores
 
         syl1 = word1.syllables[nucleus1][:-1] # strip stress marker
         syl2 = word2.syllables[nucleus2][:-1]

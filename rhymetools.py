@@ -1,6 +1,7 @@
 from nltk.corpus import cmudict
 import numpy as np
 import re
+import itertools
 
 
 # revision
@@ -14,6 +15,9 @@ class RhymeEvaluator:
         - Av: vowel pair score lookup table
         - Ac: consonant pair score lookup table
         """
+        self.priority = np.array([0.013, 0.355, 0.014])
+        self.priority /= np.sum(self.priority)
+
         self.vowel_symbols = ["AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER", "EY", "IH", \
                               "IY", "OW", "OY", "UH", "UW"]
         self.consonant_symbols = ["B", "CH", "D", "DH", "F", "G", "HH", "JH", "K", "L", "M",
@@ -37,7 +41,7 @@ class RhymeEvaluator:
         self.Mt = np.loadtxt("data/v_tensing.csv", delimiter=",")
         self.Ms = np.loadtxt("data/v_stress.csv", delimiter=",")
 
-        self.vowel_feature_matrices = [self.Mh, self.Mf, self.Mr, self.Mt, self.Ms]
+        #self.vowel_feature_matrices = [self.Mh, self.Mf, self.Mr, self.Mt, self.Ms]
 
         self.Mm = np.loadtxt("data/c_manner.csv", delimiter=",")
         self.Mp = np.loadtxt("data/c_place.csv", delimiter=",")
@@ -45,12 +49,12 @@ class RhymeEvaluator:
 
         self.consonant_feature_matrices = [self.Mm, self.Mp, self.Mv]
 
-        self.Av = self.compute_Av_values()
-        self.Ac = self.compute_Ac_values()
-        self.initialize_tables()
+        self.compute_Av_values()
+        self.compute_Ac_values()
+        #self.initialize_tables()
 
     def compute_Av_values(self):
-        Av = np.zeros((self.num_vowels, self.num_vowels))
+        self.Av = np.zeros((self.num_vowels, self.num_vowels))
 
         for vowel1 in self.vowel_symbols:
             v1_idx = self.vowel_dict[vowel1]
@@ -61,22 +65,38 @@ class RhymeEvaluator:
                 rounding_score = self.Mr[self.vowel_features[v1_idx][2], self.vowel_features[v2_idx][2]]
                 tensing_score = self.Mt[self.vowel_features[v1_idx][3], self.vowel_features[v2_idx][3]]
                 # stress_score = self.Ms[self.vowel_features[v1_idx], self.vowel_features[v2_idx]]
-                Av[v1_idx, v2_idx] = sum((height_score, frontness_score, rounding_score, tensing_score))
-        return Av
+                # self.Av[v1_idx, v2_idx] = sum((height_score, frontness_score, rounding_score, tensing_score))
+
+                self.Av[v1_idx, v2_idx] = .355 * frontness_score + \
+                                            .921 * height_score + \
+                                            .979 * rounding_score + \
+                                            .053 * tensing_score
+
+        self.Av = (self.Av - np.min(self.Av)) / (np.max(self.Av) - np.min(self.Av))
+        np.fill_diagonal(self.Av, 1.0)
+        # self.Av /= (.355 + .921 + .979 + .053)
+        print(np.diag(self.Av))
 
     def compute_Ac_values(self):
-        Ac = np.zeros((self.num_consonants, self.num_consonants))
+        self.Ac = np.zeros((self.num_consonants, self.num_consonants))
 
         for c1 in self.consonant_symbols:
+
             c1_idx = self.consonant_dict[c1]
+
             for c2 in self.consonant_symbols:
+
                 c2_idx = self.consonant_dict[c2]
                 manner_score = self.Mm[self.consonant_features[c1_idx][0], self.consonant_features[c2_idx][0]]
-                place_score = self.Mp[self.consonant_features[c1_idx][1], self.consonant_features[c2_idx][1]]
+                # place_score = self.Mp[self.consonant_features[c1_idx][1], self.consonant_features[c2_idx][1]]
                 voicing_score = self.Mm[self.consonant_features[c1_idx][2], self.consonant_features[c2_idx][2]]
 
-                Ac[c1_idx, c2_idx] = sum((manner_score, place_score, voicing_score))
-        return Ac
+                self.Ac[c1_idx, c2_idx] = 0.933 * manner_score + voicing_score
+                # self.Ac[c1_idx, c2_idx] = sum((manner_score, place_score, voicing_score))
+        self.Ac = (self.Ac - np.min(self.Ac)) / (np.max(self.Ac) - np.min(self.Ac))
+        np.fill_diagonal(self.Ac,1.0)
+        # self.Ac /= 1.933
+        print(np.diag(self.Ac))
 
     def get_features_from_file(self, filename):
         attribute_data = []
@@ -114,16 +134,17 @@ class RhymeEvaluator:
 
     def initialize_tables(self):
         """
-        Create Mv and Mc using the hardcoded property tables (made manually) and the 
+        Create Av and Ac using the hardcoded property tables (made manually) and the
         correlation matrices for phoneme properties (colorful ones from the paper)
         """
+        self.vowel_pairs = np.zeros((self.num_vowels, self.num_vowels))
         for i in range(self.num_vowels):
             for j in range(self.num_vowels):
-                self.Av[i, j] = self.vowel_pair_score(i, j)
-
+                self.vowel_pairs[i, j] = self.vowel_pair_score(i, j)
+        self.consonant_pairs = np.zeros((self.num_consonants, self.num_consonants))
         for i in range(self.num_consonants):
             for j in range(self.num_consonants):
-                self.Ac[i, j] = self.consonant_pair_score(i, j)
+                self.consonant_pairs[i, j] = self.consonant_pair_score(i, j)
 
     def diff(self, a, b):
         SUB_COST = 1
@@ -157,7 +178,7 @@ class RhymeEvaluator:
         score = 0
         for k in range(len(self.vowel_weights)):
             M = self.vowel_feature_matrices[k]
-            # score += self.vowel_weights[k] * M[self.vowel_features[k, i], self.vowel_features[k,j]]
+            score += self.vowel_weights[k] * M[self.vowel_features[i, k], self.vowel_features[j, k]]
         return score
 
     def consonant_pair_score(self, i, j):
@@ -169,12 +190,56 @@ class RhymeEvaluator:
             score += self.consonant_weights[k] * M[index1][index2]
         return score
 
+    def similarity_score(self, phoneme_1, phoneme_2):
+        phoneme_1_idx = self.consonant_dict[phoneme_1]
+        phoneme_2_idx = self.consonant_dict[phoneme_2]
+        return self.Ac[phoneme_1_idx, phoneme_2_idx]
+
+    def seq_align(self, alignment):
+
+        m, n = np.shape(alignment)
+        diff = n - m
+        if diff < 0:
+            raise ValueError("Should have more columns than rows")
+
+        if diff == 0:
+            return np.diag(alignment) / np.max(np.diag(alignment))
+        if m == 1:
+            return np.max(alignment) / n
+        elif n == 1:
+            return np.max(alignment) / m
+
+        best = 0
+        tot = 0
+        for c in itertools.combinations(range(n), n - diff):
+            mydiag = np.diag(alignment[:,c])
+            tot = np.sum(mydiag)/np.max(mydiag)
+            if tot > best:
+                best = tot
+        return tot / n
+
     def consonant_sequence_score(self, onset1, onset2):
         """
         Alignment function for consonant sequences with like edit distances and stuff
         """
-        # optimal_alignment_score = 0.5
-        return self.align(onset1, onset2)
+        # create matrix out of onset1 and onset2
+        # get the similarity score for every cell
+        # get the largest cell in each row or column (whichever dimension is shorter)
+        # sum those together and normalize by the bigger direction
+
+        if onset1 == onset2:
+            return 1.0
+        rows = len(onset1)
+        cols = len(onset2)
+        alignment = np.zeros((rows, cols))
+        for i in range(rows):
+            for j in range(cols):
+                alignment[i,j] = self.similarity_score(onset1[i],onset2[j])
+        if rows > cols:
+            score = self.seq_align(alignment.T)
+        else:
+            score = self.seq_align(alignment)
+        return score
 
     def is_vowel(self, syllable):
         # returns true if sllable is a vowel
@@ -225,8 +290,7 @@ class RhymeEvaluator:
                 break
         return coda
 
-
-    def rhyme_score(self, word1, word2, i, j, priority=np.array([0.013, 0.355, 0.014])):
+    def rhyme_score(self, word1, word2, i, j):
         """
         Calculate the rhyme score for syllables i and j of words 1 and 2, respectively.
         Args:
@@ -296,5 +360,5 @@ class RhymeEvaluator:
         coda_score = self.consonant_sequence_score(coda1, coda2)
 
         scores = np.array([vowel_score, onset_score, coda_score])
-
-        return np.dot(scores, priority)
+        print(np.sum(self.priority))
+        return np.dot(scores, self.priority)

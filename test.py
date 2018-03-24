@@ -6,8 +6,8 @@ if __name__ == "__main__":
     # print(rm.evaluate("enable", "fable"))
     from phonetic import PhoneticDictionary
     pd = PhoneticDictionary()
-    word1 = pd.lookup("refrain")
-    word2 = pd.lookup("frame")
+    word1 = pd.lookup("sprint")
+    word2 = pd.lookup("print")
     print(word1)
     print(word2)
     rm = RhymeEvaluator()

@@ -11,15 +11,17 @@ class WordCorpus:
     use the distribution to generate options for new text.
 
     Attributes:
-        - size (int): Number of unique words in the corpus.
-        - length (int): Total number of words in the corpus.
-        - wordSeq: NumPy array where the i-th element is the index of 
+        size (int): Number of unique words in the corpus.
+        length (int): Total number of words in the corpus.
+
+        wordSeq: NumPy array where the i-th element is the index of 
           the i-th word in the corpus text.
-        - wordList: List of unique Word objects in the corpus.
-        - wordDict: Dictionary with wordDict[Word.word] = index of Word.
+        wordList: List of unique Word objects in the corpus.
+        wordDict: Dictionary with wordDict[Word.word] = index of Word.
           That is, we look up the index based on the text of an actual Word,
           so we can extend the corpus without duplicating Word objects.
-        - A (csr_matrix): Transition matrix.
+          
+        A : Transition matrix.
     """
 
     def __init__(self, dictionary):
@@ -95,6 +97,8 @@ class WordCorpus:
             shape=(self.size, self.size)
         ).tocsr()
 
+        # Jot down followability stuff
+
         # Normalize A to get probabilities
         data = np.maximum(A_raw.sum(axis=1).T, np.ones(self.size))
         d = sparse.spdiags(1.0/data, 0, self.size, self.size)
@@ -102,12 +106,6 @@ class WordCorpus:
 
         # TODO: better to keep it sparse?
         self.A = np.asarray(self.A.todense())
-
-    def _extendCorpus(self, text):
-        pass
-
-    def _extendMatrix(self):
-        pass
 
     def initialize(self, text, is_filename=True, keeplines=False):
         """
@@ -147,10 +145,9 @@ class WordCorpus:
         self._initializeCorpus()
         self._initializeMatrix()
 
-    def extend(self, text, is_filename=True):
-        pass
-
     def add_constraints(self):
+
+        # Can we add a MaxOrder constraint here without too much trouble?
         pass
 
     def sample_distribution(self, current, n):
@@ -161,21 +158,7 @@ class WordCorpus:
         try:
             samples = np.random.choice(self.size, size=n, p=self.A[current,:])
         except ValueError:
-            print("probabilities do not sum to 1-try anything")
+            print("Probabilities do not sum to 1. Generally means a row of zeros,\
+                so we simply choose randomly.")
             samples = np.random.randint(self.size, size=n)
         return np.unique(samples)
-
-
-class StructureCorpus:
-    """
-    Calculate the transition probabilities for rhyme and meter in order to
-    use the distribution to generate new structures.
-
-    1) Brute force: Go through all of the words/chunks of syllables and 
-       ask "does it rhyme with anything we've seen yet"
-       - By the word? By the syllable? By chunks of syllables?
-    2) Learning of what patterns to pay attention to
-    3) Simplify to a small number of patterns
-    4) Generate new patterns accordingly
-    """
-    pass

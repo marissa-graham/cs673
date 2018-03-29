@@ -12,21 +12,21 @@ class WordCorpus:
 
     Attributes:
 
-        dictionary : PhoneticDictionary to use for lookup. 
-        corpString : Source text in string format.
-        size : Number of unique words in the corpus.
+        dictionary : PhoneticDictionary to use for lookup
+        corpString : Source text in string format
+        size : Number of unique words in the corpus
 
-        frequencies : Number of times each word occurs.
-        unique_precedent_counts : # of unique words each word follows.
-        unique_antecedent_counts : # of unique follow words for each word.
+        frequencies : Number of times each word occurs
+        unique_precedent_counts : # of unique words each word follows
+        unique_antecedent_counts : # of unique follow words for each word
 
-        wordSeq : Indices for each word in the corpus text.
-        wordList : List of unique Word objects in the corpus.
-        wordDict : Dictionary with wordDict[Word.stringRepr] = index of Word.
+        wordSeq : Indices for each word in the corpus text
+        wordList : List of unique Word objects in the corpus
+        wordDict : Dictionary with wordDict[Word.stringRepr] = index of Word
           That is, we look up the index based on the text of an actual Word,
-          so we can extend the corpus without duplicating Word objects.
+          so we can extend the corpus without duplicating Word objects
 
-        A : Transition matrix used to sample the probability distribution.
+        A : Transition matrix used to sample the probability distribution
     """
 
     def __init__(self, dictionary):
@@ -122,11 +122,11 @@ class WordCorpus:
         Read in the corpus and calculate the transition matrix.
 
         Arguments:
-            text : String containing either a filename or the actual text.
-            is_filename : Bool telling us whether text is a filename.
+            text : String containing either a filename or the actual text
+            is_filename : Bool telling us whether text is a filename
             keeplines : Bool telling us whether to keep line structure at 
                 the cost of sometimes splitting words apart, or to keep words
-                together at the cost of losing line structure.
+                together at the cost of losing line structure
         """
 
         # Assign the text to self.corpString

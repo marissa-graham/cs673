@@ -11,21 +11,21 @@ class RhymeEvaluator:
     Hard-coded attributes:
 
         self.priority : Priority weights for onset, nucleus, and coda
-        self.vowel_priorities: Weights for height, frontness, rounding, and tensing
-        self.consonant_priorities: Weights for manner and voicing
+        self.vowel_priorities : Weights for height, frontness, rounding, and tensing
+        self.consonant_priorities : Weights for manner and voicing
 
-        self.num_vowels: Number of vowel phonemes possible
-        self.num_consonants: Number of consonant phonemes possible
-        self.v_list: List of vowel phoneme symbols
-        self.c_list: List of consonant phoneme symbols
+        self.num_vowels : Number of vowel phonemes possible
+        self.num_consonants : Number of consonant phonemes possible
+        self.v_list : List of vowel phoneme symbols
+        self.c_list : List of consonant phoneme symbols
 
-        self.vowels: Dictionary lookup for vowel phoneme index by symbol
-        self.consonants: Dict lookup for consonant phoneme index by symbol
+        self.vowels : Dictionary lookup for vowel phoneme index by symbol
+        self.consonants : Dict lookup for consonant phoneme index by symbol
     
     Attributes loaded from file:
 
-        self.v_features: Phoneme features for the vowels
-        self.c_features: Phoneme features for the consonants
+        self.v_features : Phoneme features for the vowels
+        self.c_features : Phoneme features for the consonants
         self.M* : Similarity matrix for a specific phoneme feature
             (Vowels: Mh, Mf, Mr, Mt; Consonants: Mm, Mv)
 

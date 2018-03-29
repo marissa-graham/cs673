@@ -41,9 +41,7 @@ def followability_score():
 	pass
 
 def get_choices(corpus, versetemplate):
-	"""
-	Get a pool of word choices from the corpus.
-	"""
+	"""Get a pool of word choices from the corpus."""
 
 	# Sample the distribution
 
@@ -90,19 +88,17 @@ def join_stubs(left_index, right_index, corpus, versetemplate):
 
 def generate_word(fill_index, corpus, versetemplate, forward=True):
 	"""
-	Generate a word based on the given corpus to fill the 
-	given template.
+	Generate a word based on the given corpus to fill the given template.
 
 	Arguments:
-		- location: Tuple with the information about the current
-					word and indices in the template.
-		- corpus: WordCorpus to use.
-		- versetemplate: VerseTemplate to use.
-		- forward: if True, fill forward; if False, fill backward.
+		location : Tuple with the information about the current
+					word and indices in the template
+		corpus : WordCorpus to use
+		versetemplate : VerseTemplate to use
+		forward : if True, fill forward; if False, fill backward
 
 	Returns:
-		- location: Updated information about current word
-					and indices.
+		location : Updated information about current word and indices
 	"""
 
 	# Get a pool of choices

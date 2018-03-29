@@ -33,16 +33,20 @@ def get_sample(i):
 
 class VerseTemplate:
 	"""
-	Arguments:
-		template_string: Text with the desired rhythm and rhyme pattern.
-		dictionary: Phonetic dictionary to use for lookup.
-		breakrules: Require no word breaking across original words ('word')
-					  or no word breaking across phrases ('phrase')
+	Generate a template for scansion and rhyme requirements mimicking the 
+	given input text.	
 	
 	Attributes:
-		breakpoints: List of indices that a word can't cross
-		stresses: List of stresses for each syllable
-		verse: Dictionary to store the filled template
+
+		template_string : Text with the desired rhythm and rhyme pattern
+		dictionary : Phonetic dictionary to use for lookup
+		breakrules : Require no word breaking across original words ('word')
+					  or no word breaking across phrases ('phrase')
+
+		wordList : List of Words in the source text.
+		breakpoints : List of indices that a word can't cross
+		stresses : List of stresses for each syllable
+		verse : Dictionary to store the filled template
 		rhymes : Matrix with rhyme patterns to be mimicked
 	"""
 
@@ -58,37 +62,41 @@ class VerseTemplate:
 		self.phraseBreakpoints = ('!', ')', ',', '--', '.', ':', ';', '?')
 		self.nonos = string.punctuation + '0123456789'
 
+		self.wordList = []
 		self.breakpoints = []
 		self.stresses = []
 		self.verse = dict()
+
+		self._getRhythm()
+		self._getRhyme()
 
 	def _getRhythm(self):
 		"""
 		Extract the meter pattern and desired breaks from a given string.
 		"""
-		wordstrings = self.template.split()
 
-		def add_word(wordstrings, i):
+		# Go through all the words in the template text
+		wordstrings = self.template.split()
+		for i in range(len(wordstrings)):
+
+			# Add the word's rhythm to the template
 			wordstring = wordstrings[i].strip(self.nonos).lower()
+
 			if len(wordstring) == 0:
 				pass
+
 			else:
 				word = self.dictionary.lookup(wordstring)
-				self.stresses.extend(word.rhythm)
+				self.wordList.append(word)
+				self.stresses.extend(word.rhythm)	
 
-		for i in range(len(wordstrings)):
-			add_word(wordstrings, i)
-			
+			# Add any breakpoints associated with the word 
 			if self.breakrules == "word":
 				self.breakpoints.append(len(self.stresses))
 
 			elif self.breakrules == "phrase":
 				if wordstrings[i].endswith(self.phraseBreakpoints):
 					self.breakpoints.append(len(self.stresses))
-
-		print('\n',self.template)
-		print(self.stresses)
-		print(self.breakpoints)
 
 	def _getRhyme(self):
 		"""
@@ -104,12 +112,6 @@ class VerseTemplate:
 
 		# Ignore the 1-syllable prepositions, articles, and pronouns
 		pass
-
-	def initialize():
-		"""
-		Initialize the 
-		self._getRhythm()
-		self._getRhyme()
 
 	def add_word(self, word, fill_index, L, scores, forward):
 		"""

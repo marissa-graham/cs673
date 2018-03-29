@@ -227,16 +227,12 @@ class RhymeEvaluator:
         """
         Alignment function for consonant sequences with like edit distances and stuff
         """
-        # create matrix out of onset1 and onset2
-        # get the similarity score for every cell
-        # get the largest cell in each row or column (whichever dimension is shorter)
-        # sum those together and normalize by the bigger direction
 
         # Return 1 if the sequences are identical
         if onset1 == onset2:
             return 1.0
 
-        # Set up the alignment matrix
+        # Get the similarity score for each phoneme pair
         rows = len(onset1)
         cols = len(onset2)
         alignment = np.zeros((rows, cols))
@@ -294,14 +290,14 @@ class RhymeEvaluator:
         Calculate the rhyme score between the i-th syllable of word1 and the
         j-th syllable of word2.
 
-        Args:
-            word1: the first word
-            word2: the second word
-            i: idx of nucleus of first word
-            j: idx of nucleus of second word
+        Arguments:
+            word1 : the first Word object
+            word2 : the second Word
+            i : relevant syllable index in first word
+            j : relevant syllable index in second word
 
         Returns: 
-            rhyme_score: A value in [0,1] indicating the rhyme quality.
+            rhyme_score : A value in [0,1] indicating the rhyme quality.
         """
 
         # Get the nucleus for each word (i.e. if i is 0, get the 1st vowel)

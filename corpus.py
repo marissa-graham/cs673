@@ -12,16 +12,17 @@ class WordCorpus:
 
     Attributes:
 
-        dictionary: 
+        dictionary : PhoneticDictionary to use for lookup. 
+        corpString : Source text in string format.
         size : Number of unique words in the corpus.
 
-        frequencies : Array containing the number of times each word occurs.
+        frequencies : Number of times each word occurs.
         unique_precedent_counts : # of unique words each word follows.
         unique_antecedent_counts : # of unique follow words for each word.
 
-        wordSeq: Array containing the indices for each word in the corpus text.
-        wordList: List of unique Word objects in the corpus.
-        wordDict: Dictionary with wordDict[Word.stringRepr] = index of Word.
+        wordSeq : Indices for each word in the corpus text.
+        wordList : List of unique Word objects in the corpus.
+        wordDict : Dictionary with wordDict[Word.stringRepr] = index of Word.
           That is, we look up the index based on the text of an actual Word,
           so we can extend the corpus without duplicating Word objects.
 
@@ -29,9 +30,7 @@ class WordCorpus:
     """
 
     def __init__(self, dictionary):
-        """
-        Initialize an empty corpus. Dictionary is a PhoneticDictionary object.
-        """
+        """ Initialize an empty corpus. """
         self.dictionary = dictionary
         self.corpString = None
         

@@ -10,13 +10,13 @@ class Word:
         word : The string representation of the word
         length : The number of syllables in the word
         phonemes : Phoneme list for the word, e.g. table =  [T, EY1, B, AH0, L]
-        rhythm : Stressed/unstressed information for the syllables.
-        vowelIndices : The indices in the phoneme list corresponding to the vowels. 
+        rhythm : Stressed/unstressed information for the syllables
+        vowelIndices : The indices in the phoneme list corresponding to the vowels
     """
     
     def __init__(self, word, phonemes):
         """
-        Initialize and parse a given word with phoneme list already parset.
+        Initialize and parse a given word with phoneme list already parsed.
         """
         self.stringRepr = word
         self.length = 0
@@ -39,7 +39,7 @@ class Word:
 
     def __str__(self):
         """
-        Get a string representation of the Word object 
+        Get a string representation of the Word object.
         """
         out = "Word: " + self.stringRepr + "\n"
         out += "Phonemes: ["+", ".join(self.phonemes) + "]\n"

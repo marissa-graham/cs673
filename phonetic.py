@@ -1,194 +1,97 @@
-import re
+#!python3
+import nltk
 import numpy as np
-
 
 class Word:
     """
-    Represents a word like "table" or "dog" but with metric/syllabic information from the
-    CMU phonetic dictionary
+    Store convenient phonetic and metric information for a word.
+
     Attributes:
-        word        The string representation of the word
-        syllables   A list of phonetic syllables with their stress information.
-                    For example, the syllables for the word table are:
-                    [T, EY1, B, AH0, L]
-        rhythm      The string representation of the stress pattern of the word (gleaned
-                    from its syllabic information). The rhythm for the word "table" is 
-                    [10]
+        word : The string representation of the word
+        length : The number of syllables in the word
+        phonemes : Phoneme list for the word, e.g. table =  [T, EY1, B, AH0, L]
+        rhythm : Stressed/unstressed information for the syllables
+        vowelIndices : The indices in the phoneme list corresponding to the vowels
     """
-    #regex = re.compile("\d+")  # a regular expression used to search for stress pattern info
-
-    def __init__(self, word, syllables):
+    
+    def __init__(self, word, phonemes):
         """
-        Parameterized constructor
-        :param word: a string that represents a word
-        :param syllables: a list of syllabic information
+        Initialize and parse a given word with phoneme list already parsed.
         """
-        self.word = word
-        self.syllables = syllables
+        self.stringRepr = word
+        self.length = 0
+        self.phonemes = phonemes
         self.rhythm = []
-        self.stress_indices = []
-        self.parse_rhythm()
+        self.vowelIndices = []
 
-    def word(self):
-        """
-        :return: the internally word
-        """
-        return self.word
+        # Go through all the phonemes
+        for i in range(len(self.phonemes)):
 
-    def syllables(self):
-        """
-        :return: the internal syllable list  
-        """
-        return self.syllables
+            # If it's a vowel, store the stress and vowel index
+            if self.phonemes[i].endswith(('0','1','2','3')):
+                self.rhythm.append(int(self.phonemes[i][-1]))
+                self.vowelIndices.append(i)
 
-    def parse_rhythm(self):
-        """
-        Extracts rhythm string from syllabic data 
-
-        TODO: store the indices where the vowels
-        :return: None
-        """
-        for i in range(len(self.syllables)):
-            if self.syllables[i].endswith(('0','1','2','3')):
-                self.rhythm.append(int(self.syllables[i][-1]))
-                self.stress_indices.append(i)
+        # Make things arrays instead of lists.
+        self.length = len(rhythm)
         self.rhythm = np.array(self.rhythm)
-        self.stress_indices = np.array(self.stress_indices)
-        """
-        for syllable in self.syllables:
-            m = Word.regex.search(syllable)
-            if m is not None:
-                self.rhythm.append(int(m.group(0)))
-        return
-        """
-
-    def rhymes_with(self, other):
-        """
-        Determines if this word rhymes with another by checking to see if their
-        last syllables are equal
-        :param other: another word to compare to this one
-        :return: True if they rhyme, otherwise False
-        """
-        assert type(other) == type(self)
-        return self.syllables[-1] == other.syllables[-1]
+        self.vowelIndices = np.array(self.vowelIndices)
 
     def __str__(self):
         """
-        :return: a string representation of the Word object 
+        Get a string representation of the Word object.
         """
-        out = "Word: " + self.word + " "
-        out += "Syllables: ["
-        out += ", ".join(self.syllables) + "] "
-        out += "Rhythm: "
-        out += str(self.rhythm)
+        out = "Word: " + self.stringRepr + "\n"
+        out += "Phonemes: ["+", ".join(self.phonemes) + "]\n"
+        out += "Rhythm: " + str(self.rhythm)
         return out
-
-
-class Sentence:
-    """
-    Represents a group of Words
-    Attributes:
-        words       The words in the Sentence
-    """
-
-    def __init__(self):
-        self.words = []
-
-    def add(self, word):
-        self.words.append(word)
 
 
 class PhoneticDictionary:
     """
-    A phonetic dictionary stored in memory. Phonetic dictionaries provide syllabic stress 
-    information for a given word
+    Wrap around the CMU phonetic dictionary (by default, but with the option 
+    to use an alternative file) to conveniently and robustly look up 
+    phonetic information for English words as strings. 
+
     Attributes:
-        filename    The name of the file containing the CMU phonetic dictionary
-        pdict       A dictionary of words (as uppercase strings) to their corresponding Word
-                    objects
+        filename : The filename for the CMU phonetic dictionary
+        pdict : A dictionary assigning Word objects to their uppercase string
     """
 
     def __init__(self, file=None):
+
         self.filename = file
         self.pdict = None
         if file is not None:
             self.import_file(file)
         else:
-            self.loadCMUdict()
+            self.pdict = nltk.cmudict.dict()
 
     def import_file(self, filename):
         """
-        Reads and parses a file into memory
-        :param filename: the phonetic dictionary file
-        :return: None
+        Add the words in the phonetic dictionary to our dictionary.
         """
         self.filename = filename
         with open(filename, encoding="latin-1") as file:
             for line in file:
                 if not line.startswith(";"):
-                    key, value = self.parse_word(line)
-                    self.pdict[key] = value
-        return
+                    tokens = line.split()
+                    self.pdict[tokens[0]] = Word(tokens[0], tokens[1:])
 
-    def lookup(self, word: str):
+    def lookup(self, word):
         """
-        Look up a word in the dictionary and return a corresponding Word object
-
-        TODO:
-        If you run across a word you don't know, look it up using the LOGIOS tool
-            
-        :param word: a word to look up in the dictionary
-        :return: a Word object
+        Look up a word in the dictionary and return a Word object. If you 
+        run across a word you don't know, look it up using the LOGIOS tool.
         """
-        self.checkDictLoaded()
         word = word.lower()
-        # TODO: check whether dictionary was loaded from cmudict
-        # TODO: logios tool to return non-null value, more rigorous test cases
+
+        # Check if it's already in the CMU dictionary
         if word in self.pdict:
-            syllables = self.pdict[word][0] #cmudict provides a list of lists for some reason
-            return Word(word, syllables)
+            return Word(word, self.pdict[word][0])
+
+        # Otherwise, get a reasonable approximation for the phonetic info
         else:
+
+            # TODO: ACTUALLY RETURN SOMETHING IF IT'S NOT IN CMU DICT
             print("\"{}\" not in dictionary".format(word))
             return None
-
-    def evaluate(self, s):
-        self.checkDictLoaded()
-        """
-        Transforms a string into a Sentence of Words
-        :param s: a string to parse
-        :return: a Sentence containing the Words in s
-        """
-        sentence = Sentence()
-        for word in s.split():
-            sentence.add(self.lookup(word))
-        return sentence
-
-    @staticmethod
-    def parse_word(line):
-        """
-        Parses a CMU dictionary entry (in the form of <word> <syllable list>) 
-        into a Word object
-
-        :param line: a line in the CMU phonetic dictionary
-        :return: a tuple containing a word (represented by a string) and
-                the Word object representing that entry
-        """
-        tokens = line.split()
-        return tokens[0], Word(tokens[0], tokens[1:])
-
-    def loadCMUdict(self):
-        from nltk.corpus import cmudict
-        self.pdict = cmudict.dict()
-        # print(self.pdict)
-
-        pass
-
-    def checkDictLoaded(self):
-        if self.filename is None:
-            if self.pdict is None:
-                # raise Exception("no dictionary has been loaded")
-                print("Loading CMUdict...",)
-                self.loadCMUdict()
-                print("done")
-                return
-            return

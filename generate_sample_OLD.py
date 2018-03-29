@@ -1,6 +1,5 @@
 #!python3
 import corpus
-import phonetic
 import numpy as np
 #import rhymetools
 

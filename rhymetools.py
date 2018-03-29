@@ -262,12 +262,12 @@ class RhymeEvaluator:
 
         # Start from the beginning if it's the very first vowel
         if i == 0:
-            return word.syllables[0:nucleus]
+            return word.phonemes[0:nucleus]
 
         # Otherwise, start immediately after the previous vowel and stop
         # just before the current vowel.
         else:
-            return word.syllables[word.stress_indices[i-1]+1:nucleus]
+            return word.phonemes[word.vowelIndices[i-1]+1:nucleus]
 
     def _getCoda(self, word, nucleus, i):
         """
@@ -275,11 +275,11 @@ class RhymeEvaluator:
         """
 
         # If it's the last vowel, go to the end
-        if i == word.stress_indices.size - 1:
+        if i == word.vowelIndices.size - 1:
 
             # If there's anything after the vowel, slice to the end
-            if len(word.syllables) > nucleus + 1:
-                coda = word.syllables[nucleus+1:]
+            if len(word.phonemes) > nucleus + 1:
+                coda = word.phonemes[nucleus+1:]
 
             # Otherwise, it's just empty
             else:
@@ -288,7 +288,7 @@ class RhymeEvaluator:
         # Otherwise, start immediately after the current vowel and stop 
         # just before the next vowel.
         else:
-            coda = word.syllables[nucleus+1:word.stress_indices[i+1]]
+            coda = word.phonemes[nucleus+1:word.vowelIndices[i+1]]
 
     def rhyme_score(self, word1, word2, i, j):
         """
@@ -306,8 +306,8 @@ class RhymeEvaluator:
         """
 
         # Get the nucleus for each word (i.e. if i is 0, get the 1st vowel)
-        nucleus1 = word1.stress_indices[i]
-        nucleus2 = word2.stress_indices[j]
+        nucleus1 = word1.vowelIndices[i]
+        nucleus2 = word2.vowelIndices[j]
 
         # Get the onset consonant phonemes for each word
         onset1 = self._getOnset(word1, nucleus1, i)
@@ -318,8 +318,8 @@ class RhymeEvaluator:
         coda2 = self._getCoda(word2, nucleus2, j)
 
         # Get the vowel phoneme symbols with stress marker stripped
-        syl1 = word1.syllables[nucleus1][:-1]
-        syl2 = word2.syllables[nucleus2][:-1]
+        syl1 = word1.phonemes[nucleus1][:-1]
+        syl2 = word2.phonemes[nucleus2][:-1]
 
         # Get the matching scores for the nucleus, onset, and coda
         vowel_score = self.Av[self.vowels[syl1], self.vowels[syl2]]

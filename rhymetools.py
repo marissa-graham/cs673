@@ -1,8 +1,7 @@
-from nltk.corpus import cmudict
-import numpy as np
+import nltk
 import re
 import itertools
-
+import numpy as np
 
 class RhymeEvaluator:
     """

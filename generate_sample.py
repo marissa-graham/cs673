@@ -1,8 +1,15 @@
 #!python3
-import corpus
-import phonetic
+import itertools
+import nltk
+import re
+import string
 import numpy as np
-#import rhymetools
+from scipy import sparse
+
+import phonetic
+import corpus
+import rhymetools
+import verse
 
 def dada_filler():
 	"""

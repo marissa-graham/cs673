@@ -1,9 +1,9 @@
 #!python3
-import numpy as np
-import phonetic
 import string
+import numpy as np
 from scipy import sparse
-from matplotlib import pyplot as plt
+
+import phonetic
 
 class WordCorpus:
     """

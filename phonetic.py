@@ -1,5 +1,6 @@
-import numpy as np
+#!python3
 import nltk
+import numpy as np
 
 class Word:
     """

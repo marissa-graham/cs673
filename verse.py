@@ -1,10 +1,10 @@
-import phonetic
-import corpus
+#!python3
 import string
 import nltk
 import numpy as np
 from scipy import sparse
-from matplotlib import pyplot as plt
+
+import phonetic
 
 def get_sample(i):
 	"""

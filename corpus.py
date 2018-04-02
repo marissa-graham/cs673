@@ -43,6 +43,7 @@ class WordCorpus:
         self.wordSeq = []
         self.wordList = []
         self.wordDict = dict()
+        self.unknowns = ""
 
     def _initializeCorpus(self):
         """
@@ -78,6 +79,13 @@ class WordCorpus:
                     
                     # Look the word up in the dictionary
                     new_word = self.dictionary.lookup(word)
+
+                    # If the word isn't in the dictionary
+                    if new_word == None:
+
+                        # Add to file of unknown words
+                        with open(self.unknowns, "a") as unknwons:
+                            unknwons.write(new_word + " " + i)
 
                     # Append to wordList 
                     self.wordList.append(new_word)
@@ -133,8 +141,10 @@ class WordCorpus:
         if is_filename:
             with open(text) as filename:
                 self.corpString = filename.read()
+            self.unknowns = text + "_unknowns.txt"
         else:
             self.corpString = text
+
 
         #self.corpString = self.corpString.replace("\'","")
 

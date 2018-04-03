@@ -324,4 +324,3 @@ class RhymeEvaluator:
 
         # Weight the scores by priority and return the result
         return np.dot(self.priority, scores)
-        

@@ -65,10 +65,11 @@ class VerseTemplate:
 		self.wordList = []
 		self.breakpoints = []
 		self.stresses = []
+		self.syllable_indices = []
+		self.matrix_indices = []
 		self.verse = dict()
 
 		self._getRhythm()
-		self._getRhyme()
 
 		self.unknowns = template_string[:10].replace(" ", "_") + "_unknowns.txt"
 
@@ -79,6 +80,8 @@ class VerseTemplate:
 
 		# Go through all the words in the template text
 		wordstrings = self.template.split()
+
+		num_words = 0
 		for i in range(len(wordstrings)):
 
 			# Add the word's rhythm to the template
@@ -92,8 +95,10 @@ class VerseTemplate:
 
 				if word == None:
 					with open(self.unknowns, "a") as unknowns:
-						unknowns.write(word + " " + i)
+						line = word + " " + i + " " + len(self.stresses)
+						unknowns.write(line)
 				else:
+					num_words += 1
 					self.wordList.append(word)
 					self.stresses.extend(word.rhythm)
 
@@ -105,19 +110,80 @@ class VerseTemplate:
 				if wordstrings[i].endswith(self.phraseBreakpoints):
 					self.breakpoints.append(len(self.stresses))
 
-	def _getRhyme(self):
+	def get_rhyme(self):
 		"""
 		Go through a local-ish window of the syllables and check where the
 		rhyme patterns are.
+
+		It's not an internal function because you have to have the unknowns
+		fixed and we might need to do that manually. If we can get that to
+		be automatic, it can be internal again and we can call add_unknowns
+		in here.
+
+		Here is how syllable_indices and matrix_indices are going to work:
+			- If you've got word i and syllable j and you want to know what
+			  index in the matrix that is, you get syllable_indices[i] + j
+			- If you've got index k in the matrix and you want to know what
+			  word/syllable that is, you get the k-th row of matrix_indices.
+			  So matrix_indices[k,:] = (i,j) (that's a numpy array, not a 
+			  tuple, it's just nicer-looking as a tuple).
+
+		So if you've got the string "Mary had a little lamb", we have 5 words
+		and 7 syllables, with
+			syllable_indices = [0,2,3,4,6]
+			matrix_indices = [(0,0),(0,1),(1,0),(2,0),(3,0),(3,1),(4,0)]*
+				*but it's a 2d array with the columns, this is just prettier
 		"""
 
-		# Split up the syllables and stuff?
+		# MAKE SURE YOU'VE ALREADY ADDED THE UNKNOWNS
+
+		# Fill out syllable_indices and matrix_indices
+		# TEST THIS PLEASE
+		num_syllables = 0
+		for i in range(len(self.wordList)):
+
+			self.syllable_indices.append(num_syllables)
+			num_syllables + self.wordList[i].length
+
+			for j in range(self.wordList[i].length):
+				self.matrix_indices.append(np.array([i,j]))
+
+		self.syllable_indices = np.array(self.syllable_indices)
+		self.matrix_indices = np.array(self.matrix_indices).T
 
 		# Fill the matrix within like a 30-syllable window
 
-		# Ignore the 1s
+		# Ignore the 1s (ignore = zero out)
 
 		# Ignore the 1-syllable prepositions, articles, and pronouns
+
+		# Zero out everything except the top x% of values
+
+		""" Look at real data to see about what percent of syllables fit a 
+		noticeable rhyme pattern, then decide what x is accordingly. Probably
+		somewhere between 1% and 5%, I think."""
+		pass
+
+	def add_unknowns(self, logios_file):
+		"""
+		Function to add the unknown words after using the LOGIOS tool, either
+        manually or via API.
+        
+        It'll be harder here than in corpus.py because you've got the stress 
+        pattern thing. This is what you need to update for each word:
+        	(1) self.wordList : This one will be exactly the same as in 
+        			corpus.py. Just replace the null values at the indices
+        			of the unknown words, which are in the file so it's easy.
+        	(2) self.stresses : The value of self.stresses at which you need
+        			to insert the rhythm pattern is in the file (test this). 
+        			This stackexchange question should be useful:
+        			https://stackoverflow.com/questions/39541370/how-to-insert-multiple-elements-into-a-list
+        			but play with baby test cases in a jupyter notebook or
+        			something to make sure it's working as expected.
+
+		"""
+
+		# Pitch a fit if you haven't got the file you want?
 		pass
 
 	def add_word(self, word, fill_index, L, scores, forward):

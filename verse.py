@@ -70,6 +70,8 @@ class VerseTemplate:
 		self._getRhythm()
 		self._getRhyme()
 
+		self.unknowns = template_string[:10].replace(" ", "_") + "_unknowns.txt"
+
 	def _getRhythm(self):
 		"""
 		Extract the meter pattern and desired breaks from a given string.
@@ -87,8 +89,13 @@ class VerseTemplate:
 
 			else:
 				word = self.dictionary.lookup(wordstring)
-				self.wordList.append(word)
-				self.stresses.extend(word.rhythm)	
+
+				if word == None:
+					with open(self.unknowns, "a") as unknowns:
+						unknowns.write(word + " " + i)
+				else:
+					self.wordList.append(word)
+					self.stresses.extend(word.rhythm)
 
 			# Add any breakpoints associated with the word 
 			if self.breakrules == "word":

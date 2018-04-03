@@ -137,4 +137,3 @@ class VerseTemplate:
 		Join the filled template into a single result string.
 		"""
 		pass
-

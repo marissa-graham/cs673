@@ -80,23 +80,35 @@ class WordCorpus:
                     # Look the word up in the dictionary
                     new_word = self.dictionary.lookup(word)
 
-                    # If the word isn't in the dictionary
+                    # If the word isn't in the phonetic dictionary
                     if new_word == None:
 
                         # Add to file of unknown words
-                        with open(self.unknowns, "a") as unknwons:
-                            unknwons.write(new_word + " " + i)
+                        with open(self.unknowns, "a") as unknowns:
+                            unknowns.write(new_word + " " + self.size + "\n")
 
-                    # Append to wordList 
-                    self.wordList.append(new_word)
-
-                    # Update the index and use to update wordDict and wordSeq
-                    self.wordDict[word] = self.size
                     self.wordSeq.append(self.size)
+                    self.wordDict[word] = self.size
+                    self.wordList.append(new_word)
                     self.size += 1
 
         self.wordSeq = np.array(self.wordSeq)
         print("Input text:", len(wordstrings), "words,", self.size, "unique")
+
+    def add_unknowns(self):
+        """
+        Function to add the unknown words after using the LOGIOS tool, either
+        manually or via API.
+
+        You just have to go through and fix wordList, since it has null 
+        values at the indices at the end of the line. wordDict and wordList
+        are fine. It should be pretty easy, just replace the value at that
+        index.
+
+        The wordList isn't used until generate_sample, so it can just throw 
+        a warning at the end of the normal initialization steps.
+        """
+        pass
 
     def _initializeMatrix(self):
         """
@@ -144,6 +156,7 @@ class WordCorpus:
             self.unknowns = text + "_unknowns.txt"
         else:
             self.corpString = text
+            self.unknowns = "corpus_unknowns.txt"
 
 
         #self.corpString = self.corpString.replace("\'","")
@@ -160,6 +173,19 @@ class WordCorpus:
 
         self._initializeCorpus()
         self._initializeMatrix()
+
+    def get_rhyme_matrix(self):
+        """
+        Get rhyme scores between all the syllables of all the words to 
+        facilitate the rhyme filler in generate_sample
+
+        but do we even want to do it that way
+        do we really want it to be a matrix, even
+        I feel like that might not be the best way
+        what if it's a dictionary instead? where the key is like a tuple
+            with the word1, word2, i, j args you pass to rhymetools
+        """
+        pass
 
     def sample_distribution(self, current, n, forward=True):
         """

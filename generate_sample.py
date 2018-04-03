@@ -11,12 +11,7 @@ import corpus
 import rhymetools
 import verse
 
-def dada_filler():
-	"""
-	Generate a daDada filler word with the desired scansion.
-	"""
-	pass
-
+# NEED TO DISCUSS (EASY IN {0,1}, NOT IN [0,1])
 def scansion_score():
 	"""
 	Return a score in [0,1] telling how well the meter of the given word
@@ -24,6 +19,7 @@ def scansion_score():
 	"""
 	pass
 
+# PLANNNED OUT, EASY
 def breakpoint_score():
 	"""
 	Return 1 if the word choice crosses a breakpoint in the template
@@ -31,6 +27,7 @@ def breakpoint_score():
 	"""
 	pass
 
+# DISCUSSED, CHECK WITH DR. VENTURA
 def followability_score():
 	"""
 	Get a score for how comparatively followable each word is.
@@ -40,15 +37,14 @@ def followability_score():
 	# look up here (aka avoid doing the division a bunch?)
 	pass
 
+# EASY IF NO SYNONYMS, CHECK IN WITH DR. VENTURA ABOUT NO SYNONYMS
 def get_choices(corpus, versetemplate):
 	"""Get a pool of word choices from the corpus."""
 
 	# Sample the distribution
-
-	# Get synonyms as desired (w/ original index in transition matrix)
 	pass
 
-
+# NEED TO DISCUSS
 def fill_rhymes(location, corpus, versetemplate):
 	"""
 	Get words which:
@@ -66,7 +62,7 @@ def fill_rhymes(location, corpus, versetemplate):
 			# exactly that's gonna work
 	pass 
 
-
+# FULLY PLANNED
 def join_stubs(left_index, right_index, corpus, versetemplate):
 	"""
 	Join the words going forwards and backwards by maximizing
@@ -78,14 +74,13 @@ def join_stubs(left_index, right_index, corpus, versetemplate):
 	# Get ALL words from the corpus that follow Left and are followed
 		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
 
-	# Get some synonyms maybe
-
 	# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
 		# fitness score
 
 	pass
 
-
+# NEED TO DISCUSS THE METRIC FOR COMBINING SCORES
+# OTHERWISE FULLY PLANNED AND PRETTY STRAIGHTFORWARD
 def generate_word(fill_index, corpus, versetemplate, forward=True):
 	"""
 	Generate a word based on the given corpus to fill the given template.
@@ -112,8 +107,6 @@ def generate_word(fill_index, corpus, versetemplate, forward=True):
 
 		# How "followable" are they? vs. unique
 
-		# Do they result in plagiarism?
-
 
 	# Choose between them based on these scores, including minimum 
 		# acceptability thresholds and compromise
@@ -128,12 +121,13 @@ def generate_word(fill_index, corpus, versetemplate, forward=True):
 	else:
 		return fill_index - L
 
+# FULLY PLANNED
 def fill_template(corpus, versetemplate):
 	"""
 	Generate babble words to fill the given Verse template.
 	"""
 
-	# Pure initialization steps
+	# Initialize stuff
 
 	# Go through the rhymes in the template and get bone words that 
 		# match the desired scansion

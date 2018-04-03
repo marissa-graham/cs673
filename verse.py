@@ -95,12 +95,14 @@ class VerseTemplate:
 
 				if word == None:
 					with open(self.unknowns, "a") as unknowns:
-						line = word + " " + i + " " + len(self.stresses)
+						line = word + " " + num_words + " " + len(self.stresses)
 						unknowns.write(line)
+
 				else:
-					num_words += 1
-					self.wordList.append(word)
 					self.stresses.extend(word.rhythm)
+
+				self.wordList.append(word)
+				num_words += 1
 
 			# Add any breakpoints associated with the word 
 			if self.breakrules == "word":

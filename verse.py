@@ -6,6 +6,8 @@ from scipy import sparse
 
 import phonetic
 
+from rhymetools import RhymeEvaluator
+
 def get_sample(i):
 	"""
 	Return one of the pre-determined template strings, for convenience.
@@ -137,21 +139,53 @@ class VerseTemplate:
 				*but it's a 2d array with the columns, this is just prettier
 		"""
 
+
+		"""
+		from nltk.tag import pos_tag
+
+		sentence = "Michael Jackson likes to eat at McDonalds"
+		tagged_sent = pos_tag(sentence.split())
+		# [('Michael', 'NNP'), ('Jackson', 'NNP'), ('likes', 'VBZ'), ('to', 'TO'), ('eat', 'VB'), ('at', 'IN'), ('McDonalds', 'NNP')]
+
+		propernouns = [word for word, pos in tagged_sent if pos == 'NNP']
+		# ['Michael','Jackson', 'McDonalds']
+		"""
+
 		# MAKE SURE YOU'VE ALREADY ADDED THE UNKNOWNS
 
 		# Fill out syllable_indices and matrix_indices
 		# TEST THIS PLEASE
 		num_syllables = 0
+		syllables = []
 		for i in range(len(self.wordList)):
 
 			self.syllable_indices.append(num_syllables)
-			num_syllables + self.wordList[i].length
+			num_syllables += self.wordList[i].length
 
 			for j in range(self.wordList[i].length):
 				self.matrix_indices.append(np.array([i,j]))
+				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
 		self.matrix_indices = np.array(self.matrix_indices).T
+
+		rhyme_matrix = np.zeros((num_syllables, num_syllables))
+
+		bandwidth = 30
+		rm = RhymeEvaluator()
+		for i in range(num_syllables):
+			for j in range(i, min(i + bandwidth, num_syllables)):
+				word1 = self.wordList[self.matrix_indices[i][0]]
+				syl1_index = self.matrix_indices[i][1]
+				word2 = self.wordList[self.matrix_indices[j][0]]
+				syl2_index = self.matrix_indices[j][1]
+				rhyme_matrix[i,j] = rm.rhyme_score(word1, word2, syl1_index, syl2_index)
+
+		rhyme_matrix[np.where(rhyme_matrix == 1)] = 0
+		rhyme_matrix[np.where(rhyme_matrix < .65)] = 0
+
+
+
 
 		# Fill the matrix within like a 30-syllable window
 
@@ -184,6 +218,20 @@ class VerseTemplate:
         			something to make sure it's working as expected.
 
 		"""
+		new_words = []
+		with open(self.unknowns, "r") as unknowns:
+			for line in unknowns:
+				items = line.split()
+				word = items[0]
+				syllables = items[1:]
+				new_words.append(Word(word, syllables))
+
+		counter = 0
+		for i in range(len(self.wordList)):
+			if self.wordList[i] == None:
+				self.wordList[i] = new_words[counter]
+				counter += 1
+			self.stresses[i:i] = self.wordList[i].stresses
 
 		# Pitch a fit if you haven't got the file you want?
 		pass

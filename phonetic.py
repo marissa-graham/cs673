@@ -1,5 +1,5 @@
 #!python3
-import nltk
+from nltk.corpus import cmudict
 import numpy as np
 
 class Word:
@@ -65,7 +65,7 @@ class PhoneticDictionary:
         if file is not None:
             self.import_file(file)
         else:
-            self.pdict = nltk.cmudict.dict()
+            self.pdict = cmudict.dict()
 
     def import_file(self, filename):
         """

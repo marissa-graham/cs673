@@ -71,7 +71,7 @@ class VerseTemplate:
 
 		self._getRhythm()
 
-		self.unknowns = template_string[:10].replace(" ", "_") + "_unknowns.txt"
+		self.unknowns = "verse_unknowns.txt"
 
 	def _getRhythm(self):
 		"""

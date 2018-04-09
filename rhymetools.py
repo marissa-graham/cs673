@@ -127,12 +127,12 @@ class RhymeEvaluator:
         """ Initialize the pairwise vowel phoneme scores. """
 
         # Iterate through all pairs of vowel phonemes
-        for vowel1 in self.vowel_symbols:
+        for vowel1 in self.v_list:
 
             # Get the index of the first vowel phoneme
             v1 = self.vowels[vowel1]
 
-            for vowel2 in self.vowel_symbols:
+            for vowel2 in self.v_list:
 
                 # Get the index of the second vowel phoneme
                 v2 = self.vowels[vowel2]
@@ -160,12 +160,12 @@ class RhymeEvaluator:
         for consonant1 in self.c_list:
 
             # Get the index of the first consonant phoneme
-            c1 = self.consonants[c1]
+            c1 = self.consonants[consonant1]
 
             for consonant2 in self.c_list:
 
                 # Get the index of the second consonant phoneme
-                c2 = self.consonants[c2]
+                c2 = self.consonants[consonant2]
 
                 # Look up the feature scores for manner and voicing
                 manner = self.Mm[self.c_features[c1][0], self.c_features[c2][0]]
@@ -198,7 +198,7 @@ class RhymeEvaluator:
 
         # If they're the same shape, the alignment is just the diagonal
         if diff == 0:
-            return np.diag(alignment) / np.max(np.diag(alignment))
+            return np.sum(np.diag(alignment)) / np.max(np.diag(alignment))
 
         # If it's one-dimensional, the alignment is just the max score
         if m == 1:
@@ -235,13 +235,16 @@ class RhymeEvaluator:
         # Get the similarity score for each phoneme pair
         rows = len(onset1)
         cols = len(onset2)
+        if rows == 0 or cols == 0: 
+            return 0 # TODO: double check on this
         alignment = np.zeros((rows, cols))
+
         for i in range(rows):
             for j in range(cols):
                 phoneme1 = self.consonants[onset1[i]]
                 phoneme2 = self.consonants[onset2[j]]
                 alignment[i,j] = self.Ac[phoneme1, phoneme2]
-        
+
         # Call the sequence aligner on a matrix with more columns than rows
         if rows > cols:
             score = self._sequenceAlignmentScore(alignment.T)

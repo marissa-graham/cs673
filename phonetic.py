@@ -2,6 +2,11 @@
 from nltk.corpus import cmudict
 import numpy as np
 
+vowels = frozenset(["AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER", "EY", "IH", "IY", "OW", "OY", "UH", "UW"])
+
+def is_vowel(word):
+    return word in vowels
+
 class Word:
     """
     Store convenient phonetic and metric information for a word.
@@ -33,18 +38,29 @@ class Word:
                 self.vowelIndices.append(i)
 
         # Make things arrays instead of lists.
-        self.length = len(rhythm)
+        self.length = len(self.rhythm)
         self.rhythm = np.array(self.rhythm)
         self.vowelIndices = np.array(self.vowelIndices)
+
+    def __getitem__(self, idx):
+        return self.phonemes[idx]
 
     def __str__(self):
         """
         Get a string representation of the Word object.
         """
-        out = "Word: " + self.stringRepr + "\n"
-        out += "Phonemes: ["+", ".join(self.phonemes) + "]\n"
-        out += "Rhythm: " + str(self.rhythm)
+        out = "phonetic.Word("
+        out += "\"" + self.stringRepr + "\" "
+        out += " ".join(self.phonemes) + " " 
+        # out += "".join(str(r) for r in self.rhythm)
+        out += ")"
         return out
+
+    def __repr__(self):
+        """
+        Get the internal representation of the Word object.
+        """
+        return self.__str__()
 
 
 class PhoneticDictionary:
@@ -95,3 +111,6 @@ class PhoneticDictionary:
             # TODO: ACTUALLY RETURN SOMETHING IF IT'S NOT IN CMU DICT
             print("\"{}\" not in dictionary".format(word))
             return None
+
+
+

@@ -3,8 +3,10 @@ import string
 import nltk
 import numpy as np
 from scipy import sparse
+import os
 
 import phonetic
+from phonetic import Word, PhoneticDictionary
 
 from rhymetools import RhymeEvaluator
 
@@ -30,7 +32,9 @@ def get_sample(i):
 	kicking your can all over the place, singing, we will, we will, rock you, \
 	we will, we will, rock you"
 
-	samples = [s0, s1, s2, s3, s4]
+	s5 = "Alexander Hamilton, my dawg is Alexander Hamilton. He studies trigonometry, dawg"
+
+	samples = [s0, s1, s2, s3, s4, s5]
 	return samples[i]
 
 class VerseTemplate:
@@ -50,6 +54,8 @@ class VerseTemplate:
 		stresses : List of stresses for each syllable
 		verse : Dictionary to store the filled template
 		rhymes : Matrix with rhyme patterns to be mimicked
+		unknowns: File to store unknown words
+		unknowns_info: List of tuples containing information about unknown words
 	"""
 
 	def __init__(self, template_string, dictionary, breakrules="word"):
@@ -70,10 +76,15 @@ class VerseTemplate:
 		self.syllable_indices = []
 		self.matrix_indices = []
 		self.verse = dict()
+		self.rhyme_matrix = []
+
+		self.unknowns_info = []
+		self.unknowns = "verse_unknowns.txt"
+		if os.path.exists(self.unknowns):
+			os.remove(self.unknowns)
 
 		self._getRhythm()
 
-		self.unknowns = "verse_unknowns.txt"
 
 	def _getRhythm(self):
 		"""
@@ -81,6 +92,7 @@ class VerseTemplate:
 		"""
 
 		# Go through all the words in the template text
+
 		wordstrings = self.template.split()
 
 		num_words = 0
@@ -96,9 +108,10 @@ class VerseTemplate:
 				word = self.dictionary.lookup(wordstring)
 
 				if word == None:
+					info = [wordstring, num_words, len(self.stresses)]
+					self.unknowns_info.append(info)
 					with open(self.unknowns, "a") as unknowns:
-						line = word + " " + num_words + " " + len(self.stresses)
-						unknowns.write(line)
+						unknowns.write(wordstring + "\n")
 
 				else:
 					self.stresses.extend(word.rhythm)
@@ -155,6 +168,7 @@ class VerseTemplate:
 
 		# Fill out syllable_indices and matrix_indices
 		# TEST THIS PLEASE
+
 		num_syllables = 0
 		syllables = []
 		for i in range(len(self.wordList)):
@@ -167,24 +181,24 @@ class VerseTemplate:
 				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
-		self.matrix_indices = np.array(self.matrix_indices).T
+		self.matrix_indices = np.array(self.matrix_indices)
 
 		rhyme_matrix = np.zeros((num_syllables, num_syllables))
 
 		bandwidth = 30
 		rm = RhymeEvaluator()
 		for i in range(num_syllables):
+			word1 = self.wordList[self.matrix_indices[i][0]]
+			syl1_index = self.matrix_indices[i][1]
 			for j in range(i, min(i + bandwidth, num_syllables)):
-				word1 = self.wordList[self.matrix_indices[i][0]]
-				syl1_index = self.matrix_indices[i][1]
 				word2 = self.wordList[self.matrix_indices[j][0]]
 				syl2_index = self.matrix_indices[j][1]
 				rhyme_matrix[i,j] = rm.rhyme_score(word1, word2, syl1_index, syl2_index)
 
-		rhyme_matrix[np.where(rhyme_matrix == 1)] = 0
+		rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
 		rhyme_matrix[np.where(rhyme_matrix < .65)] = 0
 
-
+		self.rhyme_matrix = rhyme_matrix
 
 
 		# Fill the matrix within like a 30-syllable window
@@ -219,19 +233,23 @@ class VerseTemplate:
 
 		"""
 		new_words = []
-		with open(self.unknowns, "r") as unknowns:
-			for line in unknowns:
+		with open(logios_file, "r") as logios_output:
+			for line in logios_output:
 				items = line.split()
 				word = items[0]
 				syllables = items[1:]
-				new_words.append(Word(word, syllables))
+				for i in range(len(syllables)):
+					if phonetic.is_vowel(syllables[i]):
+						syllables[i] += "0" # default stress of zero
+				new_words.append(Word(word.lower(), syllables))
 
 		counter = 0
 		for i in range(len(self.wordList)):
 			if self.wordList[i] == None:
 				self.wordList[i] = new_words[counter]
+				stress_idx = self.unknowns_info[counter][2]
+				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
 				counter += 1
-			self.stresses[i:i] = self.wordList[i].stresses
 
 		# Pitch a fit if you haven't got the file you want?
 		pass

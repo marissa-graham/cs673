@@ -2,8 +2,10 @@
 import string
 import numpy as np
 from scipy import sparse
+import os
 
 import phonetic
+from phonetic import Word
 
 class WordCorpus:
     """
@@ -44,6 +46,7 @@ class WordCorpus:
         self.wordList = []
         self.wordDict = dict()
         self.unknowns = ""
+        self.unknowns_indices = []
 
     def _initializeCorpus(self):
         """
@@ -85,7 +88,8 @@ class WordCorpus:
 
                         # Add to file of unknown words
                         with open(self.unknowns, "a") as unknowns:
-                            unknowns.write(new_word + " " + self.size + "\n")
+                            unknowns.write(word + "\n")
+                            self.unknowns_indices.append(self.size)
 
                     self.wordSeq.append(self.size)
                     self.wordDict[word] = self.size
@@ -95,7 +99,7 @@ class WordCorpus:
         self.wordSeq = np.array(self.wordSeq)
         print("Input text:", len(wordstrings), "words,", self.size, "unique")
 
-    def add_unknowns(self):
+    def add_unknowns(self, logios_file):
         """
         Function to add the unknown words after using the LOGIOS tool, either
         manually or via API.
@@ -108,7 +112,20 @@ class WordCorpus:
         The wordList isn't used until generate_sample, so it can just throw 
         a warning at the end of the normal initialization steps.
         """
-        pass
+
+        new_words = []
+        with open(logios_file, "r") as logios_output:
+            for line in logios_output:
+                items = line.split()
+                word_string = items[0]
+                phonemes = items[1:]
+                for i in range(len(phonemes)):
+                    if phonetic.is_vowel(phonemes[i]):
+                        phonemes[i] += "0"
+                new_words.append(Word(word_string.lower(), phonemes))
+
+        for i in range(len(self.unknowns_indices)):
+            self.wordList[self.unknowns_indices[i]] = new_words[i]
 
     def _initializeMatrix(self):
         """
@@ -126,8 +143,10 @@ class WordCorpus:
 
         # Keep track of followability stuff
         self.frequencies = A_raw.sum(axis=1).T
-        self.unique_precedent_counts = np.count_nonzero(A_raw, axis=0)
-        self.unique_antecedent_counts = np.count_nonzero(A_raw, axis=1)
+        # self.unique_precedent_counts = np.count_nonzero(A_raw, axis=0)
+        # self.unique_antecedent_counts = np.count_nonzero(A_raw, axis=1)
+        self.unique_precedent_counts = np.count_nonzero(A_raw.toarray(), axis=0)
+        self.unique_antecedent_counts = np.count_nonzero(A_raw.toarray(), axis=1)
 
         # Normalize A to get probabilities
         data = np.maximum(self.frequencies, np.ones(self.size))
@@ -158,6 +177,9 @@ class WordCorpus:
             self.corpString = text
             self.unknowns = "corpus_unknowns.txt"
 
+        # Remove unknowns file if it already exists
+        if os.path.exists(self.unknowns):
+            os.remove(self.unknowns)
 
         #self.corpString = self.corpString.replace("\'","")
 
@@ -172,6 +194,9 @@ class WordCorpus:
         self.corpString = self.corpString.replace('-', ' ')
 
         self._initializeCorpus()
+        # self._initializeMatrix()
+
+    def initializeMatrix(self):
         self._initializeMatrix()
 
     def get_rhyme_matrix(self):

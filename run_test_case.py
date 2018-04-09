@@ -40,3 +40,7 @@ corp.add_unknowns("logios_output/g2p.txt")
 print()
 print(corp.wordList)
 corp.initializeMatrix()
+
+# Make a verse template
+template = verse.VerseTemplate(verse.get_sample(4), dictionary, breakrules='phrase')
+template.get_rhyme()

@@ -27,6 +27,10 @@ class WordCorpus:
         wordDict : Dictionary with wordDict[Word.stringRepr] = index of Word
           That is, we look up the index based on the text of an actual Word,
           so we can extend the corpus without duplicating Word objects
+        
+        sylDict : Dictionary with sylDict[syl] = a list of tuples that represent
+          the (word, syl_index) coordinates of where the syllable appears in the 
+          corpus
 
         A : Transition matrix used to sample the probability distribution
     """
@@ -45,6 +49,7 @@ class WordCorpus:
         self.wordSeq = []
         self.wordList = []
         self.wordDict = dict()
+        self.sylDict = dict()
         self.unknowns = ""
         self.unknowns_indices = []
 
@@ -121,7 +126,7 @@ class WordCorpus:
                 phonemes = items[1:]
                 for i in range(len(phonemes)):
                     if phonetic.is_vowel(phonemes[i]):
-                        phonemes[i] += "0"
+                        phonemes[i] += "0" # default stress to 0
                 new_words.append(Word(word_string.lower(), phonemes))
 
         for i in range(len(self.unknowns_indices)):
@@ -143,8 +148,6 @@ class WordCorpus:
 
         # Keep track of followability stuff
         self.frequencies = A_raw.sum(axis=1).T
-        # self.unique_precedent_counts = np.count_nonzero(A_raw, axis=0)
-        # self.unique_antecedent_counts = np.count_nonzero(A_raw, axis=1)
         self.unique_precedent_counts = np.count_nonzero(A_raw.toarray(), axis=0)
         self.unique_antecedent_counts = np.count_nonzero(A_raw.toarray(), axis=1)
 
@@ -198,6 +201,23 @@ class WordCorpus:
 
     def initializeMatrix(self):
         self._initializeMatrix()
+        
+    def initializeSylDict(self):
+        # Can only be called after unknown words have been added
+        
+        # propbably not the most efficient implementation but...
+        for word in self.wordList:
+            for i in range(len(word.phonemes)):
+                syl = word.phonemes[i]
+                if syl[-1].isdigit(): # only care about vowels
+                    key = syl
+                    val = (self.wordDict[word.stringRepr], i)
+                    if key not in self.sylDict.keys():
+                        self.sylDict[key] = [val]
+                    else:
+                        self.sylDict[key].append(val)
+                        
+            
 
     def get_rhyme_matrix(self):
         """

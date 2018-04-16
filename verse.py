@@ -75,8 +75,6 @@ class VerseTemplate:
 		self.breakpoints = []
 		self.stresses = []
 
-
-		self.num_syllables = 0
 		self.syllable_indices = []
 		self.matrix_indices = []
 		self.rhyme_matrix = None
@@ -127,11 +125,11 @@ class VerseTemplate:
 
 			# Add any breakpoints associated with the word 
 			if self.breakrules == "word":
-				self.breakpoints.append(len(self.stresses))
+				self.breakpoints.append(len(self.stresses)-1)
 
 			elif self.breakrules == "phrase":
 				if wordstrings[i].endswith(self.phraseBreakpoints):
-					self.breakpoints.append(len(self.stresses))
+					self.breakpoints.append(len(self.stresses)-1)
 
 	def get_rhyme(self):
 		"""
@@ -186,7 +184,7 @@ class VerseTemplate:
 				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
-		self.
+		#self.
 		self.matrix_indices = np.array(self.matrix_indices)
 
 		rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))
@@ -258,8 +256,7 @@ class VerseTemplate:
 				counter += 1
 
 		# Pitch a fit if you haven't got the file you want?
-		pass
-
+		
 	def add_word(self, word, fill_index, L, scores, forward):
 		"""
 		Put the given word into the verse template at location start_ind, and

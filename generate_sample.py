@@ -11,7 +11,7 @@ import corpus
 import rhymetools
 import verse
 
-def scansion_score(word, location, neighbor, corpus, versetemplate, forward):
+def scansion_score(word, loc, neighbor, template, forward):
 	"""
 	Return a score in [0,1] telling how well the meter of the given word
 	matches the verse template.
@@ -25,25 +25,20 @@ def scansion_score(word, location, neighbor, corpus, versetemplate, forward):
 	not gonna do it.
 	"""
 
-	if forward:
-		
-		# Check if you've crashed into your neighbor or the edge:
-		if location + word.length >= neighbor:
-			return 0
-	# Check if you've crashed into the edge
+	# Check if you've crashed into the edge or your neighbor
+	if forward and loc + word.length > neighbor:
+		return 0.0
+	elif forward == False and loc <= neighbor:
+		return 0.0
 
-	# Check if you've crashed into your neighbor 
+	# Check if you've crashed into a breakpoint
+	loc_inds = np.array([loc, loc + word.length - 1])
+	if np.unique(np.searchsorted(template.breakpoints, loc_inds)).size == 2:
+		return 0.0
 
-	# Check if you've crashed into a breakpoint 
-
-	# Go through the syllables
-
-		# Add 1 for an exact match
-
-		# Add 0.25 otherwise
-
-	# Normalize by number of syllables and return
-	pass
+	# Score the syllable matches and return
+	goods = template.stresses[loc:loc+word.length] == word.rhythm
+	return 0.25 + 0.75*np.sum(goods)/word.length
 
 def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 	"""
@@ -74,8 +69,13 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 	# Get the scansion scores for each choice
 	for i in range(len(choices)):
 
-		scansion_scores[i] = scansion_score(choices[i], fill_index,
-			neighbor_index, corpus, versetemplate, forward)
+		if forward:
+			scansion_scores[i] = scansion_score(choices[i], fill_index + prev_L, 
+				neighbor_index, corpus, versetemplate, forward)
+		else:
+			L = choices[i].length
+			scansion_scores[i] = scansion_score(choices[i], fill_index - L,
+				neighbor_index, corpus, versetemplate, forward)
 
 	# If the best scansion score is zero (covers crashes and breakpoints)
 		# Just pick random words from the corpus

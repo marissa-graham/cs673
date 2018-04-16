@@ -11,81 +11,41 @@ import corpus
 import rhymetools
 import verse
 
-# NEED TO DISCUSS (EASY IN {0,1}, NOT IN [0,1])
-def scansion_score():
+def scansion_score(word, location, neighbor, corpus, versetemplate, forward):
 	"""
 	Return a score in [0,1] telling how well the meter of the given word
 	matches the verse template.
+
+	Zero points for crashing into an edge, neighbor, or breakpoint.
+	
+	Otherwise, full credit for every stress that matches, quarter credit for
+	mismatched stress, normalize by number of syllables.
+
+	Dealing with squishing and stretching syllables is too hard so we're
+	not gonna do it.
 	"""
+
+	if forward:
+		
+		# Check if you've crashed into your neighbor or the edge:
+		if location + word.length >= neighbor:
+			return 0
+	# Check if you've crashed into the edge
+
+	# Check if you've crashed into your neighbor 
+
+	# Check if you've crashed into a breakpoint 
+
+	# Go through the syllables
+
+		# Add 1 for an exact match
+
+		# Add 0.25 otherwise
+
+	# Normalize by number of syllables and return
 	pass
 
-# PLANNNED OUT, EASY
-def breakpoint_score():
-	"""
-	Return 1 if the word choice crosses a breakpoint in the template
-	and 0 otherwise.
-	"""
-	pass
-
-# FULLY PLANNED
-def followability_score():
-	"""
-	Get a score for how comparatively followable each word is.
-	"""
-
-	# Calculate at time of read in, since it's cheap then, mostly just
-	# look up here (aka avoid doing the division a bunch?)
-	pass
-
-# FULLY PLANNED
-def get_choices(corpus, versetemplate):
-	"""Get a pool of word choices from the corpus."""
-
-	# Sample the distribution
-	pass
-
-# NEED TO DISCUSS
-def fill_rhymes(corpus, versetemplate):
-	"""
-	Get words which:
-		1) match the meter and rhyme pattern at the given indices, and 
-		2) are either in or synonymous to something in the corpus.
-	"""
-
-	# Stage 1: Match the words that are supposed to be repeated
-
-	# Stage 2: Match the rhymes. 
-		# Get the matrix with all the rhymes for everything
-		# Go through and match a pair at a time
-			# If you have a cutesy little diagonal, and you pick a word
-			# with more than one syllable, they both gotta match. Idk how
-			# exactly that's gonna work
-
-	# Return a list of the indices for the start of each filled word
-	pass 
-
-# FULLY PLANNED
-def join_stubs(left_index, right_index, corpus, versetemplate):
-	"""
-	Join the words going forwards and backwards by maximizing
-	the probability of a word or phrase following the left side 
-	and being followed by the right side, while matching the 
-	meter as best as possible.
-	"""
-
-	# Get ALL words from the corpus that follow Left and are followed
-		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
-
-	# Also consider pairs of words?
-
-	# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
-		# fitness score
-
-	pass
-
-# NEED TO DISCUSS THE METRIC FOR COMBINING SCORES
-# OTHERWISE FULLY PLANNED AND PRETTY STRAIGHTFORWARD
-def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward=True):
+def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 	"""
 	Generate a word based on the given corpus to fill the given template.
 
@@ -97,41 +57,88 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward=Tru
 		forward : if True, fill forward; if False, fill backward
 
 	Returns:
-		location : Updated information about current word and indices
+		new_fill_index : Updated information about current word and indices
 	"""
 
-	# Check for a beginning/end index that should be ignored
-	if fill_index < 0 or fill_index >= versetemplate.num_syllables:
+	# Check if there's actually a word at that index
+	try:
+		prev_word, prev_L, prev_scores = versetemplate.verse[fill_index]
+	except KeyError:
+		print("No word exists at fill_index, return current index")
 		return fill_index
 
 	# Get a pool of choices
+	choices = corp.sample_distribution(prev_word, 20)
+	scansion_scores = np.zeros_like(choices)
+
+	# Get the scansion scores for each choice
+	for i in range(len(choices)):
+
+		scansion_scores[i] = scansion_score(choices[i], fill_index,
+			neighbor_index, corpus, versetemplate, forward)
+
+	# If the best scansion score is zero (covers crashes and breakpoints)
+		# Just pick random words from the corpus
+
+	# Take the tier of the best scansion scores
+
+		# Multiply followability by length and pick the best of those
 
 
-	# Get the fitness scores for each choice
-
-		# How well do they fit the meter? (meter score should include
-			# how many syllables it's supposed to take up)
-
-		# Do they crash into the neighbor?
-
-		# Do they cross a breakpoint?
-
-
-	# Choose between them based on these scores, including minimum 
-		# acceptability thresholds and compromise
-
-
-	# Update the template and location accordingly)
-	versetemplate.add_word(best, fill_index, L, scores, forward)
-
-	# If we didn't add the word successfully, don't change fill_index
-
+	# Update the template and location accordingly
 	if forward:
-		return fill_index + L
+		versetemplate.add_word(best, fill_index + prev_L, L, scores, forward)
+		return fill_index + prev_L
 	else:
+		versetemplate.add_word(best, fill_index - L, L, scores, forward)
 		return fill_index - L
 
-# FULLY PLANNED
+def join_stubs(left, right, corpus, versetemplate):
+	"""
+	Join the words going forwards and backwards by maximizing
+	the probability of a word or phrase following the left side 
+	and being followed by the right side, while matching the 
+	meter as best as possible.
+	"""
+
+	to_fill = abs(right - left)
+
+	# Get ALL words from the corpus that follow Left and are followed
+		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
+
+	# Pick out the ones that are the right length
+
+	# If none of them are long enough, call generate_word on left and then
+		# try again
+
+	# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
+		# fitness score
+	pass
+
+def fill_rhymes(corpus, versetemplate):
+	"""
+	Get words which:
+		1) match the meter and rhyme pattern at the given indices, and 
+		2) are either in or synonymous to something in the corpus.
+	"""
+
+	# Go through all the nonzero indices in the rhyme matrix
+
+		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
+
+		# Check if you've already got a word overlapping either one in the
+			# pair, if so, skip to stage two
+
+		# Sample from the probability distribution of the vowels, and then
+			# pick words with that vowel in them until you get one that 
+			# doesn't cross a breakpoint
+
+		# STAGE TWO: PICK THE SECOND WORD
+
+		# Just go through the ones with the same vowel and see what has the
+			# best match
+	pass 
+
 def fill_template(corpus, versetemplate):
 	"""
 	Generate babble words to fill the given Verse template.
@@ -143,17 +150,19 @@ def fill_template(corpus, versetemplate):
 	# Initialize stuff
 	num_bones, bone_indices = fill_rhymes(corpus, versetemplate)
 
+	# If there aren't any bones just pick an initial word and go
+
 	# Now go through all the "holes" between bone words
 	for i in xrange(num_bones):
 
 		# Get the left and right indices
 		if i == 0:
-			left_index = -1
+			left_index = i
 		else:
 			left_index = bone_indices[i-1]
 
 		if i+1 == num_bones:
-			right_index = versetemplate.num_syllables
+			right_index = i
 		else:
 			right_index = bone_indices[i]
 

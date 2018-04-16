@@ -199,19 +199,6 @@ class WordCorpus:
     def initializeMatrix(self):
         self._initializeMatrix()
 
-    def get_rhyme_matrix(self):
-        """
-        Get rhyme scores between all the syllables of all the words to 
-        facilitate the rhyme filler in generate_sample
-
-        but do we even want to do it that way
-        do we really want it to be a matrix, even
-        I feel like that might not be the best way
-        what if it's a dictionary instead? where the key is like a tuple
-            with the word1, word2, i, j args you pass to rhymetools
-        """
-        pass
-
     def sample_distribution(self, current, n, forward=True):
         """
         Sample the probability distribution for word 'current' n times.

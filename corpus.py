@@ -18,7 +18,7 @@ class WordCorpus:
         corpString : Source text in string format
         size : Number of unique words in the corpus
 
-        frequencies : Number of times each word occurs
+        frequency : Number of times each word occurs
         unique_precedent_counts : # of unique words each word follows
         unique_antecedent_counts : # of unique follow words for each word
 
@@ -41,7 +41,7 @@ class WordCorpus:
         self.corpString = None
         
         self.size = 0
-        self.frequencies = None
+        self.frequency = None
         self.unique_precedent_counts = None
         self.unique_antecedent_counts = None
         self.A = None
@@ -147,12 +147,12 @@ class WordCorpus:
             shape=(self.size, self.size)).tocsr()
 
         # Keep track of followability stuff
-        self.frequencies = A_raw.sum(axis=1).T
+        self.frequency = A_raw.sum(axis=1).T
         self.unique_precedent_counts = np.count_nonzero(A_raw.toarray(), axis=0)
         self.unique_antecedent_counts = np.count_nonzero(A_raw.toarray(), axis=1)
 
         # Normalize A to get probabilities
-        data = np.maximum(self.frequencies, np.ones(self.size))
+        data = np.maximum(self.frequency, np.ones(self.size))
         d = sparse.spdiags(1.0/data, 0, self.size, self.size)
         self.A = d * A_raw
 
@@ -217,9 +217,7 @@ class WordCorpus:
                     else:
                         self.sylDict[key].append(val)
                         
-            
-
-    def sample_distribution(self, current, n, forward=True):
+    def sample_distribution(self, current, n, forward):
         """
         Sample the probability distribution for word 'current' n times.
         """
@@ -240,3 +238,14 @@ class WordCorpus:
             samples = np.random.randint(self.size, size=n)
 
         return np.unique(samples)
+
+    def followability(self, word_index, forward):
+        """
+        Get the followability score for the given index.
+        """
+        if forward:
+            num_options = self.unique_antecedent_counts[word_index]
+        else:
+            num_options = self.unique_precedent_counts[word_index]
+
+        return num_options/(1.0 + self.frequency[word_index])

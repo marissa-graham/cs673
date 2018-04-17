@@ -11,7 +11,7 @@ import corpus
 import rhymetools
 import verse
 
-def scansion_score(word, loc, neighbor, template, forward):
+def scansion_score(word_index, loc, neighbor, corpus, template, forward):
 	"""
 	Return a score in [0,1] telling how well the meter of the given word
 	matches the verse template.
@@ -24,6 +24,7 @@ def scansion_score(word, loc, neighbor, template, forward):
 	Dealing with squishing and stretching syllables is too hard so we're
 	not gonna do it.
 	"""
+	word = corpus.wordList[word_index]
 
 	# Check if you've crashed into the edge or your neighbor
 	if forward and loc + word.length > neighbor:
@@ -63,34 +64,57 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 		return fill_index
 
 	# Get a pool of choices
-	choices = corp.sample_distribution(prev_word, 20)
-	scansion_scores = np.zeros_like(choices)
+	choices = corp.sample_distribution(prev_word, 20, forward)
 
 	# Get the scansion scores for each choice
-	for i in range(len(choices)):
+	def check_choices(choices, scansion_scores):
+	
+		scansion_scores = np.zeros_like(choices)
 
-		if forward:
-			scansion_scores[i] = scansion_score(choices[i], fill_index + prev_L, 
-				neighbor_index, corpus, versetemplate, forward)
-		else:
-			L = choices[i].length
-			scansion_scores[i] = scansion_score(choices[i], fill_index - L,
-				neighbor_index, corpus, versetemplate, forward)
+		for i in range(len(choices)):
+			if forward:
+				scansion_scores[i] = scansion_score(choices[i], fill_index + prev_L, 
+					neighbor_index, corpus, versetemplate, forward)
+			else:
+				L = corpus.wordList[choices[i]].length
+				scansion_scores[i] = scansion_score(choices[i], fill_index - L,
+					neighbor_index, corpus, versetemplate, forward)
 
-	# If the best scansion score is zero (covers crashes and breakpoints)
-		# Just pick random words from the corpus
+		return scansion_scores
 
-	# Take the tier of the best scansion scores
+	scansion_scores = check_choices(choices, scansion_scores)
 
-		# Multiply followability by length and pick the best of those
+	# If everything crashes, just pick random words from the corpus
+	if np.amax(scansion_scores) == 0:
+		choices = np.random.choice(corpus.size, size=20, replace=False)
+		scansion_scores = check_choices(choices, scansion_scores)
 
+		# Justify not having this be a while loop, because come on now
+		if np.amax(scansion_scores) == 0:
+			raise ValueError("You unlucky bastard, you picked 20 unique words\
+				from the entire corpus and ALL of them smash into something")
 
-	# Update the template and location accordingly
+	# Zero out scores below the 75th percentile and iterate through the rest
+	cutoff = np.nanpercentile(scores, 75)
+	scansion_scores[scansion_scores < cutoff] = 0
+
+	for i in np.nonzero(scansion_scores)[0]:
+
+		# Scale by followability and length 
+		scansion_scores[i] *= corpus.wordList[choices[i]].length
+		scansion_scores[i] *= corpus.followability(choices[i], forward)
+
+	# Choose the highest scaled score
+	best_index = choices[np.amax(scansion_scores)]
+	best = corpus.wordList[best_index].stringRepr
+	L = corpus.wordList[best_index].length
+
+	# Update the template and return the new location index
 	if forward:
-		versetemplate.add_word(best, fill_index + prev_L, L, scores, forward)
+		versetemplate.add_word(best, fill_index + prev_L, L)
 		return fill_index + prev_L
 	else:
-		versetemplate.add_word(best, fill_index - L, L, scores, forward)
+		versetemplate.add_word(best, fill_index - L, L)
 		return fill_index - L
 
 def join_stubs(left, right, corpus, versetemplate):
@@ -113,7 +137,7 @@ def join_stubs(left, right, corpus, versetemplate):
 
 	# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
 		# fitness score
-	pass
+	
 
 def fill_rhymes(corpus, versetemplate):
 	"""

@@ -79,7 +79,6 @@ class VerseTemplate:
 		self.matrix_indices = []
 		self.rhyme_matrix = None
 
-		self.occupied_syllables = None
 		self.verse = dict()
 
 		self.unknowns_info = []
@@ -257,16 +256,13 @@ class VerseTemplate:
 
 		# Pitch a fit if you haven't got the file you want?
 		
-	def add_word(self, word, fill_index, L, scores, forward):
+	def add_word(self, word, fill_index, L):
 		"""
 		Put the given word into the verse template at location start_ind, and
 		have it take up L syllables of the stress pattern. Keep track of the
 		fitness score profile so we can potentially backtrack later.
-
-		Return whether the addition was successful
 		"""
-		self.occupied_syllables[fill_index:fill_index+L] = 1
-		self.verse[fill_index] = (word, L, scores)
+		self.verse[fill_index] = (word, L)
 
 	def join_template(self):
 		"""

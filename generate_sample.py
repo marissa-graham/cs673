@@ -20,9 +20,6 @@ def scansion_score(word_index, loc, neighbor, corpus, template, forward):
 	
 	Otherwise, full credit for every stress that matches, quarter credit for
 	mismatched stress, normalize by number of syllables.
-
-	Dealing with squishing and stretching syllables is too hard so we're
-	not gonna do it.
 	"""
 	word = corpus.wordList[word_index]
 
@@ -66,9 +63,9 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 	# Get a pool of choices
 	choices = corp.sample_distribution(prev_word, 20, forward)
 
-	# Get the scansion scores for each choice
-	def check_choices(choices, scansion_scores):
-	
+	def check_choices(choices):
+		"""Get the scansion scores for all the choices."""
+		
 		scansion_scores = np.zeros_like(choices)
 
 		for i in range(len(choices)):
@@ -82,25 +79,24 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 
 		return scansion_scores
 
-	scansion_scores = check_choices(choices, scansion_scores)
+	scansion_scores = check_choices(choices)
 
 	# If everything crashes, just pick random words from the corpus
 	if np.amax(scansion_scores) == 0:
+
 		choices = np.random.choice(corpus.size, size=20, replace=False)
-		scansion_scores = check_choices(choices, scansion_scores)
+		scansion_scores = check_choices(choices)
 
 		# Justify not having this be a while loop, because come on now
 		if np.amax(scansion_scores) == 0:
 			raise ValueError("You unlucky bastard, you picked 20 unique words\
 				from the entire corpus and ALL of them smash into something")
 
-	# Zero out scores below the 75th percentile and iterate through the rest
+	# Zero out scores < 75th percentile & scale the rest by length + followability
 	cutoff = np.nanpercentile(scores, 75)
 	scansion_scores[scansion_scores < cutoff] = 0
 
 	for i in np.nonzero(scansion_scores)[0]:
-
-		# Scale by followability and length 
 		scansion_scores[i] *= corpus.wordList[choices[i]].length
 		scansion_scores[i] *= corpus.followability(choices[i], forward)
 
@@ -126,6 +122,10 @@ def join_stubs(left, right, corpus, versetemplate):
 	"""
 
 	to_fill = abs(right - left)
+	iters = 0
+	maxiters = 10
+
+	while iters 
 
 	# Get ALL words from the corpus that follow Left and are followed
 		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0

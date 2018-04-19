@@ -79,6 +79,7 @@ class VerseTemplate:
 		self.matrix_indices = []
 		self.rhyme_matrix = None
 
+		self.occupied_syllables = None
 		self.verse = dict()
 
 		self.unknowns_info = []
@@ -140,7 +141,7 @@ class VerseTemplate:
 		be automatic, it can be internal again and we can call add_unknowns
 		in here.
 
-		Here is how syllable_indices and matrix_indices are going to work:
+		Here is how syllable_indices and matrix_indices work:
 			- If you've got word i and syllable j and you want to know what
 			  index in the matrix that is, you get syllable_indices[i] + j
 			- If you've got index k in the matrix and you want to know what
@@ -155,22 +156,8 @@ class VerseTemplate:
 				*but it's a 2d array with the columns, this is just prettier
 		"""
 
-
-		"""
-		from nltk.tag import pos_tag
-
-		sentence = "Michael Jackson likes to eat at McDonalds"
-		tagged_sent = pos_tag(sentence.split())
-		# [('Michael', 'NNP'), ('Jackson', 'NNP'), ('likes', 'VBZ'), ('to', 'TO'), ('eat', 'VB'), ('at', 'IN'), ('McDonalds', 'NNP')]
-
-		propernouns = [word for word, pos in tagged_sent if pos == 'NNP']
-		# ['Michael','Jackson', 'McDonalds']
-		"""
-
-		# MAKE SURE YOU'VE ALREADY ADDED THE UNKNOWNS
-
-		# Fill out syllable_indices and matrix_indices
-		# TEST THIS PLEASE
+		self.stresses = np.array(stresses)
+		self.occupied_syllables = np.zeros_like(self.stresses)
 
 		syllables = []
 		for i in range(len(self.wordList)):
@@ -183,7 +170,6 @@ class VerseTemplate:
 				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
-		#self.
 		self.matrix_indices = np.array(self.matrix_indices)
 
 		rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))
@@ -203,7 +189,7 @@ class VerseTemplate:
 		rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
 
 		# Use a percentile instead of 0.65 hard-coded
-		cutoff = 0.65
+		cutoff = np.nanpercentile()
 		rhyme_matrix[np.where(rhyme_matrix < cutoff)] = 0
 
 		self.rhyme_matrix = rhyme_matrix
@@ -235,6 +221,9 @@ class VerseTemplate:
         			something to make sure it's working as expected.
 
 		"""
+
+		# Pitch a fit if you haven't got the file you want?
+
 		new_words = []
 		with open(logios_file, "r") as logios_output:
 			for line in logios_output:
@@ -253,8 +242,6 @@ class VerseTemplate:
 				stress_idx = self.unknowns_info[counter][2]
 				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
 				counter += 1
-
-		# Pitch a fit if you haven't got the file you want?
 		
 	def add_word(self, word, fill_index, L):
 		"""
@@ -262,10 +249,11 @@ class VerseTemplate:
 		have it take up L syllables of the stress pattern. Keep track of the
 		fitness score profile so we can potentially backtrack later.
 		"""
+		self.occupied_syllables[fill_index:fill_index+L] = 1.0
 		self.verse[fill_index] = (word, L)
 
 	def join_template(self):
 		"""
-		Join the filled template into a single result string.
+		Join the filled template into a single result string. Use
 		"""
 		pass

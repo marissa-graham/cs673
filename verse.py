@@ -75,6 +75,7 @@ class VerseTemplate:
 		self.breakpoints = []
 		self.stresses = []
 
+		self.num_syllables = 0
 		self.syllable_indices = []
 		self.matrix_indices = []
 		self.rhyme_matrix = None
@@ -183,7 +184,6 @@ class VerseTemplate:
 				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
-		#self.
 		self.matrix_indices = np.array(self.matrix_indices)
 
 		rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))

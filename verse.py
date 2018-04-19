@@ -157,7 +157,7 @@ class VerseTemplate:
 				*but it's a 2d array with the columns, this is just prettier
 		"""
 
-		self.stresses = np.array(stresses)
+		self.stresses = np.array(self.stresses)
 		self.occupied_syllables = np.zeros_like(self.stresses)
 
 		syllables = []
@@ -190,7 +190,8 @@ class VerseTemplate:
 		rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
 
 		# Use a percentile instead of 0.65 hard-coded
-		cutoff = np.nanpercentile()
+		# cutoff = np.nanpercentile()
+		cutoff = .65
 		rhyme_matrix[np.where(rhyme_matrix < cutoff)] = 0
 
 		self.rhyme_matrix = rhyme_matrix

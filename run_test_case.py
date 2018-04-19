@@ -17,6 +17,10 @@ Just an outline for all the stuff you need to have, know, call, and do to run
 a full test case.
 """
 
+# Might have to load the cmudict package, depending
+#nltk.download('cmudict')
+
+
 # Initialize phonetic dictionary
 
 dictionary = phonetic.PhoneticDictionary()
@@ -40,3 +44,7 @@ corp.add_unknowns("logios_output/g2p.txt")
 print()
 print(corp.wordList)
 corp.initializeMatrix()
+
+# Make a verse template
+template = verse.VerseTemplate(verse.get_sample(4), dictionary, breakrules='phrase')
+template.get_rhyme()

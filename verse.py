@@ -52,10 +52,11 @@ class VerseTemplate:
 		wordList : List of Words in the source text.
 		breakpoints : List of indices that a word can't cross
 		stresses : List of stresses for each syllable
-		verse : Dictionary to store the filled template
-		rhymes : Matrix with rhyme patterns to be mimicked
 		unknowns: File to store unknown words
 		unknowns_info: List of tuples containing information about unknown words
+
+		verse : Dictionary to store the filled template
+		rhyme_matrix : Matrix with rhyme patterns to be mimicked
 	"""
 
 	def __init__(self, template_string, dictionary, breakrules="word"):
@@ -73,10 +74,12 @@ class VerseTemplate:
 		self.wordList = []
 		self.breakpoints = []
 		self.stresses = []
+
 		self.syllable_indices = []
 		self.matrix_indices = []
+		self.rhyme_matrix = None
+
 		self.verse = dict()
-		self.rhyme_matrix = []
 
 		self.unknowns_info = []
 		self.unknowns = "verse_unknowns.txt"
@@ -121,11 +124,11 @@ class VerseTemplate:
 
 			# Add any breakpoints associated with the word 
 			if self.breakrules == "word":
-				self.breakpoints.append(len(self.stresses))
+				self.breakpoints.append(len(self.stresses)-1)
 
 			elif self.breakrules == "phrase":
 				if wordstrings[i].endswith(self.phraseBreakpoints):
-					self.breakpoints.append(len(self.stresses))
+					self.breakpoints.append(len(self.stresses)-1)
 
 	def get_rhyme(self):
 		"""
@@ -169,41 +172,41 @@ class VerseTemplate:
 		# Fill out syllable_indices and matrix_indices
 		# TEST THIS PLEASE
 
-		num_syllables = 0
 		syllables = []
 		for i in range(len(self.wordList)):
 
-			self.syllable_indices.append(num_syllables)
-			num_syllables += self.wordList[i].length
+			self.syllable_indices.append(self.num_syllables)
+			self.num_syllables += self.wordList[i].length
 
 			for j in range(self.wordList[i].length):
 				self.matrix_indices.append(np.array([i,j]))
 				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
+		#self.
 		self.matrix_indices = np.array(self.matrix_indices)
 
-		rhyme_matrix = np.zeros((num_syllables, num_syllables))
+		rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))
 
+		# Fill the matrix within like a 30-syllable window
 		bandwidth = 30
 		rm = RhymeEvaluator()
-		for i in range(num_syllables):
+		for i in range(self.num_syllables):
 			word1 = self.wordList[self.matrix_indices[i][0]]
 			syl1_index = self.matrix_indices[i][1]
-			for j in range(i, min(i + bandwidth, num_syllables)):
+			for j in range(i, min(i + bandwidth, self.num_syllables)):
 				word2 = self.wordList[self.matrix_indices[j][0]]
 				syl2_index = self.matrix_indices[j][1]
 				rhyme_matrix[i,j] = rm.rhyme_score(word1, word2, syl1_index, syl2_index)
 
+		# Ignore the 1s (ignore = zero out)
 		rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
-		rhyme_matrix[np.where(rhyme_matrix < .65)] = 0
+
+		# Use a percentile instead of 0.65 hard-coded
+		cutoff = 0.65
+		rhyme_matrix[np.where(rhyme_matrix < cutoff)] = 0
 
 		self.rhyme_matrix = rhyme_matrix
-
-
-		# Fill the matrix within like a 30-syllable window
-
-		# Ignore the 1s (ignore = zero out)
 
 		# Ignore the 1-syllable prepositions, articles, and pronouns
 
@@ -252,26 +255,14 @@ class VerseTemplate:
 				counter += 1
 
 		# Pitch a fit if you haven't got the file you want?
-		pass
-
-	def add_word(self, word, fill_index, L, scores, forward):
+		
+	def add_word(self, word, fill_index, L):
 		"""
 		Put the given word into the verse template at location start_ind, and
 		have it take up L syllables of the stress pattern. Keep track of the
 		fitness score profile so we can potentially backtrack later.
 		"""
-
-		# Check for overlap and freak out accordingly
-
-		# Separate cases for going forwards and backwards
-
-		self.verse[start_ind] = (word, L, scores)
-
-	def remove_word(self, word, start_ind):
-		"""
-		Delete the word at start_ind, if it exists.
-		"""
-		pass
+		self.verse[fill_index] = (word, L)
 
 	def join_template(self):
 		"""

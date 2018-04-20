@@ -38,6 +38,36 @@ def scansion_score(word_index, loc, neighbor, corpus, template, forward):
 	goods = template.stresses[loc:loc+word.length] == word.rhythm
 	return 0.25 + 0.75*np.sum(goods)/word.length
 
+def check_choices(choices, fill_ind, neighbor_ind, corp, versetemplate, forward):
+	"""
+	Get the scansion scores for all the choices.
+	
+	Arguments:
+		choices : List of indices of the words you want to check
+		fill_index : Syllable index to start the word at
+		neighbor_ind : Nearest word you might be able to crash into
+		corp : Main corpus, only used for looking up the word indices
+		versetemplate : As usual
+		forward : Whether to check the scores going forwards or backward
+
+	Returns:
+		scansion_scores : Array of rhythm scores for all the choices.
+	"""
+	
+	scansion_scores = np.zeros_like(choices)
+
+	for i in range(len(choices)):
+		if forward:
+			scansion_scores[i] = scansion_score(choices[i], fill_index, 
+				neighbor_index, corpus, versetemplate, forward)
+		else:
+			L = corpus.wordList[choices[i]].length
+			scansion_scores[i] = scansion_score(choices[i], fill_index - L,
+				neighbor_index, corpus, versetemplate, forward)
+
+	return scansion_scores
+
+
 def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 	"""
 	Generate a word based on the given corpus to fill the given template.
@@ -63,23 +93,12 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 	# Get a pool of choices
 	choices = corp.sample_distribution(prev_word, 20, forward)
 
-	def check_choices(choices):
-		"""Get the scansion scores for all the choices."""
-		
-		scansion_scores = np.zeros_like(choices)
-
-		for i in range(len(choices)):
-			if forward:
-				scansion_scores[i] = scansion_score(choices[i], fill_index + prev_L, 
-					neighbor_index, corpus, versetemplate, forward)
-			else:
-				L = corpus.wordList[choices[i]].length
-				scansion_scores[i] = scansion_score(choices[i], fill_index - L,
-					neighbor_index, corpus, versetemplate, forward)
-
-		return scansion_scores
-
-	scansion_scores = check_choices(choices)
+	if forward:
+		scansion_scores = check_choices(choices, fill_index + prev_L, 
+			neighbor_index, corpus, versetemplate, forward)
+	else:
+		scansion_scores = check_choices(choices, fill_index, neighbor_index, 
+			corpus, versetemplate, forward)
 
 	# If everything crashes, just pick random words from the corpus
 	if np.amax(scansion_scores) == 0:
@@ -125,18 +144,21 @@ def join_stubs(left, right, corpus, versetemplate):
 	iters = 0
 	maxiters = 10
 
-	while iters 
+	# Try to fill with length to_fill
+	while to_fill > 0 and iters < maxiters:
 
-	# Get ALL words from the corpus that follow Left and are followed
-		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
+		iters += 1
 
-	# Pick out the ones that are the right length
+		# Get ALL words from the corpus that follow Left and are followed
+			# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
 
-	# If none of them are long enough, call generate_word on left and then
-		# try again
+		# Pick out the ones that are the right length
 
-	# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
-		# fitness score
+		# If none of them are long enough, call generate_word on left and then
+			# try again
+
+		# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
+			# fitness score
 	
 
 def fill_rhymes(corpus, versetemplate):
@@ -147,11 +169,11 @@ def fill_rhymes(corpus, versetemplate):
 	"""
 
 	# Go through all the nonzero indices in the rhyme matrix
-		rows, cols = np.where(versetemplate.rhyme_matrix == 0)
-		num_pairs = len(rows)
+	rows, cols = np.where(versetemplate.rhyme_matrix == 0)
+	num_pairs = len(rows)
 
-		for i in range(num_pairs):
-			word1 = versetemplate.
+	for i in range(num_pairs):
+		word1 = versetemplate
 
 		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
 

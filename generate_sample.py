@@ -38,7 +38,7 @@ def scansion_score(word_index, loc, neighbor, corpus, template, forward):
 	goods = template.stresses[loc:loc+word.length] == word.rhythm
 	return 0.25 + 0.75*np.sum(goods)/word.length
 
-def check_choices(choices, fill_ind, neighbor_ind, corp, versetemplate, forward):
+def check_choices(choices, fill_ind, neighbor_ind, corp, template, forward):
 	"""
 	Get the scansion scores for all the choices.
 	
@@ -47,7 +47,7 @@ def check_choices(choices, fill_ind, neighbor_ind, corp, versetemplate, forward)
 		fill_index : Syllable index to start the word at
 		neighbor_ind : Nearest word you might be able to crash into
 		corp : Main corpus, only used for looking up the word indices
-		versetemplate : As usual
+		template : As usual
 		forward : Whether to check the scores going forwards or backward
 
 	Returns:
@@ -59,16 +59,15 @@ def check_choices(choices, fill_ind, neighbor_ind, corp, versetemplate, forward)
 	for i in range(len(choices)):
 		if forward:
 			scansion_scores[i] = scansion_score(choices[i], fill_index, 
-				neighbor_index, corpus, versetemplate, forward)
+				neighbor_index, corpus, template, forward)
 		else:
 			L = corpus.wordList[choices[i]].length
 			scansion_scores[i] = scansion_score(choices[i], fill_index - L,
-				neighbor_index, corpus, versetemplate, forward)
+				neighbor_index, corpus, template, forward)
 
 	return scansion_scores
 
-
-def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
+def generate_word(fill_index, neighbor_index, corpus, template, forward):
 	"""
 	Generate a word based on the given corpus to fill the given template.
 
@@ -76,7 +75,7 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 		fill_index : Location of the current word in the template
 		neighbor_index : Index of the left or right neighbor
 		corpus : WordCorpus to use
-		versetemplate : VerseTemplate to use
+		template : VerseTemplate to use
 		forward : if True, fill forward; if False, fill backward
 
 	Returns:
@@ -85,7 +84,7 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 
 	# Check if there's actually a word at that index
 	try:
-		prev_word, prev_L, prev_scores = versetemplate.verse[fill_index]
+		prev_word, prev_L, prev_scores = template.verse[fill_index]
 	except KeyError:
 		print("No word exists at fill_index, return current index")
 		return fill_index
@@ -95,10 +94,10 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 
 	if forward:
 		scansion_scores = check_choices(choices, fill_index + prev_L, 
-			neighbor_index, corpus, versetemplate, forward)
+			neighbor_index, corpus, template, forward)
 	else:
 		scansion_scores = check_choices(choices, fill_index, neighbor_index, 
-			corpus, versetemplate, forward)
+			corpus, template, forward)
 
 	# If everything crashes, just pick random words from the corpus
 	if np.amax(scansion_scores) == 0:
@@ -126,13 +125,13 @@ def generate_word(fill_index, neighbor_index, corpus, versetemplate, forward):
 
 	# Update the template and return the new location index
 	if forward:
-		versetemplate.add_word(best, fill_index + prev_L, L)
+		template.add_word(best, fill_index + prev_L, L)
 		return fill_index + prev_L
 	else:
-		versetemplate.add_word(best, fill_index - L, L)
+		template.add_word(best, fill_index - L, L)
 		return fill_index - L
 
-def join_stubs(left, right, corpus, versetemplate):
+def join_stubs(left, right, corpus, template):
 	"""
 	Join the words going forwards and backwards by maximizing
 	the probability of a word or phrase following the left side 
@@ -144,10 +143,14 @@ def join_stubs(left, right, corpus, versetemplate):
 	iters = 0
 	maxiters = 10
 
+	print("fill between index", left, "and", right)
+
 	# Try to fill with length to_fill
 	while to_fill > 0 and iters < maxiters:
 
 		iters += 1
+
+		break
 
 		# Get ALL words from the corpus that follow Left and are followed
 			# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
@@ -160,8 +163,7 @@ def join_stubs(left, right, corpus, versetemplate):
 		# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
 			# fitness score
 	
-
-def fill_rhymes(corpus, versetemplate):
+def fill_rhymes(corpus, template):
 	"""
 	Get words which:
 		1) match the meter and rhyme pattern at the given indices, and 
@@ -169,11 +171,11 @@ def fill_rhymes(corpus, versetemplate):
 	"""
 
 	# Go through all the nonzero indices in the rhyme matrix
-	rows, cols = np.where(versetemplate.rhyme_matrix == 0)
+	rows, cols = np.where(template.rhyme_matrix == 0)
 	num_pairs = len(rows)
 
 	for i in range(num_pairs):
-		word1 = versetemplate
+		word1 = template
 
 		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
 
@@ -190,7 +192,7 @@ def fill_rhymes(corpus, versetemplate):
 			# best match
 	pass 
 
-def fill_template(corpus, versetemplate):
+def fill_template(corpus, template):
 	"""
 	Generate babble words to fill the given Verse template.
 
@@ -199,43 +201,44 @@ def fill_template(corpus, versetemplate):
 	"""
 
 	# Initialize stuff
-	num_bones, bone_indices = fill_rhymes(corpus, versetemplate)
+	fill_rhymes(corpus, template)
 
-	# If there aren't any bones just pick an initial word and go
+	rhyme_inds = list(template.verse.keys())
 
 	# Now go through all the "holes" between bone words
-	for i in xrange(num_bones):
+	for i in range(len(rhyme_inds)):
 
-		# Get the left and right indices
 		if i == 0:
-			left_index = i
+			join_stubs(0,rhyme_inds[0], corpus, template)
+		
+		left = rhyme_inds[i]
+		
+		if i == len(rhyme_inds) - 1:
+			right = template.num_syllables-1
 		else:
-			left_index = bone_indices[i-1]
-
-		if i+1 == num_bones:
-			right_index = i
-		else:
-			right_index = bone_indices[i]
-
+			right = rhyme_inds[i+1]
+		
 		# Fill the holes forwards and backwards 
 		maxiters = 20
 		iters = 0
-		while abs(right_index - left_index) > 3 and iters < maxiters:
+
+		to_fill = abs(right - left + template.verse[left][1])
+		while abs(right - left + left_length) > 3 and iters < maxiters:
 
 			# Paranoid
 			iters += 1
 
 			# Go forwards from left
 			left_index = generate_word(left_index, right_index, corpus, 
-				versetemplate, forward=True)
+				template, forward=True)
 
 			# Go backwards from right if necessary
 			if abs(right_index - left_index) > 2:
 				right_index = generate_word(right_index, left_index, corpus, 
-					versetemplate, forward=False)
+					template, forward=False)
 		
 		# Join up the middles
-		join_stubs(left_index, right_index, corpus, versetemplate)
+		join_stubs(left, right, corpus, template)
 
 	# Return the joined-up string
-	return versetemplate.join_template()
+	return template.join_template()

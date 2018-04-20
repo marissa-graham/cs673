@@ -44,19 +44,22 @@ class VerseTemplate:
 	
 	Attributes:
 
-		template_string : Text with the desired rhythm and rhyme pattern
+		template : Text with the desired rhythm and rhyme pattern
 		dictionary : Phonetic dictionary to use for lookup
 		breakrules : Require no word breaking across original words ('word')
 					  or no word breaking across phrases ('phrase')
-
+		
+		num_syllables : Number of syllables in the template
 		wordList : List of Words in the source text.
 		breakpoints : List of indices that a word can't cross
 		stresses : List of stresses for each syllable
+		
 		unknowns : File to store unknown words
 		unknowns_info : List of tuples containing information about unknown words
-
+	
+		occupied_syllables : boolean array of filled syllables in the template
 		verse : Dictionary to store the filled template
-		self.rhyme_matrix : Matrix with rhyme patterns to be mimicked
+		rhyme_matrix : Matrix with rhyme patterns to be mimicked
 	"""
 
 	def __init__(self, template_string, dictionary, breakrules="word"):
@@ -74,12 +77,9 @@ class VerseTemplate:
 		self.wordList = []
 		self.breakpoints = []
 		self.stresses = []
-
 		self.syllable_indices = []
 		self.matrix_indices = []
-		self.rhyme_matrix = None
 
-		self.occupied_syllables = None
 		self.verse = dict()
 
 		self.unknowns_info = []
@@ -89,7 +89,44 @@ class VerseTemplate:
 
 		self._getRhythm()
 		print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
+			
+	def add_unknowns(self, logios_file):
+		"""
+		Function to add the unknown words after using the LOGIOS tool, either
+        manually or via API.
+        
+        It'll be harder here than in corpus.py because you've got the stress 
+        pattern thing. This is what you need to update for each word:
+        	(1) self.wordList : This one will be exactly the same as in 
+        			corpus.py. Just replace the null values at the indices
+        			of the unknown words, which are in the file so it's easy.
+        	(2) self.stresses : The value of self.stresses at which you need
+        			to insert the rhythm pattern is in the file (test this). 
+		"""
 
+		# Pitch a fit if you haven't got the file you want?
+
+		new_words = []
+		with open(logios_file, "r") as logios_output:
+			for line in logios_output:
+				items = line.split()
+				word = items[0]
+				syllables = items[1:]
+				for i in range(len(syllables)):
+					if phonetic.is_vowel(syllables[i]):
+						syllables[i] += "0" # default stress of zero
+				new_words.append(Word(word.lower(), syllables))
+
+		counter = 0
+		for i in range(len(self.wordList)):
+			if self.wordList[i] == None:
+				self.wordList[i] = new_words[counter]
+				stress_idx = self.unknowns_info[counter][2]
+				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
+				counter += 1
+
+		print("Unknown words successfully added")
+	
 	def _getRhythm(self):
 		"""
 		Extract the meter pattern and desired breaks from a given string.
@@ -124,6 +161,7 @@ class VerseTemplate:
 				num_words += 1
 
 			# Add any breakpoints associated with the word 
+
 			if self.breakrules == "word":
 				self.breakpoints.append(len(self.stresses)-1)
 
@@ -223,60 +261,35 @@ class VerseTemplate:
 				print(" ", match, "% match: syllable", i1+1, "of", 
 					self.wordList[word1].stringRepr, "+ syllable", j1+1, "of", 
 					self.wordList[word2].stringRepr)
-				
-	def add_unknowns(self, logios_file):
-		"""
-		Function to add the unknown words after using the LOGIOS tool, either
-        manually or via API.
-        
-        It'll be harder here than in corpus.py because you've got the stress 
-        pattern thing. This is what you need to update for each word:
-        	(1) self.wordList : This one will be exactly the same as in 
-        			corpus.py. Just replace the null values at the indices
-        			of the unknown words, which are in the file so it's easy.
-        	(2) self.stresses : The value of self.stresses at which you need
-        			to insert the rhythm pattern is in the file (test this). 
-        			This stackexchange question should be useful:
-        			https://stackoverflow.com/questions/39541370/how-to-insert-multiple-elements-into-a-list
-        			but play with baby test cases in a jupyter notebook or
-        			something to make sure it's working as expected.
-
-		"""
-
-		# Pitch a fit if you haven't got the file you want?
-
-		new_words = []
-		with open(logios_file, "r") as logios_output:
-			for line in logios_output:
-				items = line.split()
-				word = items[0]
-				syllables = items[1:]
-				for i in range(len(syllables)):
-					if phonetic.is_vowel(syllables[i]):
-						syllables[i] += "0" # default stress of zero
-				new_words.append(Word(word.lower(), syllables))
-
-		counter = 0
-		for i in range(len(self.wordList)):
-			if self.wordList[i] == None:
-				self.wordList[i] = new_words[counter]
-				stress_idx = self.unknowns_info[counter][2]
-				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
-				counter += 1
-
-		print("Unknown words successfully added")
 		
-	def add_word(self, word, fill_index, L):
+	def add_word(self, word, fill_index, L=None):
 		"""
 		Put the given word into the verse template at location start_ind, and
 		have it take up L syllables of the stress pattern. Keep track of the
 		fitness score profile so we can potentially backtrack later.
 		"""
-		self.occupied_syllables[fill_index:fill_index+L] = 1.0
+		if L is None:
+			L = word.length
+
+		self.occupied_syllables[fill_index:fill_index+L] = 1
 		self.verse[fill_index] = (word, L)
 
-	def join_template(self):
+	def join_template(self, verbose=True):
 		"""
 		Join the filled template into a single result string. Use
 		"""
-		
+		self.result = ""
+		for i in range(self.num_syllables):
+			if self.occupied_syllables[i]:
+				try:
+					self.result += " " + self.verse[i][0].stringRepr + " "
+				except KeyError:
+					pass
+			else:
+				if self.stresses[i] > 0:
+					self.result += " x "
+				else:
+					self.result += " / "
+
+		if verbose:
+			print(self.result)

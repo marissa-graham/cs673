@@ -302,8 +302,6 @@ class RhymeEvaluator:
         else:
             return word.phonemes[nucleus+1:word.vowelIndices[i+1]]
 
-
-
     def rhyme_score(self, word1, word2, i, j):
         """
         Calculate the rhyme score between the i-th syllable of word1 and the

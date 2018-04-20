@@ -42,7 +42,8 @@ class RhymeEvaluator:
         """
 
         # Initialize the priority weights
-        self.priority = np.array([0.013, 0.355, 0.014])
+        #self.priority = np.array([0.013, 0.355, 0.014])
+        self.priority = np.array([0.05,0.75,0.2])
         self.priority /= np.sum(self.priority)
         self.vowel_priorities = np.array([0.355, 0.921, 0.979, 0.53])
         self.consonant_priorities = np.array([0.933, 1.0])
@@ -53,6 +54,10 @@ class RhymeEvaluator:
         self.c_list = ["B", "CH", "D", "DH", "F", "G", "HH", "JH",\
                                   "K", "L", "M", "N", "NG", "P", "R", "S", \
                                   "SH", "T", "TH", "V", "W", "Y", "Z", "ZH"]
+
+        self.bads = {"a","an","the","to","of","by","at","on","he","her","is",
+        "in","it","its","my","or","our","she","him","and"}
+        
 
         # Set up the vowel and consonant lookup dictionaries
         self.num_vowels = len(self.v_list)
@@ -176,7 +181,8 @@ class RhymeEvaluator:
                 self.Ac[c1, c2] = np.dot(self.consonant_priorities, feature_scores)
         
         # Shift and normalize values to lie in [0,1]     
-        self.Ac = (self.Ac - np.min(self.Ac)) / (np.max(self.Ac) - np.min(self.Ac))
+        self.Ac = (self.Ac - np.min(self.Ac)) 
+        self.Ac /= np.max(self.Ac)
         
         # Cheat to make sure exact matches give you a score of 1
         np.fill_diagonal(self.Ac,1.0)
@@ -198,13 +204,17 @@ class RhymeEvaluator:
 
         # If they're the same shape, the alignment is just the diagonal
         if diff == 0:
-            return np.sum(np.diag(alignment)) / np.max(np.diag(alignment))
+            #print("same shape")
+            return np.sum(np.diag(alignment))/n
 
         # If it's one-dimensional, the alignment is just the max score
         if m == 1:
-            return np.max(alignment) / n
-        elif n == 1:
-            return np.max(alignment) / m
+            #print("one row")
+            if n == 1:
+                #print("both sequences are length 1")
+                return np.max(alignment) 
+            else:
+                return np.max(alignment)/n
 
         best = 0
         tot = 0
@@ -214,14 +224,15 @@ class RhymeEvaluator:
 
             # See how good the score is for this particular possibility
             mydiag = np.diag(alignment[:,c])
-            tot = np.sum(mydiag)/np.max(mydiag)
+            #print(mydiag)
+            tot = np.sum(mydiag)/n
 
             # Keep it if it's the best one we've seen
             if tot > best:
                 best = tot
 
         # Normalize by the maximum dimension
-        return tot / n
+        return tot 
 
     def _consonantSequenceScore(self, onset1, onset2):
         """
@@ -235,6 +246,7 @@ class RhymeEvaluator:
         # Get the similarity score for each phoneme pair
         rows = len(onset1)
         cols = len(onset2)
+
         if rows == 0 or cols == 0: 
             return 0 # TODO: double check on this
         alignment = np.zeros((rows, cols))
@@ -245,6 +257,7 @@ class RhymeEvaluator:
                 phoneme2 = self.consonants[onset2[j]]
                 alignment[i,j] = self.Ac[phoneme1, phoneme2]
 
+        #print("\talignment matrix", alignment, alignment.shape)
         # Call the sequence aligner on a matrix with more columns than rows
         if rows > cols:
             score = self._sequenceAlignmentScore(alignment.T)
@@ -277,16 +290,18 @@ class RhymeEvaluator:
 
             # If there's anything after the vowel, slice to the end
             if len(word.phonemes) > nucleus + 1:
-                coda = word.phonemes[nucleus+1:]
+                return word.phonemes[nucleus+1:]
 
             # Otherwise, it's just empty
             else:
-                coda = []
+                return []
 
         # Otherwise, start immediately after the current vowel and stop 
         # just before the next vowel.
         else:
-            coda = word.phonemes[nucleus+1:word.vowelIndices[i+1]]
+            return word.phonemes[nucleus+1:word.vowelIndices[i+1]]
+
+
 
     def rhyme_score(self, word1, word2, i, j):
         """
@@ -302,6 +317,21 @@ class RhymeEvaluator:
         Returns: 
             rhyme_score : A value in [0,1] indicating the rhyme quality.
         """
+
+        if word1.stringRepr in self.bads:
+            #print("ignore the article ", word1.stringRepr)
+            return 0
+        if word2.stringRepr in self.bads:
+            #print("ignore the article ", word2.stringRepr)
+            return 0
+
+        if word1.rhythm[i] != word2.rhythm[j]:
+            #print("stress", word1.rhythm[i], "for (", word1.stringRepr, ",", i,
+            #") doesn't match stress", word2.rhythm[j], " for (", word2.stringRepr, ",", j, ")")
+            return 0
+
+        if word1.stringRepr == word2.stringRepr:
+            return 0
 
         # Get the nucleus for each word (i.e. if i is 0, get the 1st vowel)
         nucleus1 = word1.vowelIndices[i]
@@ -321,9 +351,28 @@ class RhymeEvaluator:
 
         # Get the matching scores for the nucleus, onset, and coda
         vowel_score = self.Av[self.vowels[syl1], self.vowels[syl2]]
+        #print("get onset score for", onset1, onset2, "words:", word1.stringRepr, i, word2.stringRepr, j)
         onset_score = self._consonantSequenceScore(onset1, onset2)
+        #print("get coda score for", coda1, coda2)
         coda_score = self._consonantSequenceScore(coda1, coda2)
-        scores = np.array([vowel_score, onset_score, coda_score])
+        scores = np.array([onset_score, vowel_score, coda_score])
 
+        
+        if np.dot(self.priority, scores) > 1:
+            print("*** Rhyme score for (", word1.stringRepr, ",", i,
+                ") and (", word2.stringRepr, ",", j, "): ", np.dot(self.priority, scores))
+            #print("\tpriorities: ", self.priority)
+            #print("\tVowel score: ", vowel_score)
+            print("\tOnset score: ", onset_score)
+            #print("\tCoda score: ", coda_score)
+            #print("\tOverall score: ", np.dot(self.priority, scores))
+    
         # Weight the scores by priority and return the result
+
+        if onset1 == None and onset2 == None:
+            if coda1 == None and coda2 == None:
+                return vowel_score
+            return (self.priority[1]*vowel_score + self.priority[2]*coda_score)/(self.priority[1]+self.priority[2])
+        if coda1 == None and coda2 == None:
+            return (self.priority[1]*vowel_score + self.priority[0]*onset_score)/(self.priority[1]+self.priority[0]) 
         return np.dot(self.priority, scores)

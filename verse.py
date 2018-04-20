@@ -75,7 +75,6 @@ class VerseTemplate:
 		self.breakpoints = []
 		self.stresses = []
 
-		self.num_syllables = 0
 		self.syllable_indices = []
 		self.matrix_indices = []
 		self.rhyme_matrix = None
@@ -161,17 +160,20 @@ class VerseTemplate:
 		self.occupied_syllables = np.zeros_like(self.stresses)
 
 		syllables = []
+		self.num_syllables = 0
 		for i in range(len(self.wordList)):
 
 			self.syllable_indices.append(self.num_syllables)
 			self.num_syllables += self.wordList[i].length
-
+			
 			for j in range(self.wordList[i].length):
 				self.matrix_indices.append(np.array([i,j]))
 				syllables.append(self.wordList[i][j])
 
 		self.syllable_indices = np.array(self.syllable_indices)
 		self.matrix_indices = np.array(self.matrix_indices)
+		print("num_syllables: ", self.num_syllables)
+		#print("length matrix_indices:", self.matrix_indices.shape)
 
 		rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))
 
@@ -184,17 +186,35 @@ class VerseTemplate:
 			for j in range(i, min(i + bandwidth, self.num_syllables)):
 				word2 = self.wordList[self.matrix_indices[j][0]]
 				syl2_index = self.matrix_indices[j][1]
+
+				#print(i, j, word1.stringRepr, word2.stringRepr, syl1_index, syl2_index)
 				rhyme_matrix[i,j] = rm.rhyme_score(word1, word2, syl1_index, syl2_index)
 
 		# Ignore the 1s (ignore = zero out)
-		rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
+		#rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
 
-		# Use a percentile instead of 0.65 hard-coded
-		# cutoff = np.nanpercentile()
-		cutoff = .65
+		# We want approximately 10% of the syllables in the length to be rhymes
+
+		curr_nonzeros = np.nonzero(rhyme_matrix)[0]
+		percentile = 100*(1 - 0.1*self.num_syllables/curr_nonzeros.size)
+		print("percentile to cut off:", np.around(percentile))
+
+		print("nonzeros before cutoff:", np.nonzero(rhyme_matrix)[0].size)
+		cutoff = np.nanpercentile(rhyme_matrix[rhyme_matrix>0], percentile)
+		print("cutoff: ", cutoff)
 		rhyme_matrix[np.where(rhyme_matrix < cutoff)] = 0
 
+		nonzeros = np.nonzero(rhyme_matrix)
+		#print("Number of entries to match:", nonzeros[0].size)
+
 		self.rhyme_matrix = rhyme_matrix
+
+		for k in range(nonzeros[0].size):
+			word1, i = self.matrix_indices[nonzeros[0][k],:]
+			word2, j = self.matrix_indices[nonzeros[1][k],:]
+			print("match word ", word1, "(", self.wordList[word1].stringRepr, ",", i, 
+				") and word ", word2, "(", self.wordList[word2].stringRepr, ",", j, ")",
+				"(rhyme score ", self.rhyme_matrix[nonzeros[0][k],nonzeros[1][k]],")")
 
 		# Ignore the 1-syllable prepositions, articles, and pronouns
 

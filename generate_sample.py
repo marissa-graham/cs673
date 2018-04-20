@@ -147,6 +147,11 @@ def fill_rhymes(corpus, versetemplate):
 	"""
 
 	# Go through all the nonzero indices in the rhyme matrix
+		rows, cols = np.where(versetemplate.rhyme_matrix == 0)
+		num_pairs = len(rows)
+
+		for i in range(num_pairs):
+			word1 = versetemplate.
 
 		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
 

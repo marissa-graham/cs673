@@ -151,7 +151,7 @@ def fill_rhymes(corpus, versetemplate):
 		num_pairs = len(rows)
 
 		for i in range(num_pairs):
-			
+			word1 = versetemplate.
 
 		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
 

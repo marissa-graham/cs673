@@ -52,11 +52,11 @@ class VerseTemplate:
 		wordList : List of Words in the source text.
 		breakpoints : List of indices that a word can't cross
 		stresses : List of stresses for each syllable
-		unknowns: File to store unknown words
-		unknowns_info: List of tuples containing information about unknown words
+		unknowns : File to store unknown words
+		unknowns_info : List of tuples containing information about unknown words
 
 		verse : Dictionary to store the filled template
-		rhyme_matrix : Matrix with rhyme patterns to be mimicked
+		self.rhyme_matrix : Matrix with rhyme patterns to be mimicked
 	"""
 
 	def __init__(self, template_string, dictionary, breakrules="word"):
@@ -88,7 +88,7 @@ class VerseTemplate:
 			os.remove(self.unknowns)
 
 		self._getRhythm()
-
+		print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
 
 	def _getRhythm(self):
 		"""
@@ -131,7 +131,7 @@ class VerseTemplate:
 				if wordstrings[i].endswith(self.phraseBreakpoints):
 					self.breakpoints.append(len(self.stresses)-1)
 
-	def get_rhyme(self):
+	def get_rhyme(self, verbose=False):
 		"""
 		Go through a local-ish window of the syllables and check where the
 		rhyme patterns are.
@@ -146,15 +146,14 @@ class VerseTemplate:
 			  index in the matrix that is, you get syllable_indices[i] + j
 			- If you've got index k in the matrix and you want to know what
 			  word/syllable that is, you get the k-th row of matrix_indices.
-			  So matrix_indices[k,:] = (i,j) (that's a numpy array, not a 
-			  tuple, it's just nicer-looking as a tuple).
+			  So matrix_indices[k,:] = (i,j) 
 
-		So if you've got the string "Mary had a little lamb", we have 5 words
-		and 7 syllables, with
+		Ex) "Mary had a little lamb" has 5 words and 7 syllables, with
 			syllable_indices = [0,2,3,4,6]
-			matrix_indices = [(0,0),(0,1),(1,0),(2,0),(3,0),(3,1),(4,0)]*
-				*but it's a 2d array with the columns, this is just prettier
+			matrix_indices = [(0,0),(0,1),(1,0),(2,0),(3,0),(3,1),(4,0)]
 		"""
+
+		# Set up data structures to convert between syllable and word indices
 
 		self.stresses = np.array(self.stresses)
 		self.occupied_syllables = np.zeros_like(self.stresses)
@@ -172,59 +171,59 @@ class VerseTemplate:
 
 		self.syllable_indices = np.array(self.syllable_indices)
 		self.matrix_indices = np.array(self.matrix_indices)
-		print("num_syllables: ", self.num_syllables)
-		#print("length matrix_indices:", self.matrix_indices.shape)
-
-		rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))
+		self.rhyme_matrix = np.zeros((self.num_syllables, self.num_syllables))
 
 		# Fill the matrix within like a 30-syllable window
+
 		bandwidth = 30
 		rm = RhymeEvaluator()
+
 		for i in range(self.num_syllables):
+
 			word1 = self.wordList[self.matrix_indices[i][0]]
 			syl1_index = self.matrix_indices[i][1]
+
 			for j in range(i, min(i + bandwidth, self.num_syllables)):
+				
 				word2 = self.wordList[self.matrix_indices[j][0]]
 				syl2_index = self.matrix_indices[j][1]
 
-				#print(i, j, word1.stringRepr, word2.stringRepr, syl1_index, syl2_index)
-				rhyme_matrix[i,j] = rm.rhyme_score(word1, word2, syl1_index, syl2_index)
+				self.rhyme_matrix[i,j] = rm.rhyme_score(word1, word2, syl1_index, syl2_index)
 
-		# Ignore the 1s (ignore = zero out)
-		#rhyme_matrix[np.where(rhyme_matrix > .999)] = 0
+		# Discard all but the highest rhyme matches, such that approximately 
+		# 10% of the syllables in the template are part of a matched rhyme 
 
-		# We want approximately 10% of the syllables in the length to be rhymes
-
-		curr_nonzeros = np.nonzero(rhyme_matrix)[0]
+		curr_nonzeros = np.nonzero(self.rhyme_matrix)[0]
 		percentile = 100*(1 - 0.1*self.num_syllables/curr_nonzeros.size)
-		print("percentile to cut off:", np.around(percentile))
+		cutoff = np.nanpercentile(self.rhyme_matrix[self.rhyme_matrix>0], percentile)
+		
+		self.rhyme_matrix[np.where(self.rhyme_matrix < cutoff)] = 0
+		nonzeros = np.nonzero(self.rhyme_matrix)
 
-		print("nonzeros before cutoff:", np.nonzero(rhyme_matrix)[0].size)
-		cutoff = np.nanpercentile(rhyme_matrix[rhyme_matrix>0], percentile)
-		print("cutoff: ", cutoff)
-		rhyme_matrix[np.where(rhyme_matrix < cutoff)] = 0
+		# Print results, if desired
+		if verbose:
 
-		nonzeros = np.nonzero(rhyme_matrix)
-		#print("Number of entries to match:", nonzeros[0].size)
+			print("\nTemplate length: ", self.num_syllables, "syllables,", 
+				len(self.wordList), "words")
 
-		self.rhyme_matrix = rhyme_matrix
+			print("\nTemplate:\n", self.template)
+			print("\nStress pattern:\n", self.stresses)
+			print("\nPercentile for cutoff:", np.around(percentile))
+			print("Nonzeros before cutoff:", curr_nonzeros.size)
+			print("Cutoff score: ", cutoff)
+			print("\nPairs to match ("+str(nonzeros[0].size)+"):")
 
-		for k in range(nonzeros[0].size):
-			word1, i = self.matrix_indices[nonzeros[0][k],:]
-			word2, j = self.matrix_indices[nonzeros[1][k],:]
-			print("match word ", word1, "(", self.wordList[word1].stringRepr, ",", i, 
-				") and word ", word2, "(", self.wordList[word2].stringRepr, ",", j, ")",
-				"(rhyme score ", self.rhyme_matrix[nonzeros[0][k],nonzeros[1][k]],")")
+			for k in range(nonzeros[0].size):
 
-		# Ignore the 1-syllable prepositions, articles, and pronouns
+				i, j = nonzeros[0][k], nonzeros[1][k]
+				word1, i1 = self.matrix_indices[i,:]
+				word2, j1 = self.matrix_indices[j,:]
+				match = np.around(100*self.rhyme_matrix[i,j],1)
 
-		# Zero out everything except the top x% of values
-
-		""" Look at real data to see about what percent of syllables fit a 
-		noticeable rhyme pattern, then decide what x is accordingly. Probably
-		somewhere between 1% and 5%, I think."""
-		pass
-
+				print(" ", match, "% match: syllable", i1+1, "of", 
+					self.wordList[word1].stringRepr, "+ syllable", j1+1, "of", 
+					self.wordList[word2].stringRepr)
+				
 	def add_unknowns(self, logios_file):
 		"""
 		Function to add the unknown words after using the LOGIOS tool, either
@@ -264,6 +263,8 @@ class VerseTemplate:
 				stress_idx = self.unknowns_info[counter][2]
 				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
 				counter += 1
+
+		print("Unknown words successfully added")
 		
 	def add_word(self, word, fill_index, L):
 		"""
@@ -278,4 +279,4 @@ class VerseTemplate:
 		"""
 		Join the filled template into a single result string. Use
 		"""
-		pass
+		

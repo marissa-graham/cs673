@@ -102,7 +102,7 @@ class WordCorpus:
                     self.size += 1
 
         self.wordSeq = np.array(self.wordSeq)
-        print("Input text:", len(wordstrings), "words,", self.size, "unique")
+        print("Corpus text:", len(wordstrings), "words,", self.size, "unique")
 
     def add_unknowns(self, logios_file):
         """

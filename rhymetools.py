@@ -55,6 +55,7 @@ class RhymeEvaluator:
                                   "K", "L", "M", "N", "NG", "P", "R", "S", \
                                   "SH", "T", "TH", "V", "W", "Y", "Z", "ZH"]
 
+        # Ignore the 1-syllable prepositions, articles, and pronouns
         self.bads = {"a","an","the","to","of","by","at","on","he","her","is",
         "in","it","its","my","or","our","she","him","and"}
         

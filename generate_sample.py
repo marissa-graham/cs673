@@ -125,7 +125,7 @@ def join_stubs(left, right, corpus, versetemplate):
 	iters = 0
 	maxiters = 10
 
-	while iters 
+	while iters <
 
 	# Get ALL words from the corpus that follow Left and are followed
 		# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0

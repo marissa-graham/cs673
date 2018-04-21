@@ -200,8 +200,10 @@ def join_stubs(left, right, corp, template, verbose):
 		# Pick out the ones that are the right length
 		plausibles = np.intersect1d(followsleft, rightfollows)
 		scores = np.zeros_like(plausibles)
-		for i in range(plausibles.size):
-			scores[i] = 
+		"""
+	    for i in range(plausibles.size):
+		 	scores[i] = 
+		"""
 
 		# If none of them are long enough, call get_word on left and then
 			# try again
@@ -209,6 +211,43 @@ def join_stubs(left, right, corp, template, verbose):
 		# Pick whatever fits best based on A[Left,i], A[i,Right], and scansion
 			# fitness score
 	
+def get_rhyme_word(ind, phoneme, corp, template):
+
+	# print("phoneme in get_rhyme_word ", phoneme)
+	candidates = corp.sylDict[phoneme]
+	#2 Choose a bunch of (word, syllable) pairs for that phoneme
+	choices = np.random.choice(len(candidates), size=20)
+	# print("choices ", choices)
+	
+	#3 Get their scansion scores
+	scansion_scores = np.zeros_like(choices, dtype=np.float)
+
+	for i in range(len(candidates)):
+		# print("word ", candidates[choices[i]][0])
+		scansion_scores[i] = scansion_score(candidates[choices[i]][0], 
+			template.syllable_indices[candidates[choices[i]][0]] - candidates[choices[i]][1], 
+			template.num_syllables, corp, template, True, verbose=False)
+
+	#4 Zero out all the ones below the 75th percentile
+	cutoff = np.nanpercentile(scansion_scores, 75)
+	scansion_scores[scansion_scores < cutoff] = 0
+	
+	#5 Out of the ones that are left, multiply by the followability score
+	for i in np.nonzero(scansion_scores)[0]:
+		scansion_scores[i] *= corp.followability(candidates[choices[i]][0], True)
+
+	#6 Take the top 25% of those, and then sample from THAT distribution
+	cutoff = np.nanpercentile(scansion_scores, 75)
+	scansion_scores[scansion_scores < cutoff] = 0
+	scansion_scores /= np.sum(scansion_scores)
+
+	# Sample from the remaining probability distribution
+	best = np.random.choice(len(choices), p=scansion_scores)
+	
+	#7 Call add_word to add that to the template 
+	# print("choices[best]: ", choices[best])
+	template.add_word(corp.wordList[candidates[choices[best]][0]], ind - candidates[choices[best]][1]	)
+
 def fill_rhymes(corp, template):
 	"""
 	Get words which:
@@ -219,107 +258,42 @@ def fill_rhymes(corp, template):
 	# row, col = indices of the location in the matrix
 	rows, cols = np.nonzero(template.rhyme_matrix)
 
-	for pair in list(zip(rows, cols)):
+	vowel_list = list(corp.sylDict.keys())
+	vowel_counts = [len(v) for v in corp.sylDict.values()]
+	vowel_probs = vowel_counts / np.sum(vowel_counts)
 
-	# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
-
-	# If either occupieds[row] or occupieds[col] is > 0
-		# move on to the second word
-		if not template.occupied_syllables[pair[0]]:
-
-			vowel_list = [k for k in corp.sylDict.keys()]
-			vowel_counts = [len(v) for v in corp.sylDict.values()]
-
-	# Otherwise
-
-		#1 Sample from vowel probability distribution to get a phoneme
-			# np.random.choice(num_vowels, p=vowel_probabilities)
-			
-		#2 Choose a bunch of (word, syllable) pairs for that phoneme
-			# Very similar to that, and to sample_distribution in corpus
-			
-		#3 Get their scansion scores
-			# Call the scansion score function, mimic get_choices
-
-		#4 Zero out all the ones below the 75th percentile
+	for row, col in list(zip(rows, cols)):
 		
-		#5 Out of the ones that are left, multiply by the followability score
+		if template.occupied_syllables[row] + template.occupied_syllables[col] == 2:
+			print("All full")
+			pass
+		
+		else:
 
-		#6 Take the top 25% of those, and then sample from THAT distribution
-			# 4-6 are very very similar to filter_choices
-			
-		#7 Call add_word to add that to the template 
-
-	# STAGE TWO: PICK THE SECOND WORD
-
-	# Get the vowel phoneme for its buddy
-
-	#2 - #7 work EXACTLY the same way
-
-	# Go through all the nonzero indices in the rhyme matrix
-	nonzero_rows, nonzero_cols = np.nonzero(template.rhyme_matrix)
-	print("rows: ", nonzero_rows)
-	print("cols: ", nonzero_cols)
-
-	# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
-	matrix_indices = list(zip(nonzero_rows, nonzero_cols))
-	for syl_pair in matrix_indices:
-
-		anchor = syl_pair[0]
-
-		vowel_list = [k for k in corp.sylDict.keys()]
-		vowel_counts = [len(v) for v in corp.sylDict.values()]
-		print(vowel_list)
-		print(vowel_counts)
-		phoneme_probabilities = vowel_counts / np.sum(vowel_counts)
-		print(phoneme_probabilities)
-		first_phoneme = np.random.choice(vowel_list, p=phoneme_probabilities)
-		print(first_phoneme)
-
-		first_word_candidates = corp.sylDict[first_phoneme]
-		print("candidates: ", first_word_candidates)
-
-		followability_scores = []
-		for candidate in first_word_candidates:
-			followability_scores.append(corp.followability(candidate[0], True))
-		followability_probabilities = followability_scores / np.sum(followability_scores)
-
-
-		best_match = 0
-		for candidate in word2_candidates:
-			print(candidate)
-			candidate_score = template.syllable_indices[candidate[0] + candidate[1]]
-			print("candidate score: ", candidate_score)
-			if candidate_score > best_match:
-				best_match = candidate_score
-				best_candidate = candidate
-
-		break
-			# If either occupieds[row] or occupieds[col] is > 0
-				# move on to the second word
-
-			# Otherwise
+			# If both of them are empty, we have to pick the first word
+			if template.occupied_syllables[row] + template.occupied_syllables[col] == 0:
 
 				#1 Sample from vowel probability distribution to get a phoneme
+				phoneme_ind = np.random.choice(len(vowel_list), p=vowel_probs)
+				phoneme = vowel_list[phoneme_ind]
+				get_rhyme_word(row, phoneme, corp, template)
+				get_rhyme_word(col, phoneme, corp, template)
 
-				#2 Choose a bunch of (word, syllable) pairs for that phoneme
+			elif template.occupied_syllables[row] == 1:
+				mtx_ind = template.matrix_indices[row]
+				phoneme = template.wordList[mtx_ind[0]].vowel_at(mtx_ind[1])[:-1]			
+				# print("phoneme ", phoneme)
+				get_rhyme_word(col, phoneme, corp, template)
 
-				#3 Get their scansion scores
+			else:
+				mtx_ind = template.matrix_indices[col]
+				phoneme = template.wordList[mtx_ind[0]].vowel_at(mtx_ind[1])[:-1]	
+				# print("phoneme ", phoneme)
+				get_rhyme_word(row, phoneme, corp, template)
+			print("Filling phoneme: ", phoneme)
 
-				#4 Zero out all the ones below the 75th percentile
 
-				#5 Out of the ones that are left, multiply by the followability score
-
-				#6 Take the top 25% of those, and then sample from THAT distribution
-
-				#7 Call add_word to add that to the template 
-
-	# STAGE TWO: PICK THE SECOND WORD
-
-	# Get the vowel phoneme for its buddy
-
-			#2 - #7 work EXACTLY the same way
-
+	print(template.join_template())
 
 def fill_template(corp, template, verbose=False):
 	"""

@@ -62,6 +62,9 @@ class Word:
         """
         return self.__str__()
 
+    def vowel_at(self, idx):
+        return self.phonemes[self.vowelIndices[idx]]
+
 
 class PhoneticDictionary:
     """

@@ -210,7 +210,7 @@ class WordCorpus:
             for i in range(len(word.phonemes)):
                 syl = word.phonemes[i]
                 if syl[-1].isdigit(): # only care about vowels
-                    key = syl
+                    key = syl[:-1] # strip stress indicator
                     val = (self.wordDict[word.stringRepr], i)
                     if key not in self.sylDict.keys():
                         self.sylDict[key] = [val]

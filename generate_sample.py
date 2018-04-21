@@ -176,8 +176,14 @@ def fill_rhymes(corp, template):
 	print("cols: ", nonzero_cols)
 
 	# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
-	for syl_pair in list(zip(nonzero_rows, nonzero_cols)):
+	matrix_indices = list(zip(nonzero_rows, nonzero_cols))
+	for syl_pair in matrix_indices:
 		print(syl_pair)
+		# word1_index = template.get_word_index_from_matrix_index(syl_pair[0])
+		# word1 = template.wordList[word1_index]
+		word1, phoneme = template.get_word_phoneme_pair_from_matrix(syl_pair[0])
+		print("word1: ", word1, " phoneme: ", phoneme)
+		break
 
 	# Check if you've already got a word overlapping either one in the
 		# pair, if so, skip to stage two

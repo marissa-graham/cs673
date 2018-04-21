@@ -299,3 +299,10 @@ class VerseTemplate:
 
 	def get_syl_index_from_matrix_index(self, idx):
 		return self.matrix_indices[idx][1]
+
+	def get_word_phoneme_pair_from_matrix(self, idx):
+		word = self.wordList[self.matrix_indices[idx][0]]
+		phoneme = word.vowel_at(self.matrix_indices[idx][1])[:-1] # strip stress
+		return word, phoneme
+
+

@@ -11,7 +11,7 @@ import corpus
 import rhymetools
 import verse
 
-def scansion_score(word_index, loc, neighbor, corp, template, forward):
+def scansion_score(w_ind, loc, neighbor, corp, template, forward, verbose):
 	"""
 	Return a score in [0,1] telling how well the meter of the given word
 	matches the verse template.
@@ -21,24 +21,29 @@ def scansion_score(word_index, loc, neighbor, corp, template, forward):
 	Otherwise, full credit for every stress that matches, quarter credit for
 	mismatched stress, normalize by number of syllables.
 	"""
-	word = corp.wordList[word_index]
-
+	word = corp.wordList[w_ind]
+	
 	# Check if you've crashed into the edge or your neighbor
 	if forward and loc + word.length > neighbor:
+		#print("\t\t'"+word.stringRepr+"' crashes into neighbor")
 		return 0.0
 	elif forward == False and loc <= neighbor:
+		#print("\t\t'"+word.stringRepr+"' crashes into neighbor")
 		return 0.0
 
 	# Check if you've crashed into a breakpoint
 	loc_inds = np.array([loc, loc + word.length - 1])
 	if np.unique(np.searchsorted(template.breakpoints, loc_inds)).size == 2:
+		#print("\t\t'"+word.stringRepr+"' crashes into breakpoint")
 		return 0.0
 
 	# Score the syllable matches and return
 	goods = template.stresses[loc:loc+word.length] == word.rhythm
-	return 0.25 + 0.75*np.sum(goods)/word.length
+	score = 0.25 + 0.75*np.sum(goods)/word.length
+	#print("\t\t'"+word.stringRepr+"' has a score of "+str(score))
+	return score
 
-def check_choices(choices, fill_ind, neighbor_ind, corp, template, forward):
+def check_choices(choices, fill_ind, neighbor, corp, template, forward, verbose):
 	"""
 	Get the scansion scores for all the choices.
 	
@@ -54,26 +59,79 @@ def check_choices(choices, fill_ind, neighbor_ind, corp, template, forward):
 		scansion_scores : Array of rhythm scores for all the choices.
 	"""
 	
-	scansion_scores = np.zeros_like(choices)
+	scansion_scores = np.zeros_like(choices, dtype=np.float)
 
 	for i in range(len(choices)):
 		if forward:
-			scansion_scores[i] = scansion_score(choices[i], fill_index, 
-				neighbor_index, corp, template, forward)
+			scansion_scores[i] = scansion_score(choices[i], fill_ind, 
+				neighbor, corp, template, forward, verbose=verbose)
 		else:
 			L = corp.wordList[choices[i]].length
-			scansion_scores[i] = scansion_score(choices[i], fill_index - L,
-				neighbor_index, corp, template, forward)
+			scansion_scores[i] = scansion_score(choices[i], fill_ind - L,
+				neighbor, corp, template, forward, verbose=verbose)
 
 	return scansion_scores
 
-def get_word(fill_index, neighbor_index, corp, template, forward=True):
+def get_choices(fill_index, prev_L, neighbor, corp, template, forward, random, verbose):
+
+	# Get a pool of choices
+	if random:
+		choices = np.random.choice(corp.size, size=20, replace=False)
+	else:
+		word_index = corp.wordDict[template.verse[fill_index][0].stringRepr]
+		choices = corp.sample_distribution(word_index, 20, forward, verbose)
+
+	if forward:
+		scansion_scores = check_choices(choices, fill_index + prev_L, 
+			neighbor, corp, template, forward, verbose)
+	else:
+		scansion_scores = check_choices(choices, fill_index, neighbor, 
+			corp, template, forward, verbose)
+
+	return choices, scansion_scores
+
+def filter_choices(choices, scansion_scores, corp, forward, verbose):
+
+	# Take top 25% of scores
+	cutoff = np.nanpercentile(scansion_scores, 75)
+	scansion_scores[scansion_scores < cutoff] = 0
+	
+	# Scale by length and followability 
+	for i in np.nonzero(scansion_scores)[0]:
+		scansion_scores[i] *= corp.wordList[choices[i]].length
+		scansion_scores[i] *= corp.followability(choices[i], forward)
+
+	# Take the top 25% of those
+	cutoff = np.nanpercentile(scansion_scores, 75)
+	scansion_scores[scansion_scores < cutoff] = 0
+	scansion_scores /= np.sum(scansion_scores)
+	
+	# Sample from the remaining probability distribution
+	best_index = np.random.choice(choices,p=scansion_scores)
+	best = corp.wordList[best_index]
+	L = corp.wordList[best_index].length
+
+	# Print feedback
+	if verbose and np.nonzero(scansion_scores)[0].size > 1:
+		goods = choices[np.nonzero(scansion_scores)[0]]
+		print("\tChoose between: "+", ".join([corp.wordList[i].stringRepr for i in goods]))
+		np.set_printoptions(2)
+		print("\t", scansion_scores)
+
+		if forward:
+			print("\t => Add '"+best.stringRepr+"' going backward")
+		else:
+			print("\t => Add '"+best.stringRepr+"' going forward")
+
+	return best, L
+
+def get_word(fill_index, neighbor, corp, template, forward, verbose):
 	"""
 	Generate a word based on the given corpus to fill the given template.
 
 	Arguments:
 		fill_index : Location of the current word in the template
-		neighbor_index : Index of the left or right neighbor
+		neighbor : Index of the left or right neighbor
 		corp : WordCorpus to use
 		template : VerseTemplate to use
 		forward : if True, fill forward; if False, fill backward
@@ -84,44 +142,30 @@ def get_word(fill_index, neighbor_index, corp, template, forward=True):
 
 	# Check if there's actually a word at that index
 	try:
-		prev_word, prev_L, prev_scores = template.verse[fill_index]
+		prev_word, prev_L = template.verse[fill_index]
 	except KeyError:
 		print("No word exists at fill_index, return current index")
 		return fill_index
 
-	# Get a pool of choices
-	choices = corp.sample_distribution(prev_word, 20, forward)
-
-	if forward:
-		scansion_scores = check_choices(choices, fill_index + prev_L, 
-			neighbor_index, corp, template, forward)
-	else:
-		scansion_scores = check_choices(choices, fill_index, neighbor_index, 
-			corp, template, forward)
+	choices, scansion_scores = get_choices(fill_index, prev_L, neighbor, corp, 
+		template, forward, False, verbose)
 
 	# If everything crashes, just pick random words from the corpus
 	if np.amax(scansion_scores) == 0:
 
-		choices = np.random.choice(corp.size, size=20, replace=False)
-		scansion_scores = check_choices(choices)
+		if verbose:
+			print("\tOH FUCK EVERYTHING CRASHED")
+			print("\tCurrent state of template:",template.join_template())
+
+		choices, scansion_scores = get_choices(fill_index, prev_L, neighbor, 
+			corp, template, forward, True, verbose)
 
 		# Justify not having this be a while loop, because come on now
 		if np.amax(scansion_scores) == 0:
 			raise ValueError("You unlucky bastard, you picked 20 unique words\
 				from the entire corpus and ALL of them smash into something")
-
-	# Zero out scores < 75th percentile & scale the rest by length + followability
-	cutoff = np.nanpercentile(scores, 75)
-	scansion_scores[scansion_scores < cutoff] = 0
-
-	for i in np.nonzero(scansion_scores)[0]:
-		scansion_scores[i] *= corp.wordList[choices[i]].length
-		scansion_scores[i] *= corp.followability(choices[i], forward)
-
-	# Choose the highest scaled score
-	best_index = choices[np.amax(scansion_scores)]
-	best = corp.wordList[best_index].stringRepr
-	L = corp.wordList[best_index].length
+	
+	best, L = filter_choices(choices, scansion_scores, corp, forward, verbose)
 
 	# Update the template and return the new location index
 	if forward:
@@ -131,7 +175,7 @@ def get_word(fill_index, neighbor_index, corp, template, forward=True):
 		template.add_word(best, fill_index - L, L)
 		return fill_index - L
 
-def join_stubs(left, right, corp, template):
+def join_stubs(left, right, corp, template, verbose):
 	"""
 	Join the words going forwards and backwards by maximizing
 	the probability of a word or phrase following the left side 
@@ -140,22 +184,23 @@ def join_stubs(left, right, corp, template):
 	"""
 
 	to_fill = abs(right - left)
-	iters = 0
-	maxiters = 10
 
-	print("fill between index", left, "and", right)
+	if verbose:
+		print("\n\tTODO: join stub between", left, "and", right, '\n')
 
 	# Try to fill with length to_fill
-	while to_fill > 0 and iters < maxiters:
-
-		iters += 1
-
-		break
+	while to_fill > 0:
 
 		# Get ALL words from the corpus that follow Left and are followed
 			# by Right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
+		followsleft = np.where(corp.A_forward[20,:]>0)
+		rightfollows = np.where(corp.A_forward[:,16]>0)
 
 		# Pick out the ones that are the right length
+		plausibles = np.intersect1d(followsleft, rightfollows)
+		scores = np.zeros_like(plausibles)
+		for i in range(plausibles.size):
+			scores[i] = 
 
 		# If none of them are long enough, call get_word on left and then
 			# try again
@@ -175,24 +220,38 @@ def fill_rhymes(corp, template):
 	num_pairs = len(rows)
 
 	for i in range(num_pairs):
-		word1 = template
+
+		# row, col = indices of the location in the matrix
 
 		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
 
-		# Check if you've already got a word overlapping either one in the
-			# pair, if so, skip to stage two
+			# If either occupieds[row] or occupieds[col] is > 0
+				# move on to the second word
 
-		# Sample from the probability distribution of the vowels, and then
-			# pick words with that vowel in them until you get one that 
-			# doesn't cross a breakpoint
+			# Otherwise
+
+				#1 Sample from vowel probability distribution to get a phoneme
+
+				#2 Choose a bunch of (word, syllable) pairs for that phoneme
+
+				#3 Get their scansion scores
+
+				#4 Zero out all the ones below the 75th percentile
+
+				#5 Out of the ones that are left, multiply by the followability score
+
+				#6 Take the top 25% of those, and then sample from THAT distribution
+
+				#7 Call add_word to add that to the template 
 
 		# STAGE TWO: PICK THE SECOND WORD
 
-		# Just go through the ones with the same vowel and see what has the
-			# best match
+			# Get the vowel phoneme for its buddy
+
+			#2 - #7 work EXACTLY the same way
 	pass 
 
-def fill_template(corp, template):
+def fill_template(corp, template, verbose=False):
 	"""
 	Generate babble words to fill the given Verse template.
 
@@ -209,35 +268,46 @@ def fill_template(corp, template):
 	for i in range(len(rhyme_inds)):
 
 		if i == 0:
-			join_stubs(0,rhyme_inds[0], corp, template)
+			if verbose: print("\nFILL BETWEEN 0 AND", rhyme_inds[0])
+			join_stubs(0, rhyme_inds[0], corp, template, verbose)
 		
 		left = rhyme_inds[i]
+		L = rhyme_inds[i]
 		
 		if i == len(rhyme_inds) - 1:
 			right = template.num_syllables-1
+			Right = template.num_syllables
 		else:
 			right = rhyme_inds[i+1]
+			R = rhyme_inds[i+1] + 1
 		
 		# Fill the holes forwards and backwards 
-		maxiters = 20
-		iters = 0
 
-		to_fill = abs(right - left + template.verse[left][1])
-		while to_fill > 4 and iters < maxiters:
-
-			# Paranoid
-			iters += 1
+		if verbose:
+			print("\nFILL BETWEEN", left + template.verse[left][1], "AND", right-1)
+		to_fill = abs(right - left - template.verse[left][1])
+		
+		while to_fill > 1:
 
 			# Go forwards from left
-			left = get_word(left, right, corp, template)
-			to_fill = abs(right - left + template.verse[left][1])
+			left = get_word(left, right, corp, template, True, verbose)
+			to_fill = abs(right - left - template.verse[left][1])
+
+			if verbose:
+				print("\tLocal state of template:",template.join_template(a=L,b=R))
+				print("    to_fill:", to_fill)
 
 			# Go backwards from right if necessary
-			if to_fill > 3:
-				right = get_word(right, left, corp, template, forward=False)
-		
+			if to_fill > 0:
+				right = get_word(right, left, corp, template, False, verbose)
+				to_fill = abs(right - left - template.verse[left][1])
+				if verbose:
+					print("\tLocal state of template:",template.join_template(a=L,b=R))
+					print("    to_fill:", to_fill)
+
 		# Join up the middles
-		join_stubs(left, right, corp, template)
+		join_stubs(left, right, corp, template, verbose)
+		if verbose: print("\nLocal state of template:", template.join_template(a=L,b=R))
 
 	# Return the joined-up string
 	return template.join_template()

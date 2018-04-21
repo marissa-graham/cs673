@@ -229,9 +229,9 @@ class WordCorpus:
         """ 
         if verbose:
             if forward:
-                print("\n    Get forwards choices for '"+self.wordList[current].stringRepr+"'")
+                print("\n\tGet forwards choices for '"+self.wordList[current].stringRepr+"'")
             else:
-                print("\n    Get backwards choices for '"+self.wordList[current].stringRepr+"'")
+                print("\n\tGet backwards choices for '"+self.wordList[current].stringRepr+"'")
 
         # Try to grab some samples
         try:

@@ -18,9 +18,7 @@ def get_sample(i):
 	nerves, everybody's nerves. Oh, I know a song that gets on everybody's \
 	nerves, and this is how it goes, oh oh oh"
 
-	s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped \
-	in the middle of a forgotten spot in the caribbean in providence \
-	impoverished in squalor, grow up to be a hero and a scholar?"
+	s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped in the middle of a forgotten spot in the caribbean in providence impoverished in squalor, grow up to be a hero and a scholar?"
 
 	s2 = "Alexander Hamilton, my name is Alexander Hamilton"
 
@@ -34,7 +32,12 @@ def get_sample(i):
 
 	s5 = "Alexander Hamilton, my dawg is Alexander Hamilton. He studies trigonometry, dawg"
 
-	samples = [s0, s1, s2, s3, s4, s5]
+	s6 = "My mistress eyes' are nothing like the sun.\n\
+	Coral is far more red than her lips red.\n\
+	If snow be white, why then her breasts are dun.\n\
+	If hair be wires, black wires grow on her head."
+
+	samples = [s0, s1, s2, s3, s4, s5, s6]
 	return samples[i]
 
 class VerseTemplate:
@@ -88,7 +91,8 @@ class VerseTemplate:
 			os.remove(self.unknowns)
 
 		self._getRhythm()
-		print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
+		if len(self.unknowns_info) > 0:
+			print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
 			
 	def add_unknowns(self, logios_file):
 		"""
@@ -274,25 +278,34 @@ class VerseTemplate:
 		self.occupied_syllables[fill_index:fill_index+L] = 1
 		self.verse[fill_index] = (word, L)
 
-	def join_template(self, verbose=True):
+	def join_template(self, verbose=False, a=0, b='end'):
 		"""
 		Join the filled template into a single result string. Use
 		"""
-		self.result = ""
-		for i in range(self.num_syllables):
+		if b == 'end':
+			b = self.num_syllables
+
+		result = ""
+		for i in range(a,b):
 			if self.occupied_syllables[i]:
 				try:
-					self.result += " " + self.verse[i][0].stringRepr + " "
+					result += self.verse[i][0].stringRepr + " "
 				except KeyError:
 					pass
 			else:
 				if self.stresses[i] > 0:
-					self.result += " x "
+					result += "# "
 				else:
-					self.result += " / "
+					result += "/ "
+
+			if i in set(self.breakpoints):
+				#result += ","
+				pass
 
 		if verbose:
 			print(self.result)
+
+		return result
 
 	def get_word_index_from_matrix_index(self, idx):
 		return self.matrix_indices[idx][0]
@@ -304,5 +317,4 @@ class VerseTemplate:
 		word = self.wordList[self.matrix_indices[idx][0]]
 		phoneme = word.vowel_at(self.matrix_indices[idx][1])[:-1] # strip stress
 		return word, phoneme
-
-
+	

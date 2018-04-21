@@ -97,7 +97,7 @@ class PhoneticDictionary:
                     tokens = line.split()
                     self.pdict[tokens[0]] = Word(tokens[0], tokens[1:])
 
-    def lookup(self, word):
+    def lookup(self, word, verbose=False):
         """
         Look up a word in the dictionary and return a Word object. If you 
         run across a word you don't know, look it up using the LOGIOS tool.
@@ -112,7 +112,7 @@ class PhoneticDictionary:
         else:
 
             # TODO: ACTUALLY RETURN SOMETHING IF IT'S NOT IN CMU DICT
-            print("\"{}\" not in dictionary".format(word))
+            if verbose: print("\"{}\" not in dictionary".format(word))
             return None
 
 

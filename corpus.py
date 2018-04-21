@@ -44,8 +44,6 @@ class WordCorpus:
         self.frequency = None
         self.unique_precedent_counts = None
         self.unique_antecedent_counts = None
-        self.A = None
-
         self.wordSeq = []
         self.wordList = []
         self.wordDict = dict()
@@ -53,7 +51,7 @@ class WordCorpus:
         self.unknowns = ""
         self.unknowns_indices = []
 
-    def _initializeCorpus(self):
+    def _initializeCorpus(self, verbose=False):
         """
         Initialize wordSeq, wordList, and wordDict for a corpus given a
         normal string of punctuation and space separated text.
@@ -86,8 +84,8 @@ class WordCorpus:
                 else:
                     
                     # Look the word up in the dictionary
-                    new_word = self.dictionary.lookup(word)
-
+                    new_word = self.dictionary.lookup(word, verbose=verbose)
+                    
                     # If the word isn't in the phonetic dictionary
                     if new_word == None:
 
@@ -104,7 +102,7 @@ class WordCorpus:
         self.wordSeq = np.array(self.wordSeq)
         print("Corpus text:", len(wordstrings), "words,", self.size, "unique")
 
-    def add_unknowns(self, logios_file):
+    def add_unknowns(self, logios_file, verbose=False):
         """
         Function to add the unknown words after using the LOGIOS tool, either
         manually or via API.
@@ -129,6 +127,8 @@ class WordCorpus:
                         phonemes[i] += "0" # default stress to 0
                 new_words.append(Word(word_string.lower(), phonemes))
 
+                if verbose: print("Add", new_words[-1])
+
         for i in range(len(self.unknowns_indices)):
             self.wordList[self.unknowns_indices[i]] = new_words[i]
 
@@ -141,23 +141,27 @@ class WordCorpus:
         """
 
         # Initialize total number of each word pair transition
+
         n = self.wordSeq.size
         A_raw = sparse.coo_matrix( 
             (np.ones(n-1), (self.wordSeq[:-1], self.wordSeq[1:])),
-            shape=(self.size, self.size)).tocsr()
+            shape=(self.size, self.size)).tocsr().toarray()
 
         # Keep track of followability stuff
-        self.frequency = A_raw.sum(axis=1).T
-        self.unique_precedent_counts = np.count_nonzero(A_raw.toarray(), axis=0)
-        self.unique_antecedent_counts = np.count_nonzero(A_raw.toarray(), axis=1)
 
-        # Normalize A to get probabilities
-        data = np.maximum(self.frequency, np.ones(self.size))
-        d = sparse.spdiags(1.0/data, 0, self.size, self.size)
-        self.A = d * A_raw
+        self.frequency = A_raw.sum(axis=1).flatten()
+        self.unique_precedent_counts = np.count_nonzero(A_raw, axis=0)
+        self.unique_antecedent_counts = np.count_nonzero(A_raw, axis=1)
 
-        # TODO: better to keep it sparse?
-        self.A = np.asarray(self.A.todense())
+        # Normalize A by row and column to get probabilities
+
+        row_data = np.maximum(self.frequency, np.ones(self.size))
+        row_d = sparse.spdiags(1.0/row_data, 0, self.size, self.size)
+        self.A_forward = row_d * A_raw
+
+        col_data = np.maximum(A_raw.sum(axis=0).flatten(), np.ones(self.size))
+        col_d = sparse.spdiags(1.0/col_data, 0, self.size, self.size)
+        self.A_backward = (col_d * A_raw.T).T
 
     def initialize(self, text, is_filename=True, keeplines=False):
         """
@@ -175,11 +179,12 @@ class WordCorpus:
         if is_filename:
             with open(text) as filename:
                 self.corpString = filename.read()
-            self.unknowns = text + "_unknowns.txt"
+            self.unknowns = text.replace(".txt","")+"_unknowns.txt"
         else:
             self.corpString = text
             self.unknowns = "corpus_unknowns.txt"
 
+        print("unknowns filename:", self.unknowns)
         # Remove unknowns file if it already exists
         if os.path.exists(self.unknowns):
             os.remove(self.unknowns)
@@ -197,7 +202,6 @@ class WordCorpus:
         self.corpString = self.corpString.replace('-', ' ')
 
         self._initializeCorpus()
-        # self._initializeMatrix()
 
     def initializeMatrix(self):
         self._initializeMatrix()
@@ -219,24 +223,33 @@ class WordCorpus:
                         self.sylDict[key].append(val)
                     vowel_pos += 1
                         
-    def sample_distribution(self, current, n, forward):
+    def sample_distribution(self, current, n, forward, verbose):
         """
         Sample the probability distribution for word 'current' n times.
-        """
+        """ 
+        if verbose:
+            if forward:
+                print("\n    Get forwards choices for '"+self.wordList[current].stringRepr+"'")
+            else:
+                print("\n    Get backwards choices for '"+self.wordList[current].stringRepr+"'")
 
         # Try to grab some samples
         try:
 
-            # If we are sampling forward, we sample from the rows
+            # If we are sampling forward, we sample from the row
             if forward:
-                samples = np.random.choice(self.size, size=n, p=self.A[current,:])
+                samples = np.random.choice(self.size, size=n, p=self.A_forward[current,:])
             
-            # If we are going backwards, we sample from the columns
+            # If we are going backwards, we sample from the column
             else:
-                samples = np.random.choice(self.size, size=n, p=self.A[current,:])
+                samples = np.random.choice(self.size, size=n, p=self.A_backward[:,current])
 
         # If it doesn't work, there are no options, so just pick random words.
         except ValueError:
+
+            if verbose:
+                print("\t\tHave to just choose random words\n\t\t",
+                "unique_antecedent_counts =", self.unique_antecedent_counts[current])
             samples = np.random.randint(self.size, size=n)
 
         return np.unique(samples)

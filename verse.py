@@ -293,3 +293,9 @@ class VerseTemplate:
 
 		if verbose:
 			print(self.result)
+
+	def get_word_index_from_matrix_index(self, idx):
+		return self.matrix_indices[idx][0]
+
+	def get_syl_index_from_matrix_index(self, idx):
+		return self.matrix_indices[idx][1]

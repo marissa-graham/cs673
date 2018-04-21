@@ -171,25 +171,25 @@ def fill_rhymes(corp, template):
 	"""
 
 	# Go through all the nonzero indices in the rhyme matrix
-	rows, cols = np.where(template.rhyme_matrix == 0)
-	num_pairs = len(rows)
+	nonzero_rows, nonzero_cols = np.nonzero(template.rhyme_matrix)
+	print("rows: ", nonzero_rows)
+	print("cols: ", nonzero_cols)
 
-	for i in range(num_pairs):
-		word1 = template
+	# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
+	for syl_pair in list(zip(nonzero_rows, nonzero_cols)):
+		print(syl_pair)
 
-		# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
+	# Check if you've already got a word overlapping either one in the
+		# pair, if so, skip to stage two
 
-		# Check if you've already got a word overlapping either one in the
-			# pair, if so, skip to stage two
+	# Sample from the probability distribution of the vowels, and then
+		# pick words with that vowel in them until you get one that 
+		# doesn't cross a breakpoint
 
-		# Sample from the probability distribution of the vowels, and then
-			# pick words with that vowel in them until you get one that 
-			# doesn't cross a breakpoint
+	# STAGE TWO: PICK THE SECOND WORD
 
-		# STAGE TWO: PICK THE SECOND WORD
-
-		# Just go through the ones with the same vowel and see what has the
-			# best match
+	# Just go through the ones with the same vowel and see what has the
+		# best match
 	pass 
 
 def fill_template(corp, template):

@@ -207,15 +207,17 @@ class WordCorpus:
         
         # propbably not the most efficient implementation but...
         for word in self.wordList:
+            vowel_pos = 0
             for i in range(len(word.phonemes)):
                 syl = word.phonemes[i]
                 if syl[-1].isdigit(): # only care about vowels
                     key = syl[:-1] # strip stress indicator
-                    val = (self.wordDict[word.stringRepr], i)
+                    val = (self.wordDict[word.stringRepr], vowel_pos)
                     if key not in self.sylDict.keys():
                         self.sylDict[key] = [val]
                     else:
                         self.sylDict[key].append(val)
+                    vowel_pos += 1
                         
     def sample_distribution(self, current, n, forward):
         """

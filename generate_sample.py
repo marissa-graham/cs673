@@ -36,9 +36,10 @@ def scansion_score(word_index, loc, neighbor, corp, template, forward):
 
 	# Score the syllable matches and return
 	goods = template.stresses[loc:loc+word.length] == word.rhythm
+
 	return 0.25 + 0.75*np.sum(goods)/word.length
 
-def check_choices(choices, fill_ind, neighbor_ind, corp, template, forward):
+def check_choices(choices, fill_ind, neighbor_ind, corp, template, forward=True):
 	"""
 	Get the scansion scores for all the choices.
 	
@@ -58,12 +59,12 @@ def check_choices(choices, fill_ind, neighbor_ind, corp, template, forward):
 
 	for i in range(len(choices)):
 		if forward:
-			scansion_scores[i] = scansion_score(choices[i], fill_index, 
-				neighbor_index, corp, template, forward)
+			scansion_scores[i] = scansion_score(choices[i], fill_ind, 
+				neighbor_ind, corp, template, forward)
 		else:
 			L = corp.wordList[choices[i]].length
-			scansion_scores[i] = scansion_score(choices[i], fill_index - L,
-				neighbor_index, corp, template, forward)
+			scansion_scores[i] = scansion_score(choices[i], fill_ind - L,
+				neighbor_ind, corp, template, forward)
 
 	return scansion_scores
 
@@ -170,6 +171,46 @@ def fill_rhymes(corp, template):
 		2) are either in or synonymous to something in the corp.
 	"""
 
+	# row, col = indices of the location in the matrix
+	rows, cols = np.nonzero(template.rhyme_matrix)
+
+	for pair in list(zip(rows, cols)):
+
+	# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
+
+	# If either occupieds[row] or occupieds[col] is > 0
+		# move on to the second word
+		if not template.occupied_syllables[pair[0]]:
+
+			vowel_list = [k for k in corp.sylDict.keys()]
+			vowel_counts = [len(v) for v in corp.sylDict.values()]
+
+	# Otherwise
+
+		#1 Sample from vowel probability distribution to get a phoneme
+			# np.random.choice(num_vowels, p=vowel_probabilities)
+			
+		#2 Choose a bunch of (word, syllable) pairs for that phoneme
+			# Very similar to that, and to sample_distribution in corpus
+			
+		#3 Get their scansion scores
+			# Call the scansion score function, mimic get_choices
+
+		#4 Zero out all the ones below the 75th percentile
+		
+		#5 Out of the ones that are left, multiply by the followability score
+
+		#6 Take the top 25% of those, and then sample from THAT distribution
+			# 4-6 are very very similar to filter_choices
+			
+		#7 Call add_word to add that to the template 
+
+	# STAGE TWO: PICK THE SECOND WORD
+
+	# Get the vowel phoneme for its buddy
+
+	#2 - #7 work EXACTLY the same way
+
 	# Go through all the nonzero indices in the rhyme matrix
 	nonzero_rows, nonzero_cols = np.nonzero(template.rhyme_matrix)
 	print("rows: ", nonzero_rows)
@@ -178,11 +219,36 @@ def fill_rhymes(corp, template):
 	# STAGE ONE: PICK THE FIRST WORD IN THE PAIR
 	matrix_indices = list(zip(nonzero_rows, nonzero_cols))
 	for syl_pair in matrix_indices:
-		print(syl_pair)
-		# word1_index = template.get_word_index_from_matrix_index(syl_pair[0])
-		# word1 = template.wordList[word1_index]
-		word1, phoneme = template.get_word_phoneme_pair_from_matrix(syl_pair[0])
-		print("word1: ", word1, " phoneme: ", phoneme)
+
+		anchor = syl_pair[0]
+
+		vowel_list = [k for k in corp.sylDict.keys()]
+		vowel_counts = [len(v) for v in corp.sylDict.values()]
+		print(vowel_list)
+		print(vowel_counts)
+		phoneme_probabilities = vowel_counts / np.sum(vowel_counts)
+		print(phoneme_probabilities)
+		first_phoneme = np.random.choice(vowel_list, p=phoneme_probabilities)
+		print(first_phoneme)
+
+		first_word_candidates = corp.sylDict[first_phoneme]
+		print("candidates: ", first_word_candidates)
+
+		followability_scores = []
+		for candidate in first_word_candidates:
+			followability_scores.append(corp.followability(candidate[0], True))
+		followability_probabilities = followability_scores / np.sum(followability_scores)
+
+
+		best_match = 0
+		for candidate in word2_candidates:
+			print(candidate)
+			candidate_score = template.syllable_indices[candidate[0] + candidate[1]]
+			print("candidate score: ", candidate_score)
+			if candidate_score > best_match:
+				best_match = candidate_score
+				best_candidate = candidate
+
 		break
 
 	# Check if you've already got a word overlapping either one in the

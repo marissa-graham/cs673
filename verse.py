@@ -87,7 +87,7 @@ class VerseTemplate:
 		if len(self.unknowns_info) > 0:
 			print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
 			
-	def add_unknowns(self, logios_file):
+	def add_unknowns(self, logios_file, verbose=False):
 		"""
 		Function to add the unknown words after using the LOGIOS tool, either
         manually or via API.
@@ -121,8 +121,8 @@ class VerseTemplate:
 				stress_idx = self.unknowns_info[counter][2]
 				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
 				counter += 1
-
-		print("Unknown words successfully added")
+		if verbose:
+			print("Unknown words successfully added")
 	
 	def _getRhythm(self):
 		"""

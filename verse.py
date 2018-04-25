@@ -22,7 +22,7 @@ def get_sample(i):
 
 	s3 = "row, row, row your boat, gently down the stream, merrily, merrily, merrily, merrily, life is but a dream"
 
-	s4 = "buddy you're a boy make a big noise, playing in the street, gonna be a big man some day, you got mud on your face, you big disgrace, kicking your can all over the place"
+	s4 = "buddy you're a boy, make a big noise, playing in the street, gonna be a big man some day, you got mud on your face, you big disgrace, kicking your can all over the place"
 
 	s5 = "Alexander Hamilton, my dawg is Alexander Hamilton. He studies trigonometry, dawg"
 
@@ -279,30 +279,30 @@ class VerseTemplate:
 		if b == 'end':
 			b = self.num_syllables
 
-		result = ""
+		self.result = ""
 		for i in range(a,b):
 
 			if self.occupied_syllables[i]:
 				try:
-					result += self.verse[i][0].stringRepr
+					self.result += self.verse[i][0].stringRepr
 					if i + self.verse[i][0].length - 1 in set(self.breakpoints):
-						result += ", "
+						self.result += ", "
 					else:
-						result += " "
+						self.result += " "
 				except KeyError:
 					pass
 			else:
 				if self.stresses[i] > 0:
-					result += " #"
+					self.result += " #"
 				else:
-					result += " /"
+					self.result += " /"
 
 				if i in set(self.breakpoints):
-					result += ", "
+					self.result += ", "
 				else:
-					result += " "
+					self.result += " "
 
 		if verbose:
 			print(self.result)
 
-		return result
+		return self.result

@@ -230,6 +230,7 @@ class WordCorpus:
         """
         Sample the probability distribution for word 'current' n times.
         """ 
+        
         if verbose:
             if forward:
                 print("\n\tGet forwards choices for '"+self.wordList[current].stringRepr+"'")

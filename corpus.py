@@ -101,7 +101,7 @@ class WordCorpus:
 
         if len(self.unknowns_indices) > 0:
             print("unknowns filename:", self.unknowns)
-            print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
+            print("Need to add", len(self.unknowns_indices), "words to template word list using LOGIOS tool")
         
         self.wordSeq = np.array(self.wordSeq)
         print("Corpus text:", len(wordstrings), "words,", self.size, "unique")

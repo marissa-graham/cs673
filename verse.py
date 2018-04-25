@@ -1,4 +1,4 @@
-#!python3
+#!python
 import string
 import nltk
 import numpy as np
@@ -14,30 +14,23 @@ def get_sample(i):
 	"""
 	Return one of the pre-determined template strings, for convenience.
 	"""
-	s0 = "I know a song that gets on everybody's nerves, everybody's \
-	nerves, everybody's nerves. Oh, I know a song that gets on everybody's \
-	nerves, and this is how it goes, oh oh oh"
+	s0 = "I know a song that gets on everybody's nerves, everybody's nerves, everybody's nerves. Oh, I know a song that gets on everybody's nerves, and this is how it goes, oh oh oh"
 
-	s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped in the middle of a forgotten spot in the caribbean in providence impoverished in squalor, grow up to be a hero and a scholar?"
+	s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped in the middle of a forgotten spot in the caribbean by providence, impoverished, in squalor, grow up to be a hero and a scholar?"
 
 	s2 = "Alexander Hamilton, my name is Alexander Hamilton"
 
-	s3 = "row, row, row your boat, gently down the stream, merrily, merrily, \
-	merrily, merrily, life is but a dream"
+	s3 = "row, row, row your boat, gently down the stream, merrily, merrily, merrily, merrily, life is but a dream"
 
-	s4 = "buddy you're a boy make a big noise, playing in the street, \
-	gonna be a big man some day, you got mud on your face, you big disgrace, \
-	kicking your can all over the place, singing, we will, we will, rock you, \
-	we will, we will, rock you"
+	s4 = "buddy you're a boy make a big noise, playing in the street, gonna be a big man some day, you got mud on your face, you big disgrace, kicking your can all over the place"
 
 	s5 = "Alexander Hamilton, my dawg is Alexander Hamilton. He studies trigonometry, dawg"
 
-	s6 = "My mistress eyes' are nothing like the sun.\n\
-	Coral is far more red than her lips red.\n\
-	If snow be white, why then her breasts are dun.\n\
-	If hair be wires, black wires grow on her head."
+	s6 = "My mistress eyes' are nothing like the sun.\nCoral is far more red than her lips red.\nIf snow be white, why then her breasts are dun.\nIf hair be wires, black wires grow on her head."
 
-	samples = [s0, s1, s2, s3, s4, s5, s6]
+	s7 = "My anaconda don't, my anaconda don't, my anaconda don't want none unless you got buns hun"
+
+	samples = [s0, s1, s2, s3, s4, s5, s6, s7]
 	return samples[i]
 
 class VerseTemplate:
@@ -248,10 +241,11 @@ class VerseTemplate:
 			print("\nTemplate length: ", self.num_syllables, "syllables,", 
 				len(self.wordList), "words")
 
-			print("\nTemplate:\n", self.template)
-			print("\nStress pattern:\n", self.stresses)
+			print("\nTemplate:\n"+self.template)
+			print("\nStress pattern:\n"+self.join_template())
+			print("\nDesired number of match pairs:", np.around(0.1*self.num_syllables))
+			print("\nNumber of nonzero indices:", curr_nonzeros.size)
 			print("\nPercentile for cutoff:", np.around(percentile))
-			print("Nonzeros before cutoff:", curr_nonzeros.size)
 			print("Cutoff score: ", cutoff)
 			print("\nPairs to match ("+str(nonzeros[0].size)+"):")
 
@@ -264,7 +258,7 @@ class VerseTemplate:
 
 				print(" ", match, "% match: syllable", i1+1, "of", 
 					self.wordList[word1].stringRepr, "+ syllable", j1+1, "of", 
-					self.wordList[word2].stringRepr)
+					self.wordList[word2].stringRepr, "\n\t", i, ",", j)
 		
 	def add_word(self, word, fill_index, L=None):
 		"""
@@ -287,34 +281,28 @@ class VerseTemplate:
 
 		result = ""
 		for i in range(a,b):
+
 			if self.occupied_syllables[i]:
 				try:
-					result += self.verse[i][0].stringRepr + " "
+					result += self.verse[i][0].stringRepr
+					if i + self.verse[i][0].length - 1 in set(self.breakpoints):
+						result += ", "
+					else:
+						result += " "
 				except KeyError:
 					pass
 			else:
 				if self.stresses[i] > 0:
-					result += "# "
+					result += " #"
 				else:
-					result += "/ "
+					result += " /"
 
-			if i in set(self.breakpoints):
-				#result += ","
-				pass
+				if i in set(self.breakpoints):
+					result += ", "
+				else:
+					result += " "
 
 		if verbose:
 			print(self.result)
 
 		return result
-
-	def get_word_index_from_matrix_index(self, idx):
-		return self.matrix_indices[idx][0]
-
-	def get_syl_index_from_matrix_index(self, idx):
-		return self.matrix_indices[idx][1]
-
-	def get_word_phoneme_pair_from_matrix(self, idx):
-		word = self.wordList[self.matrix_indices[idx][0]]
-		phoneme = word.vowel_at(self.matrix_indices[idx][1])[:-1] # strip stress
-		return word, phoneme
-	

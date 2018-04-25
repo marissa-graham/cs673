@@ -49,7 +49,7 @@ class Word:
         """
         Get a string representation of the Word object.
         """
-        out = "phonetic.Word("
+        out = "("
         out += "\"" + self.stringRepr + "\" "
         out += " ".join(self.phonemes) + " " 
         # out += "".join(str(r) for r in self.rhythm)

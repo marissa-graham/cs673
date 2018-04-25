@@ -99,6 +99,10 @@ class WordCorpus:
                     self.wordList.append(new_word)
                     self.size += 1
 
+        if len(self.unknowns_indices) > 0:
+            print("unknowns filename:", self.unknowns)
+            print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
+        
         self.wordSeq = np.array(self.wordSeq)
         print("Corpus text:", len(wordstrings), "words,", self.size, "unique")
 
@@ -184,7 +188,6 @@ class WordCorpus:
             self.corpString = text
             self.unknowns = "corpus_unknowns.txt"
 
-        print("unknowns filename:", self.unknowns)
         # Remove unknowns file if it already exists
         if os.path.exists(self.unknowns):
             os.remove(self.unknowns)
@@ -205,7 +208,7 @@ class WordCorpus:
 
     def initializeMatrix(self):
         self._initializeMatrix()
-        
+      
     def initializeSylDict(self):
         # Can only be called after unknown words have been added
         

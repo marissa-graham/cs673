@@ -15,6 +15,7 @@ def scansion_score(w_ind, loc, neighbor, corp, template, forward, verbose):
 	"""
 	Return a score in [0,1] telling how well the meter of the given word
 	matches the verse template.
+
 	Zero points for crashing into an edge, neighbor, or breakpoint.
 	
 	Otherwise, full credit for every stress that matches, quarter credit for

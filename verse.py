@@ -18,6 +18,8 @@ def get_sample(i):
 
 	s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped in the middle of a forgotten spot in the caribbean by providence, impoverished, in squalor, grow up to be a hero and a scholar?"
 
+	# s1 = "impoverished, in squalor, hero and a scholar?"
+
 	s2 = "Alexander Hamilton, my name is Alexander Hamilton"
 
 	s3 = "row, row, row your boat, gently down the stream, merrily, merrily, merrily, merrily, life is but a dream"
@@ -82,10 +84,12 @@ class VerseTemplate:
 		self.unknowns = "verse_unknowns.txt"
 		if os.path.exists(self.unknowns):
 			os.remove(self.unknowns)
+			pass
 
 		self._getRhythm()
 		if len(self.unknowns_info) > 0:
-			print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
+			# print("Need to add", len(self.unknowns_info), "words to template word list using LOGIOS tool")
+			pass
 			
 	def add_unknowns(self, logios_file, verbose=False):
 		"""
@@ -121,6 +125,7 @@ class VerseTemplate:
 				stress_idx = self.unknowns_info[counter][2]
 				self.stresses[stress_idx:stress_idx] = self.wordList[i].rhythm
 				counter += 1
+
 		if verbose:
 			print("Unknown words successfully added")
 	
@@ -149,6 +154,7 @@ class VerseTemplate:
 					info = [wordstring, num_words, len(self.stresses)]
 					self.unknowns_info.append(info)
 					with open(self.unknowns, "a") as unknowns:
+						# print("WRITE")
 						unknowns.write(wordstring + "\n")
 
 				else:
@@ -227,9 +233,11 @@ class VerseTemplate:
 
 		# Discard all but the highest rhyme matches, such that approximately 
 		# 10% of the syllables in the template are part of a matched rhyme 
+		np.savetxt("ham.txt", self.rhyme_matrix, delimiter=",", fmt="%1.4f")
+		fraction_to_keep = 0.2
 
 		curr_nonzeros = np.nonzero(self.rhyme_matrix)[0]
-		percentile = 100*(1 - 0.1*self.num_syllables/curr_nonzeros.size)
+		percentile = 100*(1 - fraction_to_keep*self.num_syllables/curr_nonzeros.size)
 		cutoff = np.nanpercentile(self.rhyme_matrix[self.rhyme_matrix>0], percentile)
 		
 		self.rhyme_matrix[np.where(self.rhyme_matrix < cutoff)] = 0

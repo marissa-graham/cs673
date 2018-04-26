@@ -211,6 +211,8 @@ class WordCorpus:
       
     def initializeSylDict(self):
         # Can only be called after unknown words have been added
+
+        # print(self.wordDict)
         
         # propbably not the most efficient implementation but...
         for word in self.wordList:

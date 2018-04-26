@@ -225,7 +225,7 @@ def join_stubs(left, right, corp, template, verbose):
 
 		if verbose: print("\n\tLeft, right, to_fill:", left, ",", right, ",", to_fill)
 		iters += 1
-		if iters > 10: 
+		if iters > template.num_syllables: 
 			raise ValueError("your stub joiner stop condition is fucked up")
 
 		# Get words that follow left and are followed  by right, i.e. A[Left, i] > 0 AND A[i, Right] > 0
@@ -265,7 +265,7 @@ def join_stubs(left, right, corp, template, verbose):
 	
 	if verbose: print("\n"+template.join_template())
 	
-def get_rhyme_word(ind, phoneme, corp, template, nono):
+def get_rhyme_word(ind, phoneme, corp, template, nono, match=None, verbose=False):
 
 	if template.occupied_syllables[ind] > 0:
 		print("\tAlready got something here, no need to fetch a word")
@@ -280,13 +280,22 @@ def get_rhyme_word(ind, phoneme, corp, template, nono):
 	# Get their scansion scores
 	scansion_scores = np.zeros_like(rhyme_choices, dtype=np.float)
 
+	if match is not None:
+		if verbose:
+			print("\tNeed to get rhyme scores with the first word")
+		rm = rhymetools.RhymeEvaluator()
+
 	for i in range(rhyme_choices.size):
 		
-		w_ind = candidates[rhyme_choices[i]][0]
-		scansion_scores[i] = scansion_score(w_ind, 
-			ind - candidates[rhyme_choices[i]][1], 
+		w_ind, syl_ind = candidates[rhyme_choices[i]]
+		scansion_scores[i] = scansion_score(w_ind, ind - syl_ind, 
 			template.num_syllables, corp, template, True, verbose=False)
 		word = corp.wordList[w_ind]
+
+		if match is not None:
+			mword = template.wordList[match[0]]
+			scansion_scores[i] *= rm.rhyme_score(mword, word, match[1], syl_ind)
+
 		if nono:
 			if nono.stringRepr == word.stringRepr:
 				scansion_scores[i] = 0
@@ -370,7 +379,7 @@ def fill_rhymes(corp, template, verbose=False):
 					print("\tGet rhymes using the vowel phoneme", phoneme)
 
 				word2 = get_rhyme_word(j, phoneme, corp, template,
-					template.wordList[mtx_ind[0]])
+					template.wordList[mtx_ind[0]], match=mtx_ind, verbose=verbose)
 
 				if verbose:
 					print("    => Add", word2)
@@ -384,7 +393,7 @@ def fill_rhymes(corp, template, verbose=False):
 					print("\tGet rhymes using the vowel phoneme", phoneme)	
 
 				word1 = get_rhyme_word(i, phoneme, corp, template,
-					template.wordList[mtx_ind[0]])
+					template.wordList[mtx_ind[0]], match=mtx_ind, verbose=verbose)
 
 				if verbose:
 					print("    => Add", word1)
@@ -404,8 +413,9 @@ def fill_template(corp, template, verbose=False, get_rhymes=True):
 	if get_rhymes:
 		fill_rhymes(corp, template, verbose)
 
-	rhyme_inds = list(template.verse.keys())
+	rhyme_inds = sorted(list(template.verse.keys()))
 
+	print("\nFill in Rhyming Words:", template.join_template())
 	
 	# Now go through all the "holes" between bone words
 	for i in range(len(rhyme_inds)):

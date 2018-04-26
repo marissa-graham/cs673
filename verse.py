@@ -4,36 +4,34 @@ import nltk
 import numpy as np
 from scipy import sparse
 import os
-
+from matplotlib import pyplot as plt
 import phonetic
 from phonetic import Word, PhoneticDictionary
 
 from rhymetools import RhymeEvaluator
 
 def get_sample(i):
-	"""
-	Return one of the pre-determined template strings, for convenience.
-	"""
-	s0 = "I know a song that gets on everybody's nerves, everybody's nerves, everybody's nerves. Oh, I know a song that gets on everybody's nerves, and this is how it goes, oh oh oh"
+    """
+    Return one of the pre-determined template strings, for convenience.
+    """
+    s0 = "I know a song that gets on everybody's nerves, everybody's nerves, everybody's nerves. Oh, I know a song that gets on everybody's nerves, and this is how it goes, oh oh oh"
 
-	s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped in the middle of a forgotten spot in the caribbean by providence, impoverished, in squalor, grow up to be a hero and a scholar?"
-
-	# s1 = "impoverished, in squalor, hero and a scholar?"
+    s1 = "How does a bastard, orphan, son of a whore and a scotsman, dropped in the middle of a forgotten spot in the caribbean by providence, impoverished, in squalor, grow up to be a hero and a scholar?"
 
 	s2 = "Alexander Hamilton, my name is Alexander Hamilton"
 
-	s3 = "row, row, row your boat, gently down the stream, merrily, merrily, merrily, merrily, life is but a dream"
+    s3 = "row, row, row your boat, gently down the stream, merrily, merrily, merrily, merrily, life is but a dream"
 
-	s4 = "buddy you're a boy make a big noise, playing in the street, gonna be a big man some day, you got mud on your face, you big disgrace, kicking your can all over the place"
+    s4 = "buddy you're a boy, make a big noise, playing in the street, gonna be a big man some day, you got mud on your face, you big disgrace, kicking your can all over the place"
 
-	s5 = "Alexander Hamilton, my dawg is Alexander Hamilton. He studies trigonometry, dawg"
+    s5 = "Alexander Hamilton, my dawg is Alexander Hamilton. He studies trigonometry, dawg"
 
-	s6 = "My mistress eyes' are nothing like the sun.\nCoral is far more red than her lips red.\nIf snow be white, why then her breasts are dun.\nIf hair be wires, black wires grow on her head."
+    s6 = "My mistress eyes' are nothing like the sun.\nCoral is far more red than her lips red.\nIf snow be white, why then her breasts are dun.\nIf hair be wires, black wires grow on her head."
 
-	s7 = "My anaconda don't, my anaconda don't, my anaconda don't want none unless you got buns hun"
+    s7 = "My anaconda don't, my anaconda don't, my anaconda don't want none unless you got buns hun"
 
-	samples = [s0, s1, s2, s3, s4, s5, s6, s7]
-	return samples[i]
+    samples = [s0, s1, s2, s3, s4, s5, s6, s7]
+    return samples[i]
 
 class VerseTemplate:
 	"""
@@ -105,7 +103,7 @@ class VerseTemplate:
         			to insert the rhythm pattern is in the file (test this). 
 		"""
 
-		# Pitch a fit if you haven't got the file you want?
+		# Pitch a fit if you havenHEt got the file you want?
 
 		new_words = []
 		with open(logios_file, "r") as logios_output:

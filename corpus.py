@@ -214,7 +214,6 @@ class WordCorpus:
 
         # print(self.wordDict)
         
-        # propbably not the most efficient implementation but...
         for word in self.wordList:
             vowel_pos = 0
             for i in range(len(word.phonemes)):
@@ -232,6 +231,7 @@ class WordCorpus:
         """
         Sample the probability distribution for word 'current' n times.
         """ 
+        
         if verbose:
             if forward:
                 print("\n\tGet forwards choices for '"+self.wordList[current].stringRepr+"'")

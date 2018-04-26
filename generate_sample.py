@@ -212,7 +212,7 @@ def join_stubs(left, right, corp, template, verbose):
 	if verbose:
 		print("\nJoin stub between", left, "and", right, ':',
 		template.join_template(a=left,b=right+1))
-		print("Fill", get_to_fill(left, right, template), "syllables")
+		print("Fill", get_to_fill(left, right, template)[0], "syllables")
 
 	original_left = left
 	original_right = right
@@ -267,15 +267,14 @@ def join_stubs(left, right, corp, template, verbose):
 	
 def get_rhyme_word(ind, phoneme, corp, template, nono, match=None, verbose=False):
 
-	if template.occupied_syllables[ind] > 0:
+	if template.occupied_syllables[ind] > 0 and verbose:
 		print("\tAlready got something here, no need to fetch a word")
 
 	candidates = corp.sylDict[phoneme]
-	#print(len(candidates), "options")
-
+	
 	# Choose a bunch of (word, syllable) pairs for that phoneme
 	rhyme_choices = np.random.choice(len(candidates), size=20)
-	#print("choose these", rhyme_choices.size, "indices:", rhyme_choices)
+	rhyme_choices = np.unique(rhyme_choices)
 	
 	# Get their scansion scores
 	scansion_scores = np.zeros_like(rhyme_choices, dtype=np.float)
@@ -334,20 +333,19 @@ def fill_rhymes(corp, template, verbose=False):
 	vowel_probs = vowel_counts / np.sum(vowel_counts)
 
 	if verbose:
-		print("\nFill", rows.size, "rhyme pairs:\n")
+		print("\nFill", rows.size, "rhyme pairs:")
 
 	for k in range(rows.size):
-
 		i, j = rows[k], cols[k]
 
 		if verbose:
-			print("\n   Get a match for at syllables", i, "and", j)
+			print("\n   Get a match for syllables", i, "and", j)
 		
 		if template.occupied_syllables[i] + template.occupied_syllables[j] == 2:
-
+		
 			if verbose:
 				print("\tOccupied:", "("+template.join_template(
-					a=i-2, b=min(i+2,template.num_syllables))+") and ("+ 
+				a=i-2, b=min(i+2,template.num_syllables))+") and ("+ 
 				template.join_template(a=j-2,b=min(j+2,template.num_syllables))+")")
 			
 		else:
@@ -359,43 +357,37 @@ def fill_rhymes(corp, template, verbose=False):
 				phoneme_ind = np.random.choice(len(vowel_list), p=vowel_probs)
 				phoneme = vowel_list[phoneme_ind]
 
+				word1 = get_rhyme_word(i, phoneme, corp, template, None, verbose=verbose)
+				word2 = get_rhyme_word(j, phoneme, corp, template, word1, verbose=verbose)
+				
 				if verbose:
 					print("\tBoth currently empty, pick both words at random")
-					print("\tGet rhymes using the vowel phoneme", phoneme)
-
-				word1 = get_rhyme_word(i, phoneme, corp, template, None)
-				word2 = get_rhyme_word(j, phoneme, corp, template, word1)
-
-				if verbose:
+					print("\tGet samples using the vowel phoneme", phoneme)
 					print("    => Add", word1, "and", word2)
 
 			elif template.occupied_syllables[i] == 1:
 
 				mtx_ind = template.matrix_indices[i]
 				phoneme = template.wordList[mtx_ind[0]].vowel_at(mtx_ind[1])[:-1]
-
-				if verbose:
-					print("\tFirst word", template.wordList[mtx_ind[0]].stringRepr)	
-					print("\tGet rhymes using the vowel phoneme", phoneme)
-
+				
 				word2 = get_rhyme_word(j, phoneme, corp, template,
 					template.wordList[mtx_ind[0]], match=mtx_ind, verbose=verbose)
 
 				if verbose:
+					print("\tFirst word", template.wordList[mtx_ind[0]].stringRepr)	
+					print("\tGet samples using the vowel phoneme", phoneme)
 					print("    => Add", word2)
 
 			else:
 				mtx_ind = template.matrix_indices[j]
 				phoneme = template.wordList[mtx_ind[0]].vowel_at(mtx_ind[1])[:-1]
 
-				if verbose:
-					print("\tFirst word", template.wordList[mtx_ind[0]].stringRepr)
-					print("\tGet rhymes using the vowel phoneme", phoneme)	
-
 				word1 = get_rhyme_word(i, phoneme, corp, template,
 					template.wordList[mtx_ind[0]], match=mtx_ind, verbose=verbose)
 
 				if verbose:
+					print("\tFirst word", template.wordList[mtx_ind[0]].stringRepr)
+					print("\tGet samples using the vowel phoneme", phoneme)	
 					print("    => Add", word1)
 	
 	if verbose:	
@@ -411,8 +403,12 @@ def fill_template(corp, template, verbose=False, get_rhymes=True):
 
 	# Initialize stuff
 	if get_rhymes:
-		fill_rhymes(corp, template, verbose)
+		fill_rhymes(corp, template, verbose=verbose)
 
+<<<<<<< HEAD
+=======
+	print("\nFill in Rhyming Words:", template.join_template())
+>>>>>>> 693e80b5d7458e184f6fdfe92d8cc057393a5e63
 	rhyme_inds = sorted(list(template.verse.keys()))
 
 	print("\nFill in Rhyming Words:", template.join_template())
@@ -428,7 +424,7 @@ def fill_template(corp, template, verbose=False, get_rhymes=True):
 		L = rhyme_inds[i]
 		
 		if i == len(rhyme_inds) - 1:
-			right = template.num_syllables-1
+			right = template.num_syllables
 			R = template.num_syllables
 		else:
 			right = rhyme_inds[i+1]
@@ -447,29 +443,22 @@ def fill_template(corp, template, verbose=False, get_rhymes=True):
 			to_fill, L = get_to_fill(left, right, template)
 
 			if verbose:
-				print("\tLocal state of template:",template.join_template(a=L,b=R))
 				print("    to_fill:", to_fill)
+				print("\n",template.join_template())
 
 			# Go backwards from right if necessary
 			if to_fill > 2:
+
 				right = get_word(right, left, corp, template, False, verbose)
 				to_fill = abs(right - left - template.verse[left][1])
+
 				if verbose:
-					print("\tLocal state of template:",template.join_template(a=L,b=R))
 					print("    to_fill:", to_fill)
+					print("\n",template.join_template())
 
 		# Join up the middles
-		#if verbose: print("\n"+template.join_template())
 		join_stubs(left, right, corp, template, verbose)
 	
-	if verbose:
-		to_print = ""
-		for i in range(template.num_syllables):	
-			try:
-				to_print += str(i)+": "+template.verse[i][0].stringRepr+", "
-			except KeyError:
-				pass
-		print("\n", to_print, "\n")
 
 	# Return the joined-up string
 	return template.join_template()

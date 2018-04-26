@@ -212,7 +212,6 @@ class WordCorpus:
     def initializeSylDict(self):
         # Can only be called after unknown words have been added
         
-        # propbably not the most efficient implementation but...
         for word in self.wordList:
             vowel_pos = 0
             for i in range(len(word.phonemes)):
